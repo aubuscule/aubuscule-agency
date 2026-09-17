@@ -119,8 +119,8 @@ export function RealisationsGallery() {
                       <circle
                         key={angle}
                         cx="100"
-                        cy="45"
-                        r="45"
+                        cy="40"
+                        r="30"
                         fill="var(--accent)"
                         fillOpacity="0.2"
                         style={{ mixBlendMode: 'screen' }}
