@@ -11,21 +11,21 @@
   --surface-dark:  #c4c8da;
   --quote:         #3760bf;
   --footer-body:   #8c92a6;
-  --accent:        #9854f1;
+  --accent:        #23305c; /* Darker version of standard blue */
   --accent-fg:     #ffffff;
   --nav-bg:        rgba(225, 226, 231, 0.86);
   --nav-open-bg:   rgba(225, 226, 231, 0.97);
-  --focus-ring:    #9854f1;
+  --focus-ring:    #23305c;
 
   --hero-grad-center: #c4c8da;
   --hero-grad-mid:    #d0d5e3;
   --hero-grad-edge:   #e1e2e7;
-  --hero-accent-1:    #2e7de9;
-  --hero-accent-2:    #9854f1;
+  --hero-accent-1:    var(--accent);
+  --hero-accent-2:    #374b8f; /* A slightly lighter variant for the gradient */
   --hero-card-bg:     #ffffff;
   --hero-card-bg-hover: #f0f1f5;
-  --hero-card-border: rgba(55, 96, 191, 0.1);
-  --hero-card-border-hover: rgba(152, 84, 241, 0.4);
+  --hero-card-border: rgba(35, 48, 92, 0.1);
+  --hero-card-border-hover: rgba(35, 48, 92, 0.3);
 
   --sp-0_5: 2px;
   --sp-1:   4px;
@@ -72,8 +72,8 @@
   --hero-grad-center: #1f1b2e;
   --hero-grad-mid:    #110f17;
   --hero-grad-edge:   #09080c;
-  --hero-accent-1:    #7dcfff;
-  --hero-accent-2:    #bb9af7;
+  --hero-accent-1:    var(--accent);
+  --hero-accent-2:    #7dcfff;
   --hero-card-bg:     #0f0d14;
   --hero-card-bg-hover: #171520;
   --hero-card-border: rgba(255, 255, 255, 0.05);
