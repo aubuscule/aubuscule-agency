@@ -87,7 +87,7 @@
   /* 3. Hero Overrides */
   --hero-grad-center: #1f1b2e;
   --hero-grad-mid:    #110f17;
-  --hero-accent-2:    #7dcfff; /* Cyan gradient complement */
+  --hero-accent-2:    #f7768e; /* Tokyo Night Pink */
   
   --hero-card-bg-hover:     #24283b; /* Tokyo Night Storm */
   --hero-card-border:       color-mix(in srgb, var(--ink) 10%, transparent);
