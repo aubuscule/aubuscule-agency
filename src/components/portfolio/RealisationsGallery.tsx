@@ -107,30 +107,27 @@ export function RealisationsGallery() {
             <article className="app-card">
               <div className="app-card-visual">
                 <svg
-                  width="90"
-                  height="90"
+                  width="80"
+                  height="80"
                   viewBox="0 0 200 200"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                 >
-                  <g opacity="0.5">
-                    {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(
-                      (angle) => (
-                        <circle
-                          key={angle}
-                          cx="100"
-                          cy="65"
-                          r="40"
-                          stroke="var(--accent)"
-                          strokeWidth="3"
-                          fill="var(--accent)"
-                          fillOpacity="0.1"
-                          transform={`rotate(${angle} 100 100)`}
-                        />
-                      )
-                    )}
-                  </g>
+                  {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(
+                    (angle) => (
+                      <circle
+                        key={angle}
+                        cx="100"
+                        cy="45"
+                        r="45"
+                        fill="var(--accent)"
+                        fillOpacity="0.2"
+                        style={{ mixBlendMode: 'screen' }}
+                        transform={`rotate(${angle} 100 100)`}
+                      />
+                    )
+                  )}
                 </svg>
               </div>
               <div className="app-card-body">

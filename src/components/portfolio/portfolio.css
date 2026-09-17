@@ -105,7 +105,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-mute);
-  border: 1px solid var(--hairline);
+  border: 1px solid var(--ink-faint);
   border-radius: 2px;
   padding: 4px 8px;
   line-height: 1;
