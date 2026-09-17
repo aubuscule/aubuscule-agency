@@ -44,7 +44,7 @@
 }
 .app-card-visual {
   height: 200px;
-  background: var(--bg);
+  background: var(--surface-dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -549,7 +549,7 @@
 .rmp-pack-preview {
   width: 100%;
   aspect-ratio: 4 / 5;
-  background: var(--bg);
+  background: var(--surface-dark);
   padding: var(--sp-6);
   display: flex;
   align-items: center;
