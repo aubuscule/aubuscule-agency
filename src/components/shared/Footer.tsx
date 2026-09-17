@@ -22,7 +22,15 @@ export function Footer() {
       <div className="footer-main">
         <div className="footer-brand">
           <Link href="/" className="footer-logo">
-            <Mark idPrefix="f" style={{ width: 34, height: 34, flexShrink: 0 }} />
+            <Mark idPrefix="f" inkColor="url(#footerMarkGradient)" style={{ width: 34, height: 34, flexShrink: 0 }}>
+              <linearGradient id="footerMarkGradient" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse" spreadMethod="repeat">
+                <stop offset="0%" stopColor="var(--hero-accent-1)" />
+                <stop offset="50%" stopColor="var(--hero-accent-2)" />
+                <stop offset="100%" stopColor="var(--hero-accent-1)" />
+                <animate attributeName="x1" values="0; 200" dur="8s" repeatCount="indefinite" />
+                <animate attributeName="x2" values="200; 400" dur="8s" repeatCount="indefinite" />
+              </linearGradient>
+            </Mark>
             <span className="footer-wordmark">Aubuscule</span>
           </Link>
           <p className="footer-tagline">

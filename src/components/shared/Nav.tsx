@@ -68,7 +68,15 @@ export function Nav() {
       <header className="nav">
         <div className="nav-inner">
           <Link href="/" className="nav-logo">
-            <Mark idPrefix="n" style={{ width: 32, height: 32, flexShrink: 0 }} />
+            <Mark idPrefix="n" inkColor="url(#navMarkGradient)" style={{ width: 32, height: 32, flexShrink: 0 }}>
+              <linearGradient id="navMarkGradient" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse" spreadMethod="repeat">
+                <stop offset="0%" stopColor="var(--hero-accent-1)" />
+                <stop offset="50%" stopColor="var(--hero-accent-2)" />
+                <stop offset="100%" stopColor="var(--hero-accent-1)" />
+                <animate attributeName="x1" values="0; 200" dur="8s" repeatCount="indefinite" />
+                <animate attributeName="x2" values="200; 400" dur="8s" repeatCount="indefinite" />
+              </linearGradient>
+            </Mark>
             <span className="nav-wordmark">Aubuscule</span>
           </Link>
           <nav aria-label={t('ariaLabel')} className="nav-area">
