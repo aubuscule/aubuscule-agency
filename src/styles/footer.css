@@ -11,7 +11,7 @@
 .footer-col-label { color: var(--ink-dim); }
 .footer-link {
   font-size: 14.5px;
-  color: var(--quote);
+  color: var(--footer-link);
   text-decoration: none;
   transition: color 0.2s ease;
 }

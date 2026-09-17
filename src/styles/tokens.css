@@ -11,6 +11,7 @@
   --surface-dark:  #c4c8da;
   --quote:         #3760bf;
   --footer-body:   #8c92a6;
+  --footer-link:   var(--ink-soft);
   --heading-ink:   #593c9d; /* Accent derived but lighter */
   --accent:        #3c296d; /* Deep Tokyo Night purple for light mode */
   --accent-fg:     #ffffff;
@@ -64,6 +65,7 @@
   --surface-dark:  #16161e;
   --quote:         #c0caf5;
   --footer-body:   #565f89;
+  --footer-link:   var(--quote);
   --heading-ink:   var(--ink);
   --accent:        #bb9af7;
   --accent-fg:     #1a1b26;

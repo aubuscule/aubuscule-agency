@@ -21,7 +21,7 @@ export function Footer() {
     <footer className="footer" role="contentinfo">
       <div className="footer-main">
         <div className="footer-brand">
-          <Logo inverted />
+          <Logo />
           <p className="footer-tagline">
             {t('tagline')}
           </p>
