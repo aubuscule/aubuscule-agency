@@ -43,9 +43,9 @@ export function HubHome() {
         <div className="hub-hero-parallax">
           <Mark idPrefix="hub" className="hub-mark-svg" inkColor="url(#hubMarkGradient)">
             <linearGradient id="hubMarkGradient" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse" spreadMethod="repeat">
-              <stop offset="0%" stopColor="#7dcfff" />
-              <stop offset="50%" stopColor="#bb9af7" />
-              <stop offset="100%" stopColor="#7dcfff" />
+              <stop offset="0%" stopColor="var(--hero-accent-1)" />
+              <stop offset="50%" stopColor="var(--hero-accent-2)" />
+              <stop offset="100%" stopColor="var(--hero-accent-1)" />
               <animate attributeName="x1" values="0; 200" dur="8s" repeatCount="indefinite" />
               <animate attributeName="x2" values="200; 400" dur="8s" repeatCount="indefinite" />
             </linearGradient>

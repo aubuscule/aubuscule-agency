@@ -2,8 +2,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #09080c; /* Near black with a hint of purple */
-  color: #c0caf5;
+  background: var(--bg);
+  color: var(--ink);
 }
 .hub-hero {
   position: relative;
@@ -15,7 +15,7 @@
   gap: var(--sp-6);
   padding: var(--sp-12) var(--sp-10) var(--sp-10);
   background:
-    radial-gradient(ellipse 80% 160% at 50% 90%, #1f1b2e 0%, #110f17 40%, #09080c 100%);
+    radial-gradient(ellipse 80% 160% at 50% 90%, var(--hero-grad-center) 0%, var(--hero-grad-mid) 40%, var(--hero-grad-edge) 100%);
   overflow: hidden;
 }
 /* 3D constellation canvas — sits behind hero content, above the gradient */
@@ -55,7 +55,7 @@
   transform: translateY(var(--sp-5));
   transition: opacity 1s cubic-bezier(.23,1,.32,1) .15s, transform 1s cubic-bezier(.23,1,.32,1) .15s;
   
-  background: linear-gradient(90deg, #7dcfff 0%, #bb9af7 50%, #7dcfff 100%);
+  background: linear-gradient(90deg, var(--hero-accent-1) 0%, var(--hero-accent-2) 50%, var(--hero-accent-1) 100%);
   background-size: 200% auto;
   background-position: 200% center;
   color: transparent;
@@ -71,7 +71,7 @@
 }
 
 .hub-sub {
-  font-size: 17px; line-height: 1.65; color: #9a978f;
+  font-size: 17px; line-height: 1.65; color: var(--ink-soft);
   text-align: center; max-width: 620px; margin-inline: auto;
   opacity: 0;
   transform: translateY(var(--sp-4));
@@ -88,22 +88,22 @@
   padding: 0 var(--sp-10) var(--sp-12);
 }
 .hub-card {
-  background: #0f0d14;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--hero-card-bg);
+  border: 1px solid var(--hero-card-border);
   border-radius: 8px;
   padding: var(--sp-7);
   display: flex;
   flex-direction: column;
   gap: var(--sp-2_5);
   text-decoration: none;
-  color: #eae8e2;
+  color: var(--ink);
   backdrop-filter: blur(12px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   transition: all 0.2s ease;
 }
 .hub-card:hover {
-  background: #171520;
-  border-color: rgba(255, 255, 255, 0.1);
+  background: var(--hero-card-bg-hover);
+  border-color: var(--hero-card-border-hover);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   transform: translateY(-2px);
 }
@@ -116,7 +116,7 @@
 .hub-card-desc {
   font-size: 14.5px;
   line-height: 1.6;
-  color: #9a978f;
+  color: var(--ink-soft);
   margin-top: 2px;
 }
 
