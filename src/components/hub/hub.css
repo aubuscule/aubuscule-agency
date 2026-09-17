@@ -58,7 +58,7 @@
               transform 0.5s cubic-bezier(.25,.1,.25,1);
   will-change: transform;
 }
-.hub-mark-svg { width: 100px; height: 100px; color: var(--accent); }
+.hub-mark-svg { width: 100px; height: 100px; color: var(--accent); --mark-color: var(--accent); }
 .hub-h1 {
   margin-top: calc(var(--sp-4) * -1);
   font-size: 48px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.04;

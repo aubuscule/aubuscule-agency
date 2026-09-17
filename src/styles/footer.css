@@ -6,7 +6,7 @@
 }
 .footer-brand { display: flex; flex-direction: column; gap: var(--sp-4); max-width: 380px; }
 .footer-logo { display: flex; align-items: center; gap: var(--sp-3); }
-.footer-logo svg { color: #ffffff; }
+.footer-logo svg { color: #ffffff; --mark-color: #ffffff; }
 .footer-wordmark { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; color: var(--bg); }
 .footer-tagline { font-size: 14px; line-height: 1.6; color: var(--footer-body); }
 .footer-cols { display: flex; gap: var(--sp-14); flex-wrap: wrap; }

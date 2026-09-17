@@ -27,6 +27,7 @@
 }
 .nav-logo svg {
   color: var(--accent);
+  --mark-color: var(--accent);
 }
 
 .nav-wordmark {
