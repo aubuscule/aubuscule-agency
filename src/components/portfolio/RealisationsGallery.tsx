@@ -107,8 +107,8 @@ export function RealisationsGallery() {
             <article className="app-card">
               <div className="app-card-visual">
                 <svg
-                  width="80"
-                  height="80"
+                  width="100"
+                  height="100"
                   viewBox="0 0 200 200"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -119,8 +119,8 @@ export function RealisationsGallery() {
                       <circle
                         key={angle}
                         cx="100"
-                        cy="40"
-                        r="30"
+                        cy="33"
+                        r="33"
                         fill="var(--accent)"
                         fillOpacity="0.2"
                         style={{ mixBlendMode: 'screen' }}
