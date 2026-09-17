@@ -13,7 +13,7 @@ export function Mark({ idPrefix, inkColor = '#44579c', className, style, childre
       aria-hidden="true"
       focusable="false"
       className={className}
-      style={{ display: 'block', overflow: 'visible', ...style }}
+      style={{ display: 'block', overflow: 'visible', color: inkColor, ...style }}
     >
       <defs>
         {children}
@@ -33,11 +33,11 @@ export function Mark({ idPrefix, inkColor = '#44579c', className, style, childre
           patternUnits="userSpaceOnUse"
           patternTransform="rotate(8)"
         >
-          <circle cx="1.35" cy="1.35" r="0.52" fill={inkColor} />
+          <circle cx="1.35" cy="1.35" r="0.52" fill="currentColor" />
         </pattern>
       </defs>
       <rect width="100" height="100" fill={`url(#${idPrefix}d)`} mask={`url(#${idPrefix}k)`} />
-      <circle cx="50" cy="51" r="29" fill={inkColor} mask={`url(#${idPrefix}c)`} />
+      <circle cx="50" cy="51" r="29" fill="currentColor" mask={`url(#${idPrefix}c)`} />
     </svg>
   )
 }
