@@ -11,21 +11,21 @@
   --surface-dark:  #c4c8da;
   --quote:         #3760bf;
   --footer-body:   #8c92a6;
-  --accent:        #5925dc; /* Darkened version of Tokyo Night purple (#bb9af7) */
+  --accent:        #3c296d; /* Deep Tokyo Night purple for light mode */
   --accent-fg:     #ffffff;
   --nav-bg:        rgba(225, 226, 231, 0.86);
   --nav-open-bg:   rgba(225, 226, 231, 0.97);
-  --focus-ring:    #5925dc;
+  --focus-ring:    #3c296d;
 
   --hero-grad-center: #c4c8da;
   --hero-grad-mid:    #d0d5e3;
   --hero-grad-edge:   #e1e2e7;
   --hero-accent-1:    var(--accent);
-  --hero-accent-2:    #7a43eb; /* A slightly lighter variant for the gradient */
+  --hero-accent-2:    #593c9d; /* A slightly lighter variant for the gradient */
   --hero-card-bg:     #ffffff;
   --hero-card-bg-hover: #f0f1f5;
-  --hero-card-border: rgba(89, 37, 220, 0.1);
-  --hero-card-border-hover: rgba(89, 37, 220, 0.3);
+  --hero-card-border: rgba(60, 41, 109, 0.1);
+  --hero-card-border-hover: rgba(60, 41, 109, 0.3);
 
   --sp-0_5: 2px;
   --sp-1:   4px;
