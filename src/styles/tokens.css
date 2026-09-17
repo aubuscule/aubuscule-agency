@@ -4,11 +4,11 @@
   --surface:       #ffffff;
   --surface-dark:  #c4c8da;
   
-  --ink:           #3760bf;
-  --ink-soft:      #4c5069;
-  --ink-mute:      #8c92a6;
-  --ink-faint:     #a8aecb;
-  --ink-dim:       #646a86;
+  --ink:           #1a1b26; /* Deep Tokyo Night slate (inverted dark bg) for subtle, modern contrast */
+  --ink-soft:      #32344a;
+  --ink-mute:      #545c7e;
+  --ink-dim:       #737aa2;
+  --ink-faint:     #9ca4cc;
   
   --hairline:      #c4c8da;
   --hairline-soft: #d0d5e3;
