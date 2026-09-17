@@ -57,15 +57,7 @@ export function HubHome() {
       >
         <Starfield />
         <div className="hub-hero-parallax">
-          <Mark idPrefix="hub" className="hub-mark-svg" inkColor="url(#hubMarkGradient)">
-            <linearGradient id="hubMarkGradient" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse" spreadMethod="repeat">
-              <stop offset="0%" stopColor="var(--hero-accent-1)" />
-              <stop offset="50%" stopColor="var(--hero-accent-2)" />
-              <stop offset="100%" stopColor="var(--hero-accent-1)" />
-              <animate attributeName="x1" values="0; 200" dur="8s" repeatCount="indefinite" />
-              <animate attributeName="x2" values="200; 400" dur="8s" repeatCount="indefinite" />
-            </linearGradient>
-          </Mark>
+          <Mark idPrefix="hub" className="hub-mark-svg" inkColor="var(--accent)" />
         </div>
         <h1 className="hub-h1" id="hub-heading">Aubuscule</h1>
         <p className="hub-sub">{t('subtitle')}</p>
