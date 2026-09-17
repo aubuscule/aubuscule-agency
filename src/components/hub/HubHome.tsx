@@ -1,8 +1,11 @@
 'use client'
 
-import { useRef, useState, useEffect, useCallback } from 'react'
-import { Link } from '@/i18n/navigation'
-import { useTranslations } from 'next-intl'
+import { useRef, useState, useEffect } from 'react'
+import { Link, usePathname, useRouter } from '@/i18n/navigation'
+import { useTranslations, useLocale } from 'next-intl'
+import { locales } from '@/i18n/config'
+import { Select } from '@/components/shared/Select'
+import { ThemeToggle } from '@/components/shared/ThemeToggle'
 import { Mark } from '@/components/shared/Mark'
 import { Starfield } from './Starfield'
 
@@ -27,6 +30,9 @@ export function HubHome() {
   const t = useTranslations('home')
   const heroRef = useRef<HTMLElement>(null)
   const [visible, setVisible] = useState(false)
+  const currentLocale = useLocale()
+  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     setVisible(true)
@@ -34,6 +40,16 @@ export function HubHome() {
 
   return (
     <main id="main-content" className="hub-page">
+      <header className="hub-header">
+        <Select
+          value={currentLocale}
+          onChange={(nextLocale) => router.replace(pathname, { locale: nextLocale as 'fr' | 'en' | 'nl' })}
+          options={locales.map(loc => ({ value: loc, label: loc.toUpperCase() }))}
+          align="right"
+          className="nav-lang-select"
+        />
+        <ThemeToggle />
+      </header>
       <section
         ref={heroRef}
         className={`hub-hero ${visible ? 'hub-hero--visible' : ''}`}
