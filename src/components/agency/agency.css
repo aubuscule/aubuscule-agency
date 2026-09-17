@@ -8,7 +8,7 @@
 .hero-sub { max-width: 480px; font-size: 17px; line-height: 1.65; color: var(--ink-soft); }
 .hero-sub strong { font-weight: 600; color: var(--ink); }
 .hero-ctas { display: flex; gap: var(--sp-3_5); flex-wrap: wrap; margin-top: var(--sp-1); }
-.hero-mark { display: flex; justify-content: center; align-items: center; }
+.hero-mark { display: flex; justify-content: center; align-items: center; color: var(--accent); }
 .hero-mark-svg { width: 320px; height: 320px; }
 
 .section { border-top: 1px solid var(--hairline); padding: var(--sp-18) 0; }
