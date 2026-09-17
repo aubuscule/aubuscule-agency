@@ -1,11 +1,12 @@
 interface MarkProps {
   idPrefix: string;
+  inkColor?: string;
   className?: string;
   style?: React.CSSProperties;
   children?: React.ReactNode;
 }
 
-export function Mark({ idPrefix, className, style, children }: MarkProps) {
+export function Mark({ idPrefix, inkColor, className, style, children }: MarkProps) {
   return (
     <svg
       viewBox="0 0 100 100"
@@ -32,11 +33,11 @@ export function Mark({ idPrefix, className, style, children }: MarkProps) {
           patternUnits="userSpaceOnUse"
           patternTransform="rotate(8)"
         >
-          <circle cx="1.35" cy="1.35" r="0.52" style={{ fill: 'var(--mark-color, currentColor)' }} />
+          <circle cx="1.35" cy="1.35" r="0.52" style={{ fill: inkColor || 'var(--mark-color, currentColor)' }} />
         </pattern>
       </defs>
       <rect width="100" height="100" fill={`url(#${idPrefix}d)`} mask={`url(#${idPrefix}k)`} />
-      <circle cx="50" cy="51" r="29" style={{ fill: 'var(--mark-color, currentColor)' }} mask={`url(#${idPrefix}c)`} />
+      <circle cx="50" cy="51" r="29" style={{ fill: inkColor || 'var(--mark-color, currentColor)' }} mask={`url(#${idPrefix}c)`} />
     </svg>
   )
 }
