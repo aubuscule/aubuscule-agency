@@ -26,10 +26,7 @@
   font-size: 11px; letter-spacing: 0.08em; color: var(--ink-dim);
 }
 
-[data-theme="dark"] .footer-link,
-[data-theme="dark"] .footer-wordmark {
-  color: var(--accent-fg);
-}
+
 [data-theme="dark"] .footer-tagline {
   color: var(--ink-soft);
 }
