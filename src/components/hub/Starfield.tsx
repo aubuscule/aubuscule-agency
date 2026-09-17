@@ -29,9 +29,6 @@ export function Starfield() {
       autoYawSpeed: 0.00045, // continuous orbit around the cloud
       vertOrbit: 0.14, // vertical bob, as a fraction of viewRadius
       pitchSpeed: 0.00018,
-      mouseYaw: 0.28, // pointer offset added on top of auto-rotate
-      mousePitch: 0.2,
-      camEase: 0.05,
       star: { r: 232, g: 230, b: 224 }, // #e8e6e0
     }
 
@@ -41,15 +38,11 @@ export function Starfield() {
     let centerY = 0
     let dpr = Math.min(window.devicePixelRatio || 1, 2)
 
-    // Camera orientation. Baseline = auto spin/tumble; mouse adds an eased offset.
+    // Camera orientation. Baseline = auto spin/tumble.
     let camYaw = 0
     let camPitch = 0
     let autoYaw = 0
     let time = 0
-    let mouseYaw = 0
-    let mousePitch = 0
-    let targetMouseYaw = 0
-    let targetMousePitch = 0
     const orbitR = CONFIG.viewRadius * 1.1
     const orbitVertAmp = CONFIG.viewRadius * CONFIG.vertOrbit
     const camPos = { x: 0, y: 0, z: -orbitR }
@@ -65,7 +58,15 @@ export function Starfield() {
       scale: number
       viewZ: number
       visible: boolean
+      color: { r: number, g: number, b: number }
     }
+
+    const TOKYO_COLORS = [
+      { r: 125, g: 207, b: 255 }, // Cyan #7dcfff
+      { r: 187, g: 154, b: 247 }, // Purple #bb9af7
+      { r: 247, g: 118, b: 142 }, // Magenta #f7768e
+      { r: 224, g: 175, b: 104 }  // Yellow/Orange #e0af68
+    ]
 
     let stars: Star[] = []
     let order: number[] = []
@@ -99,6 +100,7 @@ export function Starfield() {
         scale: 0,
         viewZ: 0,
         visible: false,
+        color: TOKYO_COLORS[Math.floor(Math.random() * TOKYO_COLORS.length)],
       }
     }
 
@@ -151,10 +153,10 @@ export function Starfield() {
       order.sort((a, b) => stars[b].viewZ - stars[a].viewZ)
 
       // Stars (flat cores, no heavy glow — brand restraint)
-      const { r: sr, g: sg, b: sb } = CONFIG.star
       for (let k = 0; k < order.length; k++) {
         const s = stars[order[k]]
         if (!s.visible) continue
+        const { r: sr, g: sg, b: sb } = s.color
         const radius = Math.max(0.4, s.size * s.scale)
         // Closer stars (higher scale) read brighter for depth
         const alpha = Math.min(1, s.alpha * (0.45 + Math.min(1.4, s.scale) * 0.55))
@@ -175,9 +177,6 @@ export function Starfield() {
     function frame() {
       time++
       autoYaw += CONFIG.autoYawSpeed
-      // Ease the pointer offset so movement feels weighty
-      mouseYaw += (targetMouseYaw - mouseYaw) * CONFIG.camEase
-      mousePitch += (targetMousePitch - mousePitch) * CONFIG.camEase
 
       // Orbit the camera *around* the cloud (position moves, not just angle) so
       // nearer stars parallax past farther ones — that's the depth cue.
@@ -185,18 +184,11 @@ export function Starfield() {
       camPos.z = -Math.cos(autoYaw) * orbitR
       camPos.y = Math.sin(time * CONFIG.pitchSpeed) * orbitVertAmp
 
-      // Always aim back at the field centre, then add the eased pointer offset.
-      camYaw = autoYaw + mouseYaw
-      camPitch = Math.atan2(camPos.y, orbitR) + mousePitch
+      // Always aim back at the field centre
+      camYaw = autoYaw
+      camPitch = Math.atan2(camPos.y, orbitR)
       draw()
       raf = requestAnimationFrame(frame)
-    }
-
-    function onPointerMove(e: PointerEvent) {
-      const nx = (e.clientX / window.innerWidth) * 2 - 1
-      const ny = (e.clientY / window.innerHeight) * 2 - 1
-      targetMouseYaw = nx * CONFIG.mouseYaw
-      targetMousePitch = -ny * CONFIG.mousePitch
     }
 
     // Init
@@ -215,13 +207,11 @@ export function Starfield() {
     }
 
     window.addEventListener('resize', resize)
-    window.addEventListener('pointermove', onPointerMove, { passive: true })
     raf = requestAnimationFrame(frame)
 
     return () => {
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', resize)
-      window.removeEventListener('pointermove', onPointerMove)
     }
   }, [])
 

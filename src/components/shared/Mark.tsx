@@ -3,9 +3,10 @@ interface MarkProps {
   inkColor?: string;
   className?: string;
   style?: React.CSSProperties;
+  children?: React.ReactNode;
 }
 
-export function Mark({ idPrefix, inkColor = '#44579c', className, style }: MarkProps) {
+export function Mark({ idPrefix, inkColor = '#44579c', className, style, children }: MarkProps) {
   return (
     <svg
       viewBox="0 0 100 100"
@@ -15,6 +16,7 @@ export function Mark({ idPrefix, inkColor = '#44579c', className, style }: MarkP
       style={{ display: 'block', overflow: 'visible', ...style }}
     >
       <defs>
+        {children}
         <mask id={`${idPrefix}c`}>
           <rect width="100" height="100" fill="#fff" />
           <circle cx="63" cy="39" r="29" fill="#000" />

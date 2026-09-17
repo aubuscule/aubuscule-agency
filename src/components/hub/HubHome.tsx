@@ -26,24 +26,10 @@ const cards: HubCard[] = [
 export function HubHome() {
   const t = useTranslations('home')
   const heroRef = useRef<HTMLElement>(null)
-  const [yOffset, setYOffset] = useState(0)
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     setVisible(true)
-  }, [])
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!heroRef.current) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const rect = heroRef.current.getBoundingClientRect()
-    const cy = rect.top + rect.height / 2
-    const dy = (e.clientY - cy) / rect.height
-    setYOffset(-dy * 28)
-  }, [])
-
-  const handleMouseLeave = useCallback(() => {
-    setYOffset(0)
   }, [])
 
   return (
@@ -51,16 +37,19 @@ export function HubHome() {
       <section
         ref={heroRef}
         className={`hub-hero ${visible ? 'hub-hero--visible' : ''}`}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
         aria-labelledby="hub-heading"
       >
         <Starfield />
-        <div
-          className="hub-hero-parallax"
-          style={{ transform: `translateY(${yOffset}px)` }}
-        >
-          <Mark idPrefix="hub" className="hub-mark-svg" inkColor="#e8e6e0" />
+        <div className="hub-hero-parallax">
+          <Mark idPrefix="hub" className="hub-mark-svg" inkColor="url(#hubMarkGradient)">
+            <linearGradient id="hubMarkGradient" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse" spreadMethod="repeat">
+              <stop offset="0%" stopColor="#7dcfff" />
+              <stop offset="50%" stopColor="#bb9af7" />
+              <stop offset="100%" stopColor="#7dcfff" />
+              <animate attributeName="x1" values="0; 200" dur="8s" repeatCount="indefinite" />
+              <animate attributeName="x2" values="200; 400" dur="8s" repeatCount="indefinite" />
+            </linearGradient>
+          </Mark>
         </div>
         <h1 className="hub-h1" id="hub-heading">Aubuscule</h1>
         <p className="hub-sub">{t('subtitle')}</p>

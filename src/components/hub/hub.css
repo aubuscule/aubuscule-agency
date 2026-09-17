@@ -2,6 +2,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: #09080c; /* Near black with a hint of purple */
+  color: #c0caf5;
 }
 .hub-hero {
   position: relative;
@@ -13,9 +15,7 @@
   gap: var(--sp-6);
   padding: var(--sp-12) var(--sp-10) var(--sp-10);
   background:
-    radial-gradient(ellipse 80% 160% at 50% 90%, #1e2240 0%, #161513 50%, transparent 100%),
-    linear-gradient(170deg, #0f0e0c 0%, #161513 50%, #1a1816 100%);
-  color: #eae8e2;
+    radial-gradient(ellipse 80% 160% at 50% 90%, #1f1b2e 0%, #110f17 40%, #09080c 100%);
   overflow: hidden;
 }
 /* 3D constellation canvas — sits behind hero content, above the gradient */
@@ -49,12 +49,27 @@
 }
 .hub-mark-svg { width: 100px; height: 100px; }
 .hub-h1 {
+  margin-top: calc(var(--sp-4) * -1);
   font-size: 48px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.04;
-  color: #eae8e2;
   opacity: 0;
   transform: translateY(var(--sp-5));
   transition: opacity 1s cubic-bezier(.23,1,.32,1) .15s, transform 1s cubic-bezier(.23,1,.32,1) .15s;
+  
+  background: linear-gradient(90deg, #7dcfff 0%, #bb9af7 50%, #7dcfff 100%);
+  background-size: 200% auto;
+  background-position: 200% center;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: hubGradientMove 8s linear infinite;
 }
+
+@keyframes hubGradientMove {
+  0% { background-position: 200% center; }
+  100% { background-position: 0% center; }
+}
+
 .hub-sub {
   font-size: 17px; line-height: 1.65; color: #9a978f;
   text-align: center; max-width: 620px; margin-inline: auto;
@@ -73,20 +88,24 @@
   padding: 0 var(--sp-10) var(--sp-12);
 }
 .hub-card {
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 3px;
+  background: #0f0d14;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
   padding: var(--sp-7);
   display: flex;
   flex-direction: column;
   gap: var(--sp-2_5);
   text-decoration: none;
   color: #eae8e2;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
 }
 .hub-card:hover {
-  background: rgba(255,255,255,.08);
-  border-color: rgba(255,255,255,.14);
+  background: #171520;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
 }
 .hub-card-title {
   font-size: 24px;
