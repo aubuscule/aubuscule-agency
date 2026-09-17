@@ -1,34 +1,44 @@
 :root {
+  /* 1. Base Colors (Light Mode) */
   --bg:            #e1e2e7;
+  --surface:       #ffffff;
+  --surface-dark:  #c4c8da;
+  
   --ink:           #3760bf;
   --ink-soft:      #4c5069;
   --ink-mute:      #8c92a6;
   --ink-faint:     #a8aecb;
   --ink-dim:       #646a86;
+  
   --hairline:      #c4c8da;
   --hairline-soft: #d0d5e3;
-  --surface:       #ffffff;
-  --surface-dark:  #c4c8da;
-  --quote:         #3760bf;
-  --footer-body:   #8c92a6;
-  --footer-link:   var(--ink-soft);
-  --heading-ink:   #593c9d; /* Accent derived but lighter */
-  --accent:        #3c296d; /* Deep Tokyo Night purple for light mode */
+  
+  --accent:        #3c296d; /* Deep Tokyo Night purple */
   --accent-fg:     #ffffff;
-  --nav-bg:        rgba(225, 226, 231, 0.86);
-  --nav-open-bg:   rgba(225, 226, 231, 0.97);
-  --focus-ring:    #3c296d;
 
+  /* 2. Semantic Aliases (DRY) */
+  --quote:         var(--ink);
+  --footer-body:   var(--ink-mute);
+  --footer-link:   var(--ink-soft);
+  --heading-ink:   #593c9d; /* Lighter accent derivative for light mode */
+  --focus-ring:    var(--accent);
+  
+  --nav-bg:        color-mix(in srgb, var(--bg) 86%, transparent);
+  --nav-open-bg:   color-mix(in srgb, var(--bg) 97%, transparent);
+
+  /* 3. Hero Specific Tokens */
   --hero-grad-center: #c4c8da;
   --hero-grad-mid:    #d0d5e3;
-  --hero-grad-edge:   #e1e2e7;
+  --hero-grad-edge:   var(--bg);
   --hero-accent-1:    var(--accent);
-  --hero-accent-2:    #593c9d; /* A slightly lighter variant for the gradient */
-  --hero-card-bg:     #ffffff;
-  --hero-card-bg-hover: #f0f1f5;
-  --hero-card-border: rgba(60, 41, 109, 0.1);
-  --hero-card-border-hover: rgba(60, 41, 109, 0.3);
+  --hero-accent-2:    #593c9d;
+  
+  --hero-card-bg:           var(--surface);
+  --hero-card-bg-hover:     color-mix(in srgb, var(--surface) 95%, var(--ink));
+  --hero-card-border:       color-mix(in srgb, var(--accent) 10%, transparent);
+  --hero-card-border-hover: color-mix(in srgb, var(--accent) 30%, transparent);
 
+  /* 4. Spacing Scale */
   --sp-0_5: 2px;
   --sp-1:   4px;
   --sp-1_5: 6px;
@@ -53,33 +63,33 @@
 }
 
 [data-theme="dark"] {
+  /* 1. Base Colors (Dark Mode) */
   --bg:            #09080c;
+  --surface:       #1a1b26;
+  --surface-dark:  #16161e;
+  
   --ink:           #c0caf5;
   --ink-soft:      #9aa5ce;
   --ink-mute:      #565f89;
   --ink-faint:     #414868;
   --ink-dim:       #292e42;
+  
   --hairline:      #1f1d2e;
   --hairline-soft: #16161e;
-  --surface:       #1a1b26;
-  --surface-dark:  #16161e;
-  --quote:         #c0caf5;
-  --footer-body:   #565f89;
-  --footer-link:   var(--quote);
-  --heading-ink:   var(--ink);
+  
   --accent:        #bb9af7;
   --accent-fg:     #1a1b26;
-  --nav-bg:        rgba(9, 8, 12, 0.90);
-  --nav-open-bg:   rgba(9, 8, 12, 0.97);
-  --focus-ring:    #bb9af7;
 
+  /* 2. Semantic Overrides */
+  --footer-link:   var(--ink);
+  --heading-ink:   var(--ink);
+  
+  /* 3. Hero Overrides */
   --hero-grad-center: #1f1b2e;
   --hero-grad-mid:    #110f17;
-  --hero-grad-edge:   #09080c;
-  --hero-accent-1:    var(--accent);
-  --hero-accent-2:    #7dcfff;
-  --hero-card-bg:     #0f0d14;
-  --hero-card-bg-hover: #171520;
-  --hero-card-border: rgba(255, 255, 255, 0.05);
-  --hero-card-border-hover: rgba(255, 255, 255, 0.1);
+  --hero-accent-2:    #7dcfff; /* Cyan gradient complement */
+  
+  --hero-card-bg-hover:     #24283b; /* Tokyo Night Storm */
+  --hero-card-border:       color-mix(in srgb, var(--ink) 10%, transparent);
+  --hero-card-border-hover: color-mix(in srgb, var(--ink) 25%, transparent);
 }
