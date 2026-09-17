@@ -4,7 +4,7 @@ import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { useTranslations, useLocale } from 'next-intl'
 import { locales } from '@/i18n/config'
 import { Select } from '@/components/shared/Select'
-import { Mark } from './Mark'
+import { Logo } from './Logo'
 import { ThemeToggle } from './ThemeToggle'
 
 type IconProps = { className?: string }
@@ -67,18 +67,7 @@ export function Nav() {
     <>
       <header className="nav">
         <div className="nav-inner">
-          <Link href="/" className="nav-logo">
-            <Mark idPrefix="n" inkColor="url(#navMarkGradient)" style={{ width: 32, height: 32, flexShrink: 0 }}>
-              <linearGradient id="navMarkGradient" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse" spreadMethod="repeat">
-                <stop offset="0%" stopColor="var(--hero-accent-1)" />
-                <stop offset="50%" stopColor="var(--hero-accent-2)" />
-                <stop offset="100%" stopColor="var(--hero-accent-1)" />
-                <animate attributeName="x1" values="0; 200" dur="8s" repeatCount="indefinite" />
-                <animate attributeName="x2" values="200; 400" dur="8s" repeatCount="indefinite" />
-              </linearGradient>
-            </Mark>
-            <span className="nav-wordmark">Aubuscule</span>
-          </Link>
+          <Logo idPrefix="n" className="nav-logo" wordmarkClassName="nav-wordmark" />
           <nav aria-label={t('ariaLabel')} className="nav-area">
             <ul className="nav-links" id="nav-menu">
               {links.map(link => {
