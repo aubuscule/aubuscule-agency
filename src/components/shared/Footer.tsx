@@ -22,7 +22,7 @@ export function Footer() {
       <div className="footer-main">
         <div className="footer-brand">
           <Link href="/" className="footer-logo">
-            <Mark idPrefix="f" inkColor="#ffffff" style={{ width: 34, height: 34, flexShrink: 0 }} />
+            <Mark idPrefix="f" style={{ width: 34, height: 34, flexShrink: 0 }} />
             <span className="footer-wordmark">Aubuscule</span>
           </Link>
           <p className="footer-tagline">

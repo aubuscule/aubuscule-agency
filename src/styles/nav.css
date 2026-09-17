@@ -25,6 +25,9 @@
   text-decoration: none;
   color: var(--ink);
 }
+.nav-logo svg {
+  color: var(--accent);
+}
 
 .nav-wordmark {
   font-size: 19px;

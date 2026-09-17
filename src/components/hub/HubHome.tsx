@@ -57,7 +57,7 @@ export function HubHome() {
       >
         <Starfield />
         <div className="hub-hero-parallax">
-          <Mark idPrefix="hub" className="hub-mark-svg" inkColor="var(--accent)" />
+          <Mark idPrefix="hub" className="hub-mark-svg" />
         </div>
         <h1 className="hub-h1" id="hub-heading">Aubuscule</h1>
         <p className="hub-sub">{t('subtitle')}</p>

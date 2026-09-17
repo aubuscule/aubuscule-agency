@@ -68,7 +68,7 @@ export function Nav() {
       <header className="nav">
         <div className="nav-inner">
           <Link href="/" className="nav-logo">
-            <Mark idPrefix="n" inkColor="var(--accent)" style={{ width: 32, height: 32, flexShrink: 0 }} />
+            <Mark idPrefix="n" style={{ width: 32, height: 32, flexShrink: 0 }} />
             <span className="nav-wordmark">Aubuscule</span>
           </Link>
           <nav aria-label={t('ariaLabel')} className="nav-area">
