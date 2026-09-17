@@ -123,7 +123,6 @@ export function RealisationsGallery() {
                         r="33"
                         fill="var(--accent)"
                         fillOpacity="0.2"
-                        style={{ mixBlendMode: 'screen' }}
                         transform={`rotate(${angle} 100 100)`}
                       />
                     )
