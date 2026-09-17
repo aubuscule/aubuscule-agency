@@ -4,11 +4,11 @@
   --surface:       #ffffff;
   --surface-dark:  #c4c8da;
   
-  --ink:           #241b3d; /* Very deep plum/purple to align with the accent */
-  --ink-soft:      #413563;
-  --ink-mute:      #605485;
-  --ink-dim:       #8175a6;
-  --ink-faint:     #a398c7;
+  --ink:           #3f3366; /* Softer, lighter purple-slate */
+  --ink-soft:      #5b4f80;
+  --ink-mute:      #776c99;
+  --ink-dim:       #9489b3;
+  --ink-faint:     #b1a7cc;
   
   --hairline:      #c4c8da;
   --hairline-soft: #d0d5e3;
