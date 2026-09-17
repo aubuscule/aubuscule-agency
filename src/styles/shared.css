@@ -30,6 +30,30 @@
   color: var(--ink-faint);
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  text-decoration: none;
+  color: var(--ink);
+}
+.logo-mark-svg {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  color: var(--accent);
+  --mark-color: var(--accent);
+}
+.logo-wordmark {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Inverted logo for dark footers */
+.logo--inverted { color: var(--bg); }
+.logo--inverted .logo-mark-svg { color: #ffffff; --mark-color: #ffffff; }
+
 .btn-primary,
 .btn-secondary {
   display: inline-flex;

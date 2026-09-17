@@ -1,19 +1,19 @@
+import { useId } from 'react'
 import { Link } from '@/i18n/navigation'
 import { Mark } from './Mark'
 
 interface LogoProps {
-  idPrefix: string;
-  className?: string;
-  wordmarkClassName?: string;
-  markStyle?: React.CSSProperties;
+  inverted?: boolean;
 }
 
-export function Logo({ idPrefix, className, wordmarkClassName, markStyle = { width: 32, height: 32, flexShrink: 0 } }: LogoProps) {
-  const gradId = `${idPrefix}MarkGradient`
+export function Logo({ inverted = false }: LogoProps) {
+  const rawId = useId()
+  const idPrefix = 'l' + rawId.replace(/[^a-zA-Z0-9]/g, '')
+  const gradId = `${idPrefix}Grad`
   
   return (
-    <Link href="/" className={className}>
-      <Mark idPrefix={idPrefix} inkColor={`url(#${gradId})`} style={markStyle}>
+    <Link href="/" className={`logo ${inverted ? 'logo--inverted' : ''}`}>
+      <Mark idPrefix={idPrefix} inkColor={`url(#${gradId})`} className="logo-mark-svg">
         <linearGradient id={gradId} x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse" spreadMethod="repeat">
           <stop offset="0%" stopColor="var(--hero-accent-1)" />
           <stop offset="50%" stopColor="var(--hero-accent-2)" />
@@ -22,7 +22,7 @@ export function Logo({ idPrefix, className, wordmarkClassName, markStyle = { wid
           <animate attributeName="x2" values="200; 400" dur="8s" repeatCount="indefinite" />
         </linearGradient>
       </Mark>
-      <span className={wordmarkClassName}>Aubuscule</span>
+      <span className="logo-wordmark">Aubuscule</span>
     </Link>
   )
 }

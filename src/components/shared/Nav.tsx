@@ -67,7 +67,7 @@ export function Nav() {
     <>
       <header className="nav">
         <div className="nav-inner">
-          <Logo idPrefix="n" className="nav-logo" wordmarkClassName="nav-wordmark" />
+          <Logo />
           <nav aria-label={t('ariaLabel')} className="nav-area">
             <ul className="nav-links" id="nav-menu">
               {links.map(link => {

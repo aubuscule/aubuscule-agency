@@ -21,7 +21,7 @@ export function Footer() {
     <footer className="footer" role="contentinfo">
       <div className="footer-main">
         <div className="footer-brand">
-          <Logo idPrefix="f" className="footer-logo" wordmarkClassName="footer-wordmark" markStyle={{ width: 34, height: 34, flexShrink: 0 }} />
+          <Logo inverted />
           <p className="footer-tagline">
             {t('tagline')}
           </p>
