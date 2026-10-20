@@ -1,9 +1,9 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import "@/components/portfolio/portfolio.css";
+import "@/components/products/products.css";
 
-export function RealisationsGallery() {
-  const t = useTranslations("portfolio");
+export function ProductsGallery() {
+  const t = useTranslations("products");
 
   return (
     <>
@@ -59,7 +59,7 @@ export function RealisationsGallery() {
                   <li className="app-card-tag">{t("cardTagDesktop")}</li>
                 </ul>
                 <div className="app-card-footer">
-                  <Link href="/portfolio/remplate" className="app-card-btn">
+                  <Link href="/products/remplate" className="app-card-btn">
                     {t("cardLearnMore")}
                     <svg
                       width="14"
@@ -140,7 +140,7 @@ export function RealisationsGallery() {
                 </ul>
                 <div className="app-card-footer">
                   <Link
-                    href="/portfolio/zones-tonales"
+                    href="/products/zones-tonales"
                     className="app-card-btn"
                   >
                     {t("cardLearnMore")}
@@ -204,3 +204,5 @@ export function RealisationsGallery() {
     </>
   );
 }
+
+export const RealisationsGallery = ProductsGallery;

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { ZonesTonalesPage } from "@/components/portfolio/ZonesTonalesPage";
+import { ZonesTonalesPage } from "@/components/products/ZonesTonalesPage";
 
 export async function generateMetadata({
   params,
@@ -28,12 +28,12 @@ export async function generateMetadata({
       images: [ogImage],
     },
     alternates: {
-      canonical: `/${locale}/portfolio/zones-tonales`,
+      canonical: `/${locale}/products/zones-tonales`,
       languages: {
-        fr: "/fr/portfolio/zones-tonales",
-        en: "/en/portfolio/zones-tonales",
-        nl: "/nl/portfolio/zones-tonales",
-        "x-default": "/fr/portfolio/zones-tonales",
+        fr: "/fr/products/zones-tonales",
+        en: "/en/products/zones-tonales",
+        nl: "/nl/products/zones-tonales",
+        "x-default": "/fr/products/zones-tonales",
       },
     },
   };

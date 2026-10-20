@@ -10,18 +10,18 @@ export async function generateMetadata({
   return {
     title: slug,
     alternates: {
-      canonical: `/${locale}/portfolio/${slug}`,
+      canonical: `/${locale}/products/${slug}`,
       languages: {
-        fr: `/fr/portfolio/${slug}`,
-        en: `/en/portfolio/${slug}`,
-        nl: `/nl/portfolio/${slug}`,
-        'x-default': `/fr/portfolio/${slug}`,
+        fr: `/fr/products/${slug}`,
+        en: `/en/products/${slug}`,
+        nl: `/nl/products/${slug}`,
+        'x-default': `/fr/products/${slug}`,
       },
     },
   }
 }
 
-export default async function AppDetail({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+export default async function ProductDetail({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { slug } = await params
 
   if (slug === 'remplate') {

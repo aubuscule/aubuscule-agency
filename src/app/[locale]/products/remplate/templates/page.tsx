@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import { RemplateTemplates } from '@/components/portfolio/RemplateTemplates'
+import { RemplateTemplates } from '@/components/products/RemplateTemplates'
 
 export async function generateMetadata({
   params,
@@ -14,12 +14,12 @@ export async function generateMetadata({
     title: t('templatesTitle'),
     description: t('templatesDesc'),
     alternates: {
-      canonical: `/${locale}/portfolio/remplate/templates`,
+      canonical: `/${locale}/products/remplate/templates`,
       languages: {
-        fr: '/fr/portfolio/remplate/templates',
-        en: '/en/portfolio/remplate/templates',
-        nl: '/nl/portfolio/remplate/templates',
-        'x-default': '/fr/portfolio/remplate/templates',
+        fr: '/fr/products/remplate/templates',
+        en: '/en/products/remplate/templates',
+        nl: '/nl/products/remplate/templates',
+        'x-default': '/fr/products/remplate/templates',
       },
     },
     openGraph: {

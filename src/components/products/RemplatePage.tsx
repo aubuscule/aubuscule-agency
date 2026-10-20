@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
-import '@/components/portfolio/portfolio.css'
+import { Link } from '@/i18n/navigation'
+import '@/components/products/products.css'
 
 /* ── Flow arrow ───────────────────────────────────────────────────── */
 
@@ -263,13 +264,13 @@ export function RemplatePage() {
           <p className="app-specs-desc">
             {t('specsDesc')}
           </p>
-          <a href="/portfolio/remplate/templates" className="app-specs-link">
+          <Link href="/products/remplate/templates" className="app-specs-link">
             {t('specsLink')}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ marginLeft: '4px' }}>
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
             </svg>
-          </a>
+          </Link>
         </div>
 
         <div className="app-specs-card">

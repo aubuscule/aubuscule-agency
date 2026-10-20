@@ -92,7 +92,7 @@ jobs:
             const marker = '<!-- pr-preview -->';
             const body = `${marker}\n🧪 **Preview deployment**\n\n` +
               (url
-                ? `\`pr-${pr}\` → ${url}\n\nTry: [\`/\`](${url}/) · [\`/agency\`](${url}/agency) · [\`/apps\`](${url}/apps) · [\`/blog\`](${url}/blog) · [\`/dev\`](${url}/dev)`
+                ? `\`pr-${pr}\` → ${url}\n\nTry: [\`/\`](${url}/) · [\`/agency\`](${url}/agency) · [\`/products\`](${url}/products) · [\`/blog\`](${url}/blog) · [\`/dev\`](${url}/dev)`
                 : '⚠️ Preview URL not found in the build output — check the workflow logs.');
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner, repo: context.repo.repo, issue_number: pr,

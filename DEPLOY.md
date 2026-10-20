@@ -34,7 +34,7 @@ unused (`images.unoptimized`).
 
 ### Verifying a PR
 
-Open the commented URL: `/`, `/agency`, `/apps`, `/apps/remplate`, `/blog`,
+Open the commented URL: `/`, `/agency`, `/products`, `/products/remplate`, `/blog`,
 `/dev`, `/shop`. Note: PRs opened from forks don’t receive repo secrets, so the
 preview step only runs for branches in this repo.
 
@@ -48,11 +48,11 @@ makes `www.aubuscule.com` the primary custom domain and drops
 1. In Cloudflare, add **Redirect Rules** (301) before/at merge (pointing directly to localized `/fr/` paths to avoid 307 temporary redirects that prevent Google canonicalization):
    - `aubuscule.com/*` (apex) → `https://www.aubuscule.com/$1`
    - `agency.aubuscule.com/*` → `https://www.aubuscule.com/fr/agency/$1`
-   - `apps.aubuscule.com/*` → `https://www.aubuscule.com/fr/apps/$1`
+   - `apps.aubuscule.com/*` → `https://www.aubuscule.com/fr/products/$1`
    - `blog.aubuscule.com/*` → `https://www.aubuscule.com/fr/blog/$1`
    - `dev.aubuscule.com/*` → `https://www.aubuscule.com/fr/dev/$1`
    - `shop.aubuscule.com/*` → `https://aubuscule.gumroad.com`
-   - `remplate.aubuscule.com/*` → `https://www.aubuscule.com/fr/apps/remplate`
+   - `remplate.aubuscule.com/*` → `https://www.aubuscule.com/fr/products/remplate`
 2. Ensure `www.aubuscule.com` is attached to the Worker as a custom domain
    (it’s in `wrangler.jsonc` `routes`).
 3. Merge → Workers Builds deploys. Verify `www.aubuscule.com/`, `/agency`, etc.

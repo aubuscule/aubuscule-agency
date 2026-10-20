@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import "@/components/portfolio/portfolio.css";
+import "@/components/products/products.css";
 
 export function ZonesTonalesPage() {
   const t = useTranslations("zonesTonales");

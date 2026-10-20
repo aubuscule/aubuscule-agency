@@ -1,30 +1,30 @@
 import { getTranslations } from 'next-intl/server'
-import { RealisationsGallery } from '@/components/portfolio/RealisationsGallery'
+import { ProductsGallery } from '@/components/products/ProductsGallery'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'nav' })
   const tMeta = await getTranslations({ locale, namespace: 'meta' })
   return {
-    title: t('portfolio'),
+    title: t('products'),
     description: tMeta('siteDescription'),
     alternates: {
-      canonical: `/${locale}/portfolio`,
+      canonical: `/${locale}/products`,
       languages: {
-        fr: '/fr/portfolio',
-        en: '/en/portfolio',
-        nl: '/nl/portfolio',
-        'x-default': '/fr/portfolio',
+        fr: '/fr/products',
+        en: '/en/products',
+        nl: '/nl/products',
+        'x-default': '/fr/products',
       },
     },
   }
 }
 
-export default async function RealisationsHome() {
+export default async function ProductsHome() {
   return (
     <main id="main-content">
       <div className="wrap">
-        <RealisationsGallery />
+        <ProductsGallery />
       </div>
     </main>
   )
