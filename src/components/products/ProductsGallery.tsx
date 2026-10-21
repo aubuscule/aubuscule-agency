@@ -160,7 +160,7 @@ export function ProductsGallery() {
                     </svg>
                   </Link>
                   <a
-                    href="#" // The user didn't specify a link yet, just a CTA
+                    href="https://tr.ee/I9DqWD4RtT"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="app-card-btn-secondary"
