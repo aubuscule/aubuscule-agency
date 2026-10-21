@@ -21,8 +21,8 @@ const cards: HubCard[] = [
     href: '/agency',
   },
   {
-    key: 'portfolio',
-    href: '/portfolio',
+    key: 'products',
+    href: '/products',
   },
 ]
 

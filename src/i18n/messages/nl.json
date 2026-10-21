@@ -18,7 +18,7 @@
     "closeMenu": "Menu sluiten",
     "themeLight": "Activeer lichte modus",
     "themeDark": "Activeer donkere modus",
-    "portfolio": "Portfolio"
+    "products": "Producten"
   },
   "footer": {
     "tagline": "We leveren geen projecten op. We verduidelijken een nood, bouwen een oplossing, geven de sleutels door.",
@@ -36,8 +36,8 @@
         "title": "Diensten voor artiesten",
         "desc": "Website, EPK, foto, opname, mix, clip, live-opname, distributie, automatisering, vier domeinen, één team."
       },
-      "portfolio": {
-        "label": "Portfolio",
+      "products": {
+        "label": "Producten",
         "title": "Software",
         "desc": "Maatwerksoftware die uw leven makkelijker maakt."
       }
@@ -439,8 +439,8 @@
       "mailtoBody": "Hallo,\n\nIk heb hulp nodig met Remplate.\n\nWat ik aan het doen was :\n\n\nWat er gebeurde :\n\n\nMijn apparaat (reMarkable 2 / Paper Pure / Paper Pro / Paper Pro Move) :\nmacOS-versie :\n\n\nBedankt!"
     }
   },
-  "portfolio": {
-    "heroTitle": "Ons portfolio",
+  "products": {
+    "heroTitle": "Onze producten",
     "heroLead": "Vaste prijs, geen abonnement, geen account.",
     "cardLearnMore": "Meer informatie",
     "cardBuy": "Kopen",

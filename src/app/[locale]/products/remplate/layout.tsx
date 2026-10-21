@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server'
-import { AppSubNav } from '@/components/portfolio/AppSubNav'
+import { AppSubNav } from '@/components/products/AppSubNav'
 
 export default async function RemplateLayout({
   children,
@@ -12,9 +12,9 @@ export default async function RemplateLayout({
   const t = await getTranslations({ locale, namespace: 'remplate.subnav' })
 
   const navItems = [
-    { href: '/portfolio/remplate', label: t('overview') },
-    { href: '/portfolio/remplate/templates', label: t('templates') },
-    { href: '/portfolio/remplate/faq', label: t('faq') },
+    { href: '/products/remplate', label: t('overview') },
+    { href: '/products/remplate/templates', label: t('templates') },
+    { href: '/products/remplate/faq', label: t('faq') },
   ]
 
   return (

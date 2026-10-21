@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import { RemplatePage } from '@/components/portfolio/RemplatePage'
+import { RemplateFAQ } from '@/components/products/RemplateFAQ'
 
 export async function generateMetadata({
   params,
@@ -11,38 +11,38 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'remplate.meta' })
 
   return {
-    title: t('overviewTitle'),
-    description: t('overviewDesc'),
+    title: t('faqTitle'),
+    description: t('faqDesc'),
     alternates: {
-      canonical: `/${locale}/portfolio/remplate`,
+      canonical: `/${locale}/products/remplate/faq`,
       languages: {
-        fr: '/fr/portfolio/remplate',
-        en: '/en/portfolio/remplate',
-        nl: '/nl/portfolio/remplate',
-        'x-default': '/fr/portfolio/remplate',
+        fr: '/fr/products/remplate/faq',
+        en: '/en/products/remplate/faq',
+        nl: '/nl/products/remplate/faq',
+        'x-default': '/fr/products/remplate/faq',
       },
     },
     openGraph: {
-      title: t('overviewTitle'),
-      description: t('overviewDesc'),
+      title: t('faqTitle'),
+      description: t('faqDesc'),
       images: [
         {
           url: '/apps/remplate/screenshot.png',
           width: 1440,
           height: 1036,
-          alt: t('overviewTitle'),
+          alt: t('faqTitle'),
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: t('overviewTitle'),
-      description: t('overviewDesc'),
+      title: t('faqTitle'),
+      description: t('faqDesc'),
       images: ['/apps/remplate/screenshot.png'],
     },
   }
 }
 
-export default async function RemplateRoute() {
-  return <RemplatePage />
+export default async function FAQRoute() {
+  return <RemplateFAQ />
 }

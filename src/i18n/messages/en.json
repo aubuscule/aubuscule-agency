@@ -18,7 +18,7 @@
     "closeMenu": "Close menu",
     "themeLight": "Activate light mode",
     "themeDark": "Activate dark mode",
-    "portfolio": "Portfolio"
+    "products": "Products"
   },
   "footer": {
     "tagline": "We don't deliver projects. We clarify a need, build a solution, hand over the keys.",
@@ -36,8 +36,8 @@
         "title": "Services for artists",
         "desc": "Website, EPK, photo, recording, mix, music video, live capture, distribution, automation, four domains, one team."
       },
-      "portfolio": {
-        "label": "Portfolio",
+      "products": {
+        "label": "Products",
         "title": "Software",
         "desc": "Custom software that makes your life easier."
       }
@@ -439,8 +439,8 @@
       "mailtoBody": "Hi,\n\nI need help with Remplate.\n\nWhat I was doing:\n\n\nWhat happened:\n\n\nMy device (reMarkable 2 / Paper Pure / Paper Pro / Paper Pro Move):\nmacOS version:\n\n\nThanks!"
     }
   },
-  "portfolio": {
-    "heroTitle": "Our portfolio",
+  "products": {
+    "heroTitle": "Our products",
     "heroLead": "Fixed price, no subscription, no account.",
     "cardLearnMore": "Learn more",
     "cardBuy": "Buy",
