@@ -142,84 +142,40 @@
   color: var(--ink-soft);
 }
 
-/* 02. Domains Category (Who/What) */
-.dev-domain-cat {
+/* 02. Domains Grid (Who/What) */
+.dev-domains-grid {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: var(--sp-12);
-  align-items: start;
-  padding: var(--sp-12) 0;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-6);
 }
 
-.dev-domain-cat + .dev-domain-cat {
-  border-top: 1px solid var(--hairline);
-}
-
-.dev-domain-label {
+.dev-domain-card {
+  padding: var(--sp-7);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card, 3px);
   display: flex;
   flex-direction: column;
-  gap: var(--sp-3_5);
-  position: sticky;
-  top: var(--sp-18);
-}
-
-.dev-domain-num-row {
-  display: flex;
-  align-items: baseline;
-  gap: var(--sp-3);
+  gap: var(--sp-2_5);
 }
 
 .dev-domain-num {
   font-size: 13px;
   letter-spacing: 0.16em;
+  color: var(--accent);
 }
 
 .dev-domain-name {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
   color: var(--ink);
 }
 
 .dev-domain-desc {
   font-size: 14.5px;
   line-height: 1.6;
-  color: var(--ink-soft);
-  max-width: 270px;
-}
-
-.dev-domain-items {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  list-style: none;
-}
-
-.dev-domain-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: var(--sp-5) 0;
-  border-top: 1px solid var(--hairline);
-}
-
-.dev-domain-item:first-child {
-  border-top: none;
-  padding-top: 0;
-}
-
-.dev-domain-item-name {
-  font-size: 17px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
-  color: var(--ink);
-}
-
-.dev-domain-item-detail {
-  font-size: 14px;
-  line-height: 1.55;
   color: var(--ink-soft);
 }
 
@@ -609,13 +565,8 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .dev-domain-cat {
+  .dev-domains-grid {
     grid-template-columns: 1fr;
-    gap: var(--sp-8);
-  }
-
-  .dev-domain-label {
-    position: static;
   }
 
   .dev-showcase-grid {

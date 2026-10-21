@@ -497,181 +497,118 @@
   },
   "dev": {
     "meta": {
-      "title": "Ingénierie sur mesure & Automatisation",
-      "description": "Conception logicielle artisanale, intégration de systèmes et automatisation de processus métier. Des outils rapides, modulaires et pérennes, sans dette superflue.",
-      "ogDescription": "Ingénierie logicielle sur mesure, intégration de systèmes et automatisation de processus guidées par la simplicité radicale."
+      "title": "Custom Software & Automation",
+      "description": "Cross-platform applications, web tools, and workflow automation to simplify your day-to-day operations.",
+      "ogDescription": "Custom software engineering, cross-platform apps, and workflow automation."
     },
     "hero": {
-      "eyebrow": "Ingénierie logicielle · Systèmes & Automatisation",
-      "h1": "Des logiciels façonnés pour vos gestes. Sans superflu.",
-      "sub": "Nous concevons des <bold>outils sur mesure, des intégrations de systèmes et des automatisations de processus</bold>. Guidés par une simplicité radicale : du code modulaire, des performances sans compromis et le refus absolu de la dette technique inutile.",
-      "ctaShowcase": "Explorer les réalisations",
-      "ctaContact": "Planifier un projet"
+      "eyebrow": "Custom Software & Automation",
+      "h1": "Useful software, built for your everyday work.",
+      "sub": "We build <bold>applications for Windows, macOS, and Linux, web tools, and data bridges</bold> to streamline your operations, without unnecessary complexity.",
+      "ctaShowcase": "Explore work",
+      "ctaContact": "Start a project"
     },
     "principles": {
-      "eyebrow": "Philosophie & Méthode · 01—06",
-      "h2": "Nos principes d’ingénierie",
-      "lead": "Directement issus de 20 ans de pratique du code et du design. Nous concevons le logiciel comme un artisanat durable, où chaque ligne de code doit justifier son existence.",
+      "eyebrow": "Working principles",
+      "h2": "How we approach code",
+      "lead": "A few simple rules drawn from twenty years of software engineering and design.",
       "items": {
         "kiss": {
           "num": "01",
-          "title": "KISS — Simplicité radicale",
-          "quote": "Keep it stupid simple — sauf si vous raffolez de la dette technique.",
-          "text": "La sur-ingénierie est l’ennemie numéro un de la fiabilité. Nous privilégions toujours la solution la plus directe, lisible et sobre pour résoudre votre problème sans inventer de complexité superflue."
+          "title": "KISS — Keep it simple first",
+          "text": "The simplest solution is usually the sturdiest. We avoid unnecessary abstractions when straightforward functions do the job."
         },
         "components": {
           "num": "02",
-          "title": "Composants modulaires",
-          "quote": "Une approche modulaire offre une flexibilité totale et une clarté absolue.",
-          "text": "Chaque brique logicielle a une responsabilité unique et bien délimitée. Cette architecture découplée permet d’isoler les changements, de tester sans friction et de faire évoluer vos outils sans effets de bord."
+          "title": "Modular components",
+          "text": "Break things down into small independent modules. Each piece has a single responsibility, making code easy to test and update without breaking anything else."
         },
         "noSurprises": {
           "num": "03",
-          "title": "Zéro surprise & Prédictibilité",
-          "quote": "Ce qui est construit doit avoir un comportement unique et explicite.",
-          "text": "Pas de magie noire, pas d’abstractions opaques. Nos systèmes sont prévisibles, documentés avec sobriété et vérifiables à tout instant, facilitant grandement la maintenance à long terme."
+          "title": "Zero surprises",
+          "text": "Readable code over clever tricks. If the implementation is not obvious on first read, it needs to be rewritten."
         },
         "yagni": {
           "num": "04",
-          "title": "YAGNI — Zéro spéculation",
-          "quote": "You aren’t gonna need it : chaque fonctionnalité doit être strictement nécessaire.",
-          "text": "Développer aujourd’hui ce qui servira peut-être demain est une illusion coûteuse. Nous construisons exclusivement ce qui apporte une valeur tangible et immédiate à vos opérations."
+          "title": "YAGNI — No speculation",
+          "text": "We don’t build for hypothetical needs six months down the line. We solve today’s problem, and adapt when requirements evolve."
         },
         "lean": {
           "num": "05",
-          "title": "Lean MVP & Cycles courts",
-          "quote": "Construire – Mesurer – Apprendre. Toujours démarrer avec un MVP soigné.",
-          "text": "Plutôt qu’un cahier des charges rigide de 100 pages, nous livrons rapidement un premier incrément fonctionnel de haute tenue pour le confronter sans attendre à votre pratique de terrain."
+          "title": "Short iterations",
+          "text": "A working version in a few days beats a long theoretical spec. We test quickly in real conditions, then refine."
         },
         "openSource": {
           "num": "06",
-          "title": "Less is More & Formats ouverts",
-          "quote": "Le bon design et le bon code se reconnaissent quand on ne peut plus rien retirer.",
-          "text": "L’outil doit s’effacer devant la tâche. Nous nous appuyons sur des standards ouverts (SQLite, JSON, SVG, Markdown), refusons les verrous propriétaires et vous transmettons l’intégralité de vos sources."
+          "title": "Open & durable formats",
+          "text": "Simple, stable file formats (SQLite, JSON, Markdown). You keep full ownership of your code and data without vendor lock-in."
         }
       }
     },
     "domains": {
-      "eyebrow": "Savoir-faire · 01—04",
-      "h2": "Ce que nous concevons & automatisons",
-      "lead": "Des solutions ciblées là où les logiciels du commerce imposent lourdeur, lenteur ou abonnements mensuels disproportionnés.",
-      "categories": {
+      "eyebrow": "Services",
+      "h2": "What we build",
+      "lead": "Targeted software solutions when off-the-shelf tools are too rigid or ill-fitted for your workflow.",
+      "items": {
         "desktop": {
           "num": "01",
-          "name": "Applications Desktop & Outils Locaux",
-          "desc": "Logiciels de bureau réactifs pour macOS et Linux, fonctionnant directement sur vos machines.",
-          "items": {
-            "native": {
-              "name": "Apps natives ultra-légères",
-              "detail": "Développement en Tauri et Rust : démarrage instantané, consommation RAM minime, sans la lourdeur d’une coquille Electron."
-            },
-            "localData": {
-              "name": "Bases locales SQLite & Fichiers",
-              "detail": "Lecture et traitement sécurisé de vos bibliothèques locales, partitions ou catalogues sans passer inutilement par le cloud."
-            },
-            "hardware": {
-              "name": "Intégration matériel & périphériques",
-              "detail": "Communication directe avec tablettes E-Ink, pédaliers Bluetooth/MIDI de scène et périphériques spécialisés."
-            }
-          }
+          "title": "Cross-platform desktop apps",
+          "desc": "Fast desktop software for Windows, macOS, and Linux. Instant launch, offline operation, and direct integration with local files or hardware."
         },
-        "webEdge": {
+        "web": {
           "num": "02",
-          "name": "Plateformes Web & Architectures Edge",
-          "desc": "Portails métier et applications web distribuées sans serveur pour une vitesse optimale.",
-          "items": {
-            "businessApps": {
-              "name": "Applications métier réactives",
-              "detail": "Interfaces sur mesure construites avec Next.js, Odoo Owl, Python ou Rails, optimisées pour la saisie et la recherche rapide."
-            },
-            "edgeDeploy": {
-              "name": "Déploiement Edge sans serveur",
-              "detail": "Hébergement mondial sur Cloudflare Workers et Edge Static Assets : latence sous 50ms, haute disponibilité et coûts serveur quasi nuls."
-            },
-            "a11yPerf": {
-              "name": "Sobriété, Performance & Accessibilité",
-              "detail": "Respect scrupuleux du standard WCAG AA, code taillé au millimètre et respect des ressources énergétiques et réseau."
-            }
-          }
+          "title": "Custom web apps & tools",
+          "desc": "Clean, fast internal tools and portals tailored to your business, with fast and reliable hosting."
         },
         "automation": {
           "num": "03",
-          "name": "Automatisations de Flux & Intégrations",
-          "desc": "Interconnexion de vos outils disparates pour éliminer les copier-coller et les tâches manuelles.",
-          "items": {
-            "apiSync": {
-              "name": "Passerelles API & Synchronisation",
-              "detail": "Rapprochement automatique et bidirectionnel entre vos CRM, calendriers, tableurs, bases de données et outils de facturation."
-            },
-            "pipelines": {
-              "name": "Pipelines de publication continue",
-              "detail": "Mise à jour automatique de sites web, plannings et dossiers dès qu’une fiche ou une donnée source est modifiée."
-            },
-            "zeroManual": {
-              "name": "Zéro ressaisie & Alertes ciblées",
-              "detail": "Routage automatique d’informations, webhooks, notifications intelligentes et génération sans risque d’erreurs de saisie."
-            }
-          }
+          "title": "Workflow automation",
+          "desc": "Connectors between your existing tools (files, databases, spreadsheets, APIs) to eliminate repetitive copy-pasting."
         },
-        "engines": {
+        "documents": {
           "num": "04",
-          "name": "Génération de Documents & Moteurs Dédiés",
-          "desc": "Génération algorithmique de documents complexes et calculs spatialisés haute précision.",
-          "items": {
-            "vectorPdf": {
-              "name": "PDF interactifs & E-Ink haute fidélité",
-              "detail": "Génération vectorielle de plannings et carnets avec des milliers de liens internes vérifiés et typographie adaptée aux écrans E-Ink."
-            },
-            "geoRouting": {
-              "name": "Calculs géospatiaux & Routage",
-              "detail": "Moteurs de recherche d’itinéraires routiers, détection dynamique de salles dans un rayon d’action et zones d’exclusion."
-            },
-            "diagrams": {
-              "name": "Moteurs de rendu vectoriel SVG",
-              "detail": "Algorithmes de génération de diagrammes harmoniques musicaux et visualisations techniques sur mesure."
-            }
-          }
+          "title": "Document generation",
+          "desc": "Automated generation of interactive PDFs, schedules, or technical visualizations straight from your raw data."
         }
       }
     },
     "why": {
-      "eyebrow": "Pourquoi le sur-mesure",
-      "h2": "Pourquoi investir dans un logiciel dédié ?",
-      "lead": "La plupart des organisations s’épuisent à faire cohabiter des logiciels SaaS rigides qui ne correspondent jamais tout à fait à leurs opérations. Le sur-mesure change la donne.",
+      "eyebrow": "Why custom software",
+      "h2": "What it changes day to day",
+      "lead": "When you spend more time working around software limitations than doing your actual work.",
       "items": {
         "fit": {
           "num": "01",
-          "title": "Un outil qui épouse vos gestes exacts",
-          "text": "Votre métier a ses particularités. Un outil taillé sur mesure adopte votre vocabulaire et supprime les 15 clics intermédiaires pour aller droit à l’essentiel."
+          "title": "Fitted to your workflow",
+          "text": "The software speaks your language and follows your steps, instead of forcing you into its mold."
         },
         "noRent": {
           "num": "02",
-          "title": "La fin de la rente d’abonnements SaaS",
-          "text": "Les coûts récurrents par utilisateur finissent par asphyxier les budgets. Le sur-mesure est un actif pérenne qui appartient définitivement à votre structure."
+          "title": "No per-user subscription rent",
+          "text": "You pay for development once, without a recurring monthly bill that inflates with every new hire."
         },
         "time": {
           "num": "03",
-          "title": "Des heures précieuses regagnées",
-          "text": "En confiant les calculs récurrents, les exports et les synchronisations aux automates, vous libérez votre temps pour votre véritable valeur ajoutée."
+          "title": "Fewer manual tasks",
+          "text": "Daily calculations, exports, and transfers run reliably in the background without manual mistakes."
         },
         "control": {
           "num": "04",
-          "title": "Souveraineté & Indépendance absolue",
-          "text": "Aucun risque de changement unilatéral d’interface, de hausse arbitraire de tarifs ou de dépendance toxique envers un éditeur tiers."
+          "title": "You stay in control",
+          "text": "No sudden vendor updates altering the interface or dropping features you rely on overnight."
         }
       }
     },
     "showcase": {
-      "eyebrow": "Galerie de réalisations · 01—06",
-      "h2": "Systèmes & logiciels en production",
-      "lead": "Six exemples d’outils et plateformes développés par Aubuscule, nés de besoins de terrain réels et éprouvés au quotidien.",
+      "eyebrow": "Showcase",
+      "h2": "Production systems & tools",
+      "lead": "A few examples of tools built by Aubuscule, born from real-world needs.",
       "items": {
         "aubuscores": {
           "num": "01",
           "title": "Aubuscores",
-          "type": "Application Desktop · Linux / Wayland",
-          "summary": "Compagnon de lecture de partitions pour MobileSheets sur poste de travail Wayland.",
-          "highlight": "Affichage instantané, modes Stage Dark et Sépia, support des pédaliers Bluetooth et garantie absolue de non-altération de la base MobileSheets.",
+          "type": "Desktop App · Linux / Wayland",
+          "summary": "Desktop sheet music companion for MobileSheets. Instant rendering, stage dark mode, and Bluetooth pedal support.",
           "tags": [
             "Rust",
             "Tauri",
@@ -679,16 +616,15 @@
             "SQLite",
             "Wayland"
           ],
-          "linkText": "Voir sur GitHub",
-          "linkHref": "https://github.com/borisrorsvort/aubuscores",
+          "linkText": "View on GitHub",
+          "linkHref": "https://github.com/aubuscule/aubuscores",
           "external": true
         },
         "remplate": {
           "num": "02",
           "title": "Remplate",
-          "type": "Application macOS · Tablettes reMarkable",
-          "summary": "Gestionnaire de gabarits pour reMarkable 1, 2 et Paper Pro via connexion SSH sans fil.",
-          "highlight": "Import PNG/SVG, prévisualisation en direct et synchronisation sécurisée sans passer par le cloud ni modifier les templates système.",
+          "type": "macOS App · reMarkable Tablets",
+          "summary": "Mac application to install custom page templates on reMarkable tablets over Wi-Fi without touching system files.",
           "tags": [
             "macOS",
             "Tauri",
@@ -696,122 +632,117 @@
             "React",
             "SSH"
           ],
-          "linkText": "Découvrir Remplate",
+          "linkText": "Explore Remplate",
           "linkHref": "/products/remplate",
           "external": false
         },
         "tourPlanner": {
           "num": "03",
           "title": "Tour Planner",
-          "type": "Web App Hybride & Calcul Géospatial",
-          "summary": "Optimisation d’itinéraires de tournée et détection dynamique de salles le long du trajet.",
-          "highlight": "Calculs spatiaux avec Shapely le long du tracé routier, rayon d’inclusion paramétrable (ex. 50km), zones d’exclusion et waypoints déplaçables.",
+          "type": "Web App & Geospatial Routing",
+          "summary": "Tour logistics planner that computes driving routes and automatically identifies music venues near the travel corridor.",
           "tags": [
+            "Python",
             "Odoo Owl",
             "Flask",
-            "Python",
-            "Shapely",
-            "Geo Routing"
+            "Shapely"
           ],
-          "linkText": "Voir sur GitHub",
-          "linkHref": "https://github.com/borisrorsvort/tour-planner",
+          "linkText": "View on GitHub",
+          "linkHref": "https://github.com/aubuscule/tour-planner",
           "external": true
         },
         "einkPlanner": {
           "num": "04",
           "title": "Aubuscule E-Ink Planner",
-          "type": "Générateur Vectoriel de Documents",
-          "summary": "Générateur modulaire de planificateurs PDF interactifs pour tablettes à encre électronique.",
-          "highlight": "Maillage de milliers d’hyperliens vectoriels, typographie Grotesk & Mono adaptée au contraste E-Ink, canevas à points/lignes et modes gaucher/droitier.",
+          "type": "Vector Document Generator",
+          "summary": "Interactive vector PDF planner generator with clickable tabs, optimized for high-contrast e-ink screens.",
           "tags": [
             "Python",
             "Typst",
-            "PDF Vectoriel",
-            "E-Ink Hardware"
+            "Vector PDF",
+            "E-Ink"
           ],
-          "linkText": "Voir sur GitHub",
-          "linkHref": "https://github.com/borisrorsvort/aubuscule-e-ink-planner",
+          "linkText": "View on GitHub",
+          "linkHref": "https://github.com/aubuscule/aubuscule-e-ink-planner",
           "external": true
         },
         "epks": {
           "num": "05",
           "title": "Aubuscule EPKs",
-          "type": "Plateforme Edge Multi-Tenant",
-          "summary": "Plateforme d’hébergement ultra-rapide de dossiers de presse électroniques pour artistes.",
-          "highlight": "Déploiement Edge sans serveur sur Cloudflare Workers et Static Assets, catalogue automatique, temps de chargement sous 50ms et zéro maintenance.",
+          "type": "Web Platform & Fast Hosting",
+          "summary": "Electronic press kits for artists and performers, engineered to load in under 50ms on mobile and desktop.",
           "tags": [
-            "Cloudflare Workers",
-            "Static Assets",
+            "Cloudflare",
             "Bun",
-            "Edge CDN"
+            "Static",
+            "Performance"
           ],
-          "linkText": "Explorer la plateforme",
+          "linkText": "Explore platform",
           "linkHref": "https://epk.aubuscule.com",
           "external": true
         },
         "harmony": {
           "num": "06",
           "title": "Harmony Composition Tables",
-          "type": "Outil Algorithmique & Rendu Musical",
-          "summary": "Moteur vectoriel de calcul et de visualisation des relations harmoniques et modulations.",
-          "highlight": "Génération algorithmique de matrices d’accords et de tables de composition de haute précision pour compositeurs et pédagogues.",
+          "type": "Algorithmic Tool & Music Rendering",
+          "summary": "Vector engine calculating and visualizing chord progressions and harmonic modulations for composers and educators.",
           "tags": [
             "Node.js",
-            "SVG Vectoriel",
-            "Harmonie Musicale",
+            "SVG",
+            "Music Theory",
             "PDF"
           ],
-          "linkText": "Découvrir Zones Tonales",
+          "linkText": "Explore Zones Tonales",
           "linkHref": "/products/zones-tonales",
           "external": false
         }
       }
     },
     "process": {
-      "eyebrow": "Méthodologie · 01—03",
-      "h2": "Comment nous travaillons ensemble",
-      "lead": "Une approche directe, transparente et sans bureaucratie : vous savez toujours ce qui est en cours et pourquoi.",
+      "eyebrow": "Process",
+      "h2": "How we work together",
+      "lead": "A direct, transparent, and bureaucracy-free process.",
       "steps": {
         "s1": {
           "num": "01",
-          "title": "Diagnostic & Cadrage sobre",
-          "text": "Nous échangeons sur vos gestes réels et ciblons le point de friction prioritaire. Nous fixons ensemble le périmètre minimal indispensable (KISS & YAGNI) pour obtenir un impact rapide."
+          "title": "Discussion & scoping",
+          "text": "We identify your friction points and define the minimal useful scope together."
         },
         "s2": {
           "num": "02",
-          "title": "Prototype & Épreuve du terrain",
-          "text": "Pas d’effet tunnel de plusieurs mois. Nous développons une première version utilisable en cycles courts pour la confronter sans tarder à votre usage quotidien."
+          "title": "Fast prototype",
+          "text": "A working first version delivered quickly to test with your actual data."
         },
         "s3": {
           "num": "03",
-          "title": "Déploiement & Remise des clés",
-          "text": "Mise en production sécurisée, automatisation des sauvegardes, documentation concise et transmission intégrale des sources. Vous êtes propriétaire de vos outils."
+          "title": "Deployment & handover",
+          "text": "Setup, clear documentation, and full transfer of the source code."
         }
       }
     },
     "contact": {
-      "eyebrow": "Contact & Cadrage",
-      "h2": "Un projet de logiciel ou une automatisation ?",
-      "lead": "Dites-nous ce qui vous fait perdre du temps ou décrivez-nous l’outil que vous aimeriez voir exister. Nous vous répondons sous 48h avec une analyse pragmatique.",
-      "emailLabel": "Écrivez-nous directement",
-      "githubLabel": "Nos projets open source",
+      "eyebrow": "Contact",
+      "h2": "Need a custom tool or automation?",
+      "lead": "Tell us what slows you down or what tool you would like to have. We reply within 48h to evaluate if custom software makes sense.",
+      "emailLabel": "Email us directly",
+      "githubLabel": "Open source projects",
       "form": {
-        "nameLabel": "Votre nom ou structure",
-        "emailLabel": "Votre adresse email",
-        "typeLabel": "Type de projet",
+        "nameLabel": "Your name or organization",
+        "emailLabel": "Your email address",
+        "typeLabel": "Project type",
         "typeOptions": {
-          "desktop": "Application desktop locale (macOS / Linux)",
-          "web": "Application ou portail web sur mesure",
-          "automation": "Automatisation de flux & intégration d’API",
-          "document": "Moteur de documents ou génération vectorielle",
-          "audit": "Audit de simplicité & refonte d’outil"
+          "desktop": "Desktop application (Windows / Mac / Linux)",
+          "web": "Custom web tool or portal",
+          "automation": "Workflow automation & integration",
+          "document": "Document generation or data visualization",
+          "audit": "Codebase audit & tool refactoring"
         },
-        "messageLabel": "Décrivez votre besoin ou vos difficultés actuelles",
-        "messagePlaceholder": "Parlez-nous de vos outils actuels, des blocages que vous rencontrez ou de la solution souhaitée...",
-        "submit": "Envoyer la demande",
-        "notice": "Réponse sous 48h · Sans engagement · Échange direct avec Boris & Éric",
-        "successTitle": "Votre demande est prête",
-        "successSub": "Votre client email va s’ouvrir avec le message pré-rempli pour envoi immédiat."
+        "messageLabel": "Describe your needs or bottlenecks",
+        "messagePlaceholder": "Tell us about your current workflow and what you want to achieve...",
+        "submit": "Send inquiry",
+        "notice": "Reply within 48h · No commitment",
+        "successTitle": "Your request is ready",
+        "successSub": "Your email client will open with the pre-filled message."
       }
     }
   }

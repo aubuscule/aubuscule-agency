@@ -244,10 +244,6 @@ export function DevShowcase() {
                 <h3 className="dev-project-title">{t(`items.${key}.title`)}</h3>
                 <p className="dev-project-summary">{t(`items.${key}.summary`)}</p>
 
-                <p className="dev-project-highlight">
-                  <strong>Points clés :</strong> {t(`items.${key}.highlight`)}
-                </p>
-
                 <div className="dev-project-footer">
                   {isExternal ? (
                     <a

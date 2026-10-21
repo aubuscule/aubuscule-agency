@@ -31,9 +31,6 @@ export function DevPrinciples() {
               </span>
               <h3 className="dev-principle-title">{t(`items.${key}.title`)}</h3>
             </div>
-            <blockquote className="dev-principle-quote">
-              &laquo; {t(`items.${key}.quote`)} &raquo;
-            </blockquote>
             <p className="dev-principle-text">{t(`items.${key}.text`)}</p>
           </li>
         ))}
