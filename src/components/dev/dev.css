@@ -1,0 +1,698 @@
+/* ==========================================================================
+   Aubuscule — Dev & Automation Page Styles
+   Strict adherence to DESIGN.md tokens and layout rules
+   ========================================================================== */
+
+.dev-hero {
+  padding: var(--sp-24) 0 var(--sp-20);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: var(--sp-14);
+  align-items: center;
+}
+
+.dev-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-7);
+}
+
+.dev-hero-h1 {
+  font-size: 56px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+.dev-hero-sub {
+  max-width: 520px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.dev-hero-sub strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.dev-hero-ctas {
+  display: flex;
+  gap: var(--sp-3_5);
+  flex-wrap: wrap;
+  margin-top: var(--sp-1);
+}
+
+.dev-hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--accent);
+}
+
+.dev-hero-svg {
+  width: 320px;
+  height: 320px;
+}
+
+/* Sections */
+.dev-section {
+  border-top: 1px solid var(--hairline);
+  padding: var(--sp-18) 0;
+}
+
+.dev-section-pb {
+  padding-bottom: var(--sp-22);
+}
+
+.dev-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3_5);
+  margin-bottom: var(--sp-14);
+  max-width: 660px;
+}
+
+.dev-section-h2 {
+  font-size: 38px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  color: var(--ink);
+}
+
+.dev-section-lead {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* 01. Principles Grid */
+.dev-principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-6);
+  list-style: none;
+}
+
+.dev-principle-card {
+  padding: var(--sp-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3_5);
+  background: var(--surface);
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+}
+
+.dev-principle-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+}
+
+.dev-principle-num {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--ink-faint);
+}
+
+.dev-principle-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.dev-principle-quote {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--accent);
+  line-height: 1.4;
+  border-left: 2px solid var(--accent);
+  padding-left: var(--sp-3);
+  margin: var(--sp-1) 0;
+}
+
+.dev-principle-text {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* 02. Domains Category (Who/What) */
+.dev-domain-cat {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: var(--sp-12);
+  align-items: start;
+  padding: var(--sp-12) 0;
+}
+
+.dev-domain-cat + .dev-domain-cat {
+  border-top: 1px solid var(--hairline);
+}
+
+.dev-domain-label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3_5);
+  position: sticky;
+  top: var(--sp-18);
+}
+
+.dev-domain-num-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+}
+
+.dev-domain-num {
+  font-size: 13px;
+  letter-spacing: 0.16em;
+}
+
+.dev-domain-name {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+.dev-domain-desc {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 270px;
+}
+
+.dev-domain-items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  list-style: none;
+}
+
+.dev-domain-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--sp-5) 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.dev-domain-item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.dev-domain-item-name {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.dev-domain-item-detail {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* 03. Why Custom Software & Automation */
+.dev-why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-6);
+  list-style: none;
+}
+
+.dev-why-card {
+  padding: var(--sp-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3_5);
+  background: var(--surface);
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+}
+
+.dev-why-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+}
+
+.dev-why-num {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--ink-faint);
+}
+
+.dev-why-title {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.dev-why-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* 04. Showcase Gallery */
+.dev-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-7);
+  list-style: none;
+}
+
+.dev-project-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  border: 1px solid var(--hairline-soft);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dev-project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.dev-project-visual {
+  background: var(--bg);
+  padding: var(--sp-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  border-bottom: 1px solid var(--hairline);
+  position: relative;
+  overflow: hidden;
+}
+
+.dev-project-body {
+  padding: var(--sp-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  flex: 1;
+}
+
+.dev-project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--sp-2);
+}
+
+.dev-project-type {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--ink-mute);
+}
+
+.dev-project-title {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.dev-project-summary {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.dev-project-highlight {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-mute);
+  background: color-mix(in srgb, var(--bg) 50%, transparent);
+  border-radius: 2px;
+  padding: var(--sp-2_5) var(--sp-3);
+  border-left: 2px solid var(--hairline);
+}
+
+.dev-project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin-top: auto;
+  padding-top: var(--sp-2);
+}
+
+.dev-project-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--hairline);
+}
+
+.dev-project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: var(--accent);
+  transition: opacity 0.15s ease;
+}
+
+.dev-project-link:hover {
+  text-decoration: underline;
+  opacity: 0.85;
+}
+
+.dev-project-link--secondary {
+  color: var(--ink-mute);
+}
+
+.dev-project-link--secondary:hover {
+  color: var(--ink);
+}
+
+/* 05. Process Steps */
+.dev-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-6);
+  list-style: none;
+}
+
+.dev-process-card {
+  padding: var(--sp-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3_5);
+  background: var(--surface);
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+  position: relative;
+}
+
+.dev-process-num {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.dev-process-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.dev-process-text {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* 06. Contact Section */
+.dev-contact-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: var(--sp-14);
+  align-items: start;
+}
+
+.dev-contact-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.dev-contact-eyebrow {
+  margin-bottom: var(--sp-3_5);
+}
+
+.dev-contact-h2 {
+  font-size: 38px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  color: var(--ink);
+}
+
+.dev-contact-lead {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-top: var(--sp-3_5);
+}
+
+.dev-contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3_5);
+  margin-top: var(--sp-1);
+  font-style: normal;
+}
+
+.dev-contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.dev-contact-item-value {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.dev-contact-item-iconlink {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.dev-contact-form {
+  padding: var(--sp-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+/* Form controls matching agency */
+.dev-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-6);
+}
+
+.dev-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.dev-form-label {
+  color: var(--ink-mute);
+}
+
+.dev-form-input,
+.dev-form-select,
+.dev-form-textarea {
+  font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--hairline-soft);
+  padding: var(--sp-2) 0;
+  outline: none;
+  width: 100%;
+  border-radius: 0;
+}
+
+.dev-form-input:focus,
+.dev-form-select:focus,
+.dev-form-textarea:focus {
+  border-bottom-color: var(--ink);
+}
+
+.dev-form-select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.dev-form-textarea {
+  resize: vertical;
+}
+
+.dev-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  margin-top: var(--sp-1);
+}
+
+.dev-form-notice {
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+
+.dev-form-submit {
+  font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--accent-fg);
+  background: var(--accent);
+  border: none;
+  padding: var(--sp-3_5) var(--sp-7);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.dev-form-submit:hover {
+  opacity: 0.85;
+}
+
+/* Dark mode overrides for form options */
+[data-theme="dark"] .dev-form-select option {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 899px) {
+  .dev-hero {
+    grid-template-columns: 1fr;
+    padding: var(--sp-16) 0 var(--sp-14);
+    gap: var(--sp-10);
+  }
+
+  .dev-hero-visual {
+    justify-content: flex-start;
+  }
+
+  .dev-hero-svg {
+    width: 220px;
+    height: 220px;
+  }
+
+  .dev-principles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dev-domain-cat {
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+  }
+
+  .dev-domain-label {
+    position: static;
+  }
+
+  .dev-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dev-process-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 719px) {
+  .dev-hero-h1 {
+    font-size: 42px;
+  }
+
+  .dev-section-h2 {
+    font-size: 30px;
+  }
+
+  .dev-domain-name {
+    font-size: 26px;
+  }
+
+  .dev-contact-h2 {
+    font-size: 30px;
+  }
+
+  .dev-principles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dev-why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dev-contact-grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-10);
+  }
+}
+
+@media (max-width: 479px) {
+  .dev-hero {
+    padding: var(--sp-12) 0 var(--sp-10);
+  }
+
+  .dev-hero-h1 {
+    font-size: 34px;
+  }
+
+  .dev-hero-svg {
+    display: none;
+  }
+
+  .dev-section {
+    padding: var(--sp-12) 0;
+  }
+
+  .dev-section-h2 {
+    font-size: 26px;
+  }
+
+  .dev-domain-name {
+    font-size: 22px;
+  }
+
+  .dev-contact-h2 {
+    font-size: 26px;
+  }
+
+  .dev-section-header {
+    margin-bottom: var(--sp-9);
+  }
+
+  .dev-form-row {
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+  }
+}

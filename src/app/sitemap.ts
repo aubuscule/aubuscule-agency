@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/products/remplate/templates',
     '/products/remplate/faq',
     '/products/zones-tonales',
+    '/dev',
   ]
 
   return paths.flatMap((path) =>

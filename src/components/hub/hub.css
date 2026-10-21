@@ -91,10 +91,10 @@
 
 .hub-cards {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--sp-5);
   justify-content: center;
-  max-width: 800px;
+  max-width: 1040px;
   margin: var(--sp-8) auto 0;
   padding: 0 var(--sp-10) var(--sp-12);
 }
