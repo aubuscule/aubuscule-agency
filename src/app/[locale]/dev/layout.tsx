@@ -69,9 +69,9 @@ export default async function DevLayout({
       'Custom Software Development',
       'Workflow Automation',
       'Systems Integration',
-      'Desktop Applications (Tauri, Rust)',
-      'Web Platforms (Next.js, Python)',
-      'Cloudflare Workers & Edge Computing',
+      'Desktop Applications (Windows, macOS, Linux)',
+      'Web Platforms & APIs',
+      'High-Performance Cloud Hosting',
     ],
   }
 

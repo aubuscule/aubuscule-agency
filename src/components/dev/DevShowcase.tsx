@@ -142,11 +142,11 @@ function EinkPlannerVisual() {
 function EpksVisual() {
   return (
     <svg width="240" height="130" viewBox="0 0 240 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      {/* Cloudflare Edge Network */}
+      {/* Edge / Fast CDN Network */}
       <ellipse cx="120" cy="65" rx="90" ry="45" stroke="var(--hairline)" strokeWidth="1" strokeDasharray="3 3" />
-      {/* Central Edge Worker Hub */}
+      {/* Central Fast CDN Hub */}
       <circle cx="120" cy="65" r="24" fill="var(--surface)" stroke="var(--accent)" strokeWidth="1.5" />
-      <text x="120" y="62" fill="var(--accent)" fontSize="8" fontWeight="600" fontFamily="var(--font-jetbrains-mono)" textAnchor="middle">WORKER</text>
+      <text x="120" y="62" fill="var(--accent)" fontSize="8" fontWeight="600" fontFamily="var(--font-jetbrains-mono)" textAnchor="middle">FAST CDN</text>
       <text x="120" y="72" fill="var(--ink-mute)" fontSize="6" fontFamily="var(--font-jetbrains-mono)" textAnchor="middle">&lt; 50ms</text>
       {/* Distributed Tenants */}
       <circle cx="50" cy="45" r="14" fill="var(--surface)" stroke="var(--ink-soft)" strokeWidth="1" />

@@ -672,7 +672,7 @@
           "type": "Plateforme Web & Hébergement Rapide",
           "summary": "Pages presse pour artistes et musiciens, conçues pour charger instantanément sur mobile et ordinateur.",
           "tags": [
-            "Cloudflare",
+            "CDN Rapide",
             "Bun",
             "Statique",
             "Performance"

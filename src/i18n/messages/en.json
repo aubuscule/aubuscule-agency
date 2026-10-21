@@ -672,7 +672,7 @@
           "type": "Web Platform & Fast Hosting",
           "summary": "Electronic press kits for artists and performers, engineered to load in under 50ms on mobile and desktop.",
           "tags": [
-            "Cloudflare",
+            "Fast CDN",
             "Bun",
             "Static",
             "Performance"
