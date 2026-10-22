@@ -497,118 +497,118 @@
   },
   "dev": {
     "meta": {
-      "title": "Custom Software & Automation",
-      "description": "Cross-platform applications, web tools, and workflow automation to simplify your day-to-day operations.",
-      "ogDescription": "Custom software engineering, cross-platform apps, and workflow automation."
+      "title": "Software op maat & Automatisering",
+      "description": "Multiplatform applicaties, webtools en workflow-automatisering om uw dagelijkse werking te vereenvoudigen.",
+      "ogDescription": "Softwareontwikkeling op maat, multiplatform apps en procesautomatisering."
     },
     "hero": {
-      "eyebrow": "Custom Software & Automation",
-      "h1": "Useful software, built for your everyday work.",
-      "sub": "We build <bold>applications for Windows, macOS, and Linux, web tools, and data bridges</bold> to streamline your operations, without unnecessary complexity.",
-      "ctaShowcase": "Explore work",
-      "ctaContact": "Start a project"
+      "eyebrow": "Software op maat & Automatisering",
+      "h1": "Nuttige software, gebouwd voor uw dagelijkse werk.",
+      "sub": "Wij bouwen <bold>applicaties voor Windows, macOS en Linux, webtools en gegevenskoppelingen</bold> om uw processen te stroomlijnen, zonder overbodige complexiteit.",
+      "ctaShowcase": "Bekijk projecten",
+      "ctaContact": "Start een project"
     },
     "principles": {
-      "eyebrow": "Working principles",
-      "h2": "How we approach code",
-      "lead": "A few simple rules drawn from twenty years of software engineering and design.",
+      "eyebrow": "Werkprincipes",
+      "h2": "Hoe we code benaderen",
+      "lead": "Enkele eenvoudige regels, gevormd door twintig jaar software-engineering en design.",
       "items": {
         "kiss": {
           "num": "01",
-          "title": "KISS — Keep it simple first",
-          "text": "The simplest solution is usually the sturdiest. We avoid unnecessary abstractions when straightforward functions do the job."
+          "title": "KISS — Eerst eenvoudig houden",
+          "text": "De eenvoudigste oplossing is meestal de meest robuuste. We vermijden overbodige abstracties wanneer heldere functies volstaan."
         },
         "components": {
           "num": "02",
-          "title": "Modular components",
-          "text": "Break things down into small independent modules. Each piece has a single responsibility, making code easy to test and update without breaking anything else."
+          "title": "Modulaire componenten",
+          "text": "Opsplitsen in kleine, onafhankelijke modules. Elk onderdeel heeft één duidelijke taak, waardoor code makkelijk te testen en aan te passen is zonder de rest te breken."
         },
         "noSurprises": {
           "num": "03",
-          "title": "Zero surprises",
-          "text": "Readable code over clever tricks. If the implementation is not obvious on first read, it needs to be rewritten."
+          "title": "Geen verrassingen",
+          "text": "Leesbare code boven slimme trucjes. Als de implementatie bij de eerste lezing niet vanzelfsprekend is, moet ze herschreven worden."
         },
         "yagni": {
           "num": "04",
-          "title": "YAGNI — No speculation",
-          "text": "We don’t build for hypothetical needs six months down the line. We solve today’s problem, and adapt when requirements evolve."
+          "title": "YAGNI — Geen speculatie",
+          "text": "We bouwen niet voor hypothetische behoeften over zes maanden. We lossen het probleem van vandaag op en passen aan wanneer de vereisten evolueren."
         },
         "lean": {
           "num": "05",
-          "title": "Short iterations",
-          "text": "A working version in a few days beats a long theoretical spec. We test quickly in real conditions, then refine."
+          "title": "Korte iteraties",
+          "text": "Een werkende versie in enkele dagen wint het altijd van een lange theoretische specificatie. We testen snel in reële omstandigheden en verfijnen daarna."
         },
         "openSource": {
           "num": "06",
-          "title": "Open & durable formats",
-          "text": "Simple, stable file formats (SQLite, JSON, Markdown). You keep full ownership of your code and data without vendor lock-in."
+          "title": "Open & duurzame formaten",
+          "text": "Eenvoudige, stabiele bestandsformaten (SQLite, JSON, Markdown). U behoudt de volledige eigendom over uw code en data, zonder vendor lock-in."
         }
       }
     },
     "domains": {
-      "eyebrow": "Services",
-      "h2": "What we build",
-      "lead": "Targeted software solutions when off-the-shelf tools are too rigid or ill-fitted for your workflow.",
+      "eyebrow": "Diensten",
+      "h2": "Wat we bouwen",
+      "lead": "Gerichte softwareoplossingen wanneer standaardpakketten te rigide of niet afgestemd zijn op uw werkwijze.",
       "items": {
         "desktop": {
           "num": "01",
-          "title": "Cross-platform desktop apps",
-          "desc": "Fast desktop software for Windows, macOS, and Linux. Instant launch, offline operation, and direct integration with local files or hardware."
+          "title": "Multiplatform desktop-apps",
+          "desc": "Snelle desktopsoftware voor Windows, macOS en Linux. Start direct op, werkt offline en integreert naadloos met lokale bestanden of apparatuur."
         },
         "web": {
           "num": "02",
-          "title": "Custom web apps & tools",
-          "desc": "Clean, fast internal tools and portals tailored to your business, with fast and reliable hosting."
+          "title": "Webapplicaties & interne tools op maat",
+          "desc": "Heldere, snelle interne tools en portals afgestemd op uw bedrijf, met snelle en betrouwbare hosting."
         },
         "automation": {
           "num": "03",
-          "title": "Workflow automation",
-          "desc": "Connectors between your existing tools (files, databases, spreadsheets, APIs) to eliminate repetitive copy-pasting."
+          "title": "Workflow-automatisering",
+          "desc": "Koppelingen tussen uw bestaande tools (bestanden, databases, spreadsheets, API’s) om repetitief knip- en plakwerk te elimineren."
         },
         "documents": {
           "num": "04",
-          "title": "Document generation",
-          "desc": "Automated generation of interactive PDFs, schedules, or technical visualizations straight from your raw data."
+          "title": "Documentgeneratie",
+          "desc": "Geautomatiseerde generatie van interactieve pdf’s, planningen of technische visualisaties rechtstreeks vanuit uw ruwe gegevens."
         }
       }
     },
     "why": {
-      "eyebrow": "Why custom software",
-      "h2": "What it changes day to day",
-      "lead": "When you spend more time working around software limitations than doing your actual work.",
+      "eyebrow": "Waarom software op maat",
+      "h2": "Wat het verandert in de praktijk",
+      "lead": "Wanneer u meer tijd besteedt aan het omzeilen van softwarebeperkingen dan aan uw eigenlijke werk.",
       "items": {
         "fit": {
           "num": "01",
-          "title": "Fitted to your workflow",
-          "text": "The software speaks your language and follows your steps, instead of forcing you into its mold."
+          "title": "Afgestemd op uw workflow",
+          "text": "De software spreekt uw taal en volgt uw logica, in plaats van u in een keurslijf te dwingen."
         },
         "noRent": {
           "num": "02",
-          "title": "No per-user subscription rent",
-          "text": "You pay for development once, without a recurring monthly bill that inflates with every new hire."
+          "title": "Geen abonnementskosten per gebruiker",
+          "text": "U betaalt de ontwikkeling eenmalig, zonder een steeds oplopende factuur bij elke nieuwe medewerker."
         },
         "time": {
           "num": "03",
-          "title": "Fewer manual tasks",
-          "text": "Daily calculations, exports, and transfers run reliably in the background without manual mistakes."
+          "title": "Minder manuele taken",
+          "text": "Dagelijkse berekeningen, exports en overdrachten draaien betrouwbaar op de achtergrond zonder menselijke fouten."
         },
         "control": {
           "num": "04",
-          "title": "You stay in control",
-          "text": "No sudden vendor updates altering the interface or dropping features you rely on overnight."
+          "title": "U behoudt de controle",
+          "text": "Geen plotse vendor-updates die de interface omgooien of functies schrappen waar u dagelijks op rekent."
         }
       }
     },
     "showcase": {
-      "eyebrow": "Showcase",
-      "h2": "Production systems & tools",
-      "lead": "A few examples of tools built by Aubuscule, born from real-world needs.",
+      "eyebrow": "Realisaties",
+      "h2": "Productiesystemen & tools",
+      "lead": "Enkele voorbeelden van door Aubuscule gebouwde tools, ontstaan uit concrete noden.",
       "items": {
         "aubuscores": {
           "num": "01",
           "title": "Aubuscores",
           "type": "Desktop App · Linux / Wayland",
-          "summary": "Desktop sheet music companion for MobileSheets. Instant rendering, stage dark mode, and Bluetooth pedal support.",
+          "summary": "Desktop partituurbegeleider voor MobileSheets. Vloeiende rendering, podium-donkere modus en ondersteuning voor bluetooth-pedalen.",
           "tags": [
             "Rust",
             "Tauri",
@@ -624,7 +624,7 @@
           "num": "02",
           "title": "Remplate",
           "type": "macOS App · reMarkable Tablets",
-          "summary": "Mac application to install custom page templates on reMarkable tablets over Wi-Fi without touching system files.",
+          "summary": "Mac-applicatie om eigen sjablonen draadloos via wifi op reMarkable-tablets te installeren zonder systeembestanden te wijzigen.",
           "tags": [
             "macOS",
             "Tauri",
@@ -632,15 +632,15 @@
             "React",
             "SSH"
           ],
-          "linkText": "Explore Remplate",
+          "linkText": "Ontdek Remplate",
           "linkHref": "/products/remplate",
           "external": false
         },
         "tourPlanner": {
           "num": "03",
           "title": "Tour Planner",
-          "type": "Web App & Geospatial Routing",
-          "summary": "Tour logistics planner that computes driving routes and automatically identifies music venues near the travel corridor.",
+          "type": "Web App & Geospatiale Routing",
+          "summary": "Logistieke tourplanner die rijroutes berekent en automatisch concertzalen in de buurt van het traject identificeert.",
           "tags": [
             "Python",
             "Odoo Owl",
@@ -654,8 +654,8 @@
         "einkPlanner": {
           "num": "04",
           "title": "Aubuscule E-Ink Planner",
-          "type": "Vector Document Generator",
-          "summary": "Interactive vector PDF planner generator with clickable tabs, optimized for high-contrast e-ink screens.",
+          "type": "Vectoriële Documentgenerator",
+          "summary": "Generator van interactieve vectoriële pdf-planners met klikbare tabbladen, geoptimaliseerd voor e-ink schermen.",
           "tags": [
             "Python",
             "Typst",
@@ -669,80 +669,80 @@
         "epks": {
           "num": "05",
           "title": "Aubuscule EPKs",
-          "type": "Web Platform & Fast Hosting",
-          "summary": "Electronic press kits for artists and performers, engineered to load in under 50ms on mobile and desktop.",
+          "type": "Webplatform & Snelle Hosting",
+          "summary": "Elektronische persmappen voor artiesten en muzikanten, gebouwd om binnen 50 ms te laden op mobiel en desktop.",
           "tags": [
             "Snelle CDN",
             "Bun",
             "Static",
             "Performance"
           ],
-          "linkText": "Explore platform",
+          "linkText": "Platform verkennen",
           "linkHref": "https://epk.aubuscule.com",
           "external": true
         },
         "harmony": {
           "num": "06",
-          "title": "Harmony Composition Tables",
-          "type": "Algorithmic Tool & Music Rendering",
-          "summary": "Vector engine calculating and visualizing chord progressions and harmonic modulations for composers and educators.",
+          "title": "Harmonische Compositietabellen",
+          "type": "Algoritmische Tool & Muziekrendering",
+          "summary": "Vectoriële rekenmodule voor het berekenen en visualiseren van akkoordprogressies en harmonische modulaties.",
           "tags": [
             "Node.js",
             "SVG",
-            "Music Theory",
+            "Muziektheorie",
             "PDF"
           ],
-          "linkText": "Explore Zones Tonales",
+          "linkText": "Ontdek Zones Tonales",
           "linkHref": "/products/zones-tonales",
           "external": false
         }
       }
     },
     "process": {
-      "eyebrow": "Process",
-      "h2": "How we work together",
-      "lead": "A direct, transparent, and bureaucracy-free process.",
+      "eyebrow": "Werkwijze",
+      "h2": "Hoe we samenwerken",
+      "lead": "Een directe, transparante aanpak zonder bureaucratie.",
       "steps": {
         "s1": {
           "num": "01",
-          "title": "Discussion & scoping",
-          "text": "We identify your friction points and define the minimal useful scope together."
+          "title": "Afstemming & afbakening",
+          "text": "We brengen uw knelpunten in kaart en bepalen samen de minimale nuttige scope."
         },
         "s2": {
           "num": "02",
-          "title": "Fast prototype",
-          "text": "A working first version delivered quickly to test with your actual data."
+          "title": "Snel prototype",
+          "text": "Een eerste werkende versie, snel opgeleverd om direct met uw echte data te testen."
         },
         "s3": {
           "num": "03",
-          "title": "Deployment & handover",
-          "text": "Setup, clear documentation, and full transfer of the source code."
+          "title": "Oplevering & overdracht",
+          "text": "Installatie, heldere uitleg en volledige overdracht van de broncode."
         }
       }
     },
     "contact": {
       "eyebrow": "Contact",
-      "h2": "Need a custom tool or automation?",
-      "lead": "Tell us what slows you down or what tool you would like to have. We reply within 48h to evaluate if custom software makes sense.",
-      "emailLabel": "Email us directly",
+      "h2": "Een softwareproject of automatisering?",
+      "lead": "Vertel ons wat uw werking vertraagt of welke tool u nodig heeft. We reageren binnen 48 uur om te bekijken of maatwerk zinvol is.",
+      "emailLabel": "Stuur ons rechtstreeks een e-mail",
       "githubLabel": "GitHub-organisatie",
       "form": {
-        "nameLabel": "Your name or organization",
-        "emailLabel": "Your email address",
-        "typeLabel": "Project type",
+        "nameLabel": "Uw naam of organisatie",
+        "emailLabel": "Uw e-mailadres",
+        "typeLabel": "Type project",
         "typeOptions": {
-          "desktop": "Desktop application (Windows / Mac / Linux)",
-          "web": "Custom web tool or portal",
-          "automation": "Workflow automation & integration",
-          "document": "Document generation or data visualization",
-          "audit": "Codebase audit & tool refactoring"
+          "desktop": "Desktop applicatie (Windows / Mac / Linux)",
+          "web": "Webapplicatie of portaal op maat",
+          "automation": "Workflow-automatisering & integratie",
+          "document": "Documentgeneratie of visualisaties",
+          "audit": "Audit & modernisering van bestaande tool"
         },
-        "messageLabel": "Describe your needs or bottlenecks",
-        "messagePlaceholder": "Tell us about your current workflow and what you want to achieve...",
-        "submit": "Send inquiry",
-        "notice": "Reply within 48h · No commitment",
-        "successTitle": "Your request is ready",
-        "successSub": "Your email client will open with the pre-filled message."
+        "messageLabel": "Beschrijf uw nood of knelpunten",
+        "messagePlaceholder": "Vertel ons over uw huidige werkwijze en het gewenste resultaat...",
+        "submit": "Aanvraag versturen",
+        "notice": "Reactie binnen 48 uur · Vrijblijvend",
+        "successTitle": "Uw aanvraag is klaar",
+        "successSub": "Uw e-mailprogramma opent met het vooraf ingevulde bericht."
       }
     }
   }
