@@ -616,9 +616,9 @@
             "SQLite",
             "Wayland"
           ],
-          "linkText": "View on GitHub",
-          "linkHref": "https://github.com/aubuscule/aubuscores",
-          "external": true
+          "linkText": "Contact for info",
+          "linkHref": "#contact",
+          "external": false
         },
         "remplate": {
           "num": "02",
@@ -647,9 +647,9 @@
             "Flask",
             "Shapely"
           ],
-          "linkText": "View on GitHub",
-          "linkHref": "https://github.com/aubuscule/tour-planner",
-          "external": true
+          "linkText": "Contact for info",
+          "linkHref": "#contact",
+          "external": false
         },
         "einkPlanner": {
           "num": "04",
@@ -662,9 +662,9 @@
             "Vector PDF",
             "E-Ink"
           ],
-          "linkText": "View on GitHub",
-          "linkHref": "https://github.com/aubuscule/aubuscule-e-ink-planner",
-          "external": true
+          "linkText": "Contact for info",
+          "linkHref": "#contact",
+          "external": false
         },
         "epks": {
           "num": "05",
@@ -725,7 +725,7 @@
       "h2": "Need a custom tool or automation?",
       "lead": "Tell us what slows you down or what tool you would like to have. We reply within 48h to evaluate if custom software makes sense.",
       "emailLabel": "Email us directly",
-      "githubLabel": "Open source projects",
+      "githubLabel": "GitHub organization",
       "form": {
         "nameLabel": "Your name or organization",
         "emailLabel": "Your email address",

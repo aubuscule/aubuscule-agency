@@ -224,9 +224,10 @@ export function DevShowcase() {
       <ul className="dev-showcase-grid" role="list">
         {PROJECT_KEYS.map((key) => {
           const Visual = VISUAL_COMPONENTS[key]
-          const isExternal = t(`items.${key}.external`) === 'true' || key === 'aubuscores' || key === 'tourPlanner' || key === 'einkPlanner' || key === 'epks'
           const linkHref = t(`items.${key}.linkHref`)
           const linkText = t(`items.${key}.linkText`)
+          const isAnchor = linkHref.startsWith('#')
+          const isExternal = !isAnchor && (linkHref.startsWith('http://') || linkHref.startsWith('https://'))
 
           return (
             <li key={key} className="dev-project-card">
@@ -245,7 +246,15 @@ export function DevShowcase() {
                 <p className="dev-project-summary">{t(`items.${key}.summary`)}</p>
 
                 <div className="dev-project-footer">
-                  {isExternal ? (
+                  {isAnchor ? (
+                    <a href={linkHref} className="dev-project-link">
+                      {linkText}
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <polyline points="19 12 12 19 5 12" />
+                      </svg>
+                    </a>
+                  ) : isExternal ? (
                     <a
                       href={linkHref}
                       target="_blank"
