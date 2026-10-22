@@ -40,10 +40,20 @@ function AppsIcon({ className }: IconProps) {
   )
 }
 
+function DevIcon({ className }: IconProps) {
+  return (
+    <svg className={className} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="16 18 22 12 16 6" />
+      <polyline points="8 6 2 12 8 18" />
+    </svg>
+  )
+}
+
 const icons = {
   '/': HomeIcon,
   '/agency': AgencyIcon,
   '/products': AppsIcon,
+  '/dev': DevIcon,
 } as const
 
 export function Nav() {
@@ -58,6 +68,7 @@ export function Nav() {
     { href: '/', label: t('home') },
     { href: '/agency', label: t('agency') },
     { href: '/products', label: t('products') },
+    { href: '/dev', label: t('dev') },
   ] as const
 
   const isActive = (href: string) =>

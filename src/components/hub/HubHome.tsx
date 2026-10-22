@@ -24,6 +24,10 @@ const cards: HubCard[] = [
     key: 'products',
     href: '/products',
   },
+  {
+    key: 'dev',
+    href: '/dev',
+  },
 ]
 
 export function HubHome() {

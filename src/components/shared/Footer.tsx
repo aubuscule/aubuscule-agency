@@ -15,6 +15,7 @@ export function Footer() {
     { href: '/', label: tNav('home') },
     { href: '/agency', label: tNav('agency') },
     { href: '/products', label: tNav('products') },
+    { href: '/dev', label: tNav('dev') },
   ] as const
 
   return (

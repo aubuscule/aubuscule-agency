@@ -18,7 +18,8 @@
     "closeMenu": "Menu sluiten",
     "themeLight": "Activeer lichte modus",
     "themeDark": "Activeer donkere modus",
-    "products": "Producten"
+    "products": "Producten",
+    "dev": "Engineering & Dev"
   },
   "footer": {
     "tagline": "We leveren geen projecten op. We verduidelijken een nood, bouwen een oplossing, geven de sleutels door.",
@@ -40,6 +41,11 @@
         "label": "Producten",
         "title": "Software",
         "desc": "Maatwerksoftware die uw leven makkelijker maakt."
+      },
+      "dev": {
+        "label": "Engineering",
+        "title": "Maatwerk & Automatisering",
+        "desc": "Gespecialiseerde software, systeemintegratie en workflowautomatisering zonder overtollige schuld."
       }
     }
   },
@@ -488,5 +494,256 @@
     "trust1": "Interactieve PDF",
     "trust2": "Levenslange toegang",
     "trust3": "Veilige betaling"
+  },
+  "dev": {
+    "meta": {
+      "title": "Custom Software & Automation",
+      "description": "Cross-platform applications, web tools, and workflow automation to simplify your day-to-day operations.",
+      "ogDescription": "Custom software engineering, cross-platform apps, and workflow automation."
+    },
+    "hero": {
+      "eyebrow": "Custom Software & Automation",
+      "h1": "Useful software, built for your everyday work.",
+      "sub": "We build <bold>applications for Windows, macOS, and Linux, web tools, and data bridges</bold> to streamline your operations, without unnecessary complexity.",
+      "ctaShowcase": "Explore work",
+      "ctaContact": "Start a project"
+    },
+    "principles": {
+      "eyebrow": "Working principles",
+      "h2": "How we approach code",
+      "lead": "A few simple rules drawn from twenty years of software engineering and design.",
+      "items": {
+        "kiss": {
+          "num": "01",
+          "title": "KISS — Keep it simple first",
+          "text": "The simplest solution is usually the sturdiest. We avoid unnecessary abstractions when straightforward functions do the job."
+        },
+        "components": {
+          "num": "02",
+          "title": "Modular components",
+          "text": "Break things down into small independent modules. Each piece has a single responsibility, making code easy to test and update without breaking anything else."
+        },
+        "noSurprises": {
+          "num": "03",
+          "title": "Zero surprises",
+          "text": "Readable code over clever tricks. If the implementation is not obvious on first read, it needs to be rewritten."
+        },
+        "yagni": {
+          "num": "04",
+          "title": "YAGNI — No speculation",
+          "text": "We don’t build for hypothetical needs six months down the line. We solve today’s problem, and adapt when requirements evolve."
+        },
+        "lean": {
+          "num": "05",
+          "title": "Short iterations",
+          "text": "A working version in a few days beats a long theoretical spec. We test quickly in real conditions, then refine."
+        },
+        "openSource": {
+          "num": "06",
+          "title": "Open & durable formats",
+          "text": "Simple, stable file formats (SQLite, JSON, Markdown). You keep full ownership of your code and data without vendor lock-in."
+        }
+      }
+    },
+    "domains": {
+      "eyebrow": "Services",
+      "h2": "What we build",
+      "lead": "Targeted software solutions when off-the-shelf tools are too rigid or ill-fitted for your workflow.",
+      "items": {
+        "desktop": {
+          "num": "01",
+          "title": "Cross-platform desktop apps",
+          "desc": "Fast desktop software for Windows, macOS, and Linux. Instant launch, offline operation, and direct integration with local files or hardware."
+        },
+        "web": {
+          "num": "02",
+          "title": "Custom web apps & tools",
+          "desc": "Clean, fast internal tools and portals tailored to your business, with fast and reliable hosting."
+        },
+        "automation": {
+          "num": "03",
+          "title": "Workflow automation",
+          "desc": "Connectors between your existing tools (files, databases, spreadsheets, APIs) to eliminate repetitive copy-pasting."
+        },
+        "documents": {
+          "num": "04",
+          "title": "Document generation",
+          "desc": "Automated generation of interactive PDFs, schedules, or technical visualizations straight from your raw data."
+        }
+      }
+    },
+    "why": {
+      "eyebrow": "Why custom software",
+      "h2": "What it changes day to day",
+      "lead": "When you spend more time working around software limitations than doing your actual work.",
+      "items": {
+        "fit": {
+          "num": "01",
+          "title": "Fitted to your workflow",
+          "text": "The software speaks your language and follows your steps, instead of forcing you into its mold."
+        },
+        "noRent": {
+          "num": "02",
+          "title": "No per-user subscription rent",
+          "text": "You pay for development once, without a recurring monthly bill that inflates with every new hire."
+        },
+        "time": {
+          "num": "03",
+          "title": "Fewer manual tasks",
+          "text": "Daily calculations, exports, and transfers run reliably in the background without manual mistakes."
+        },
+        "control": {
+          "num": "04",
+          "title": "You stay in control",
+          "text": "No sudden vendor updates altering the interface or dropping features you rely on overnight."
+        }
+      }
+    },
+    "showcase": {
+      "eyebrow": "Showcase",
+      "h2": "Production systems & tools",
+      "lead": "A few examples of tools built by Aubuscule, born from real-world needs.",
+      "items": {
+        "aubuscores": {
+          "num": "01",
+          "title": "Aubuscores",
+          "type": "Desktop App · Linux / Wayland",
+          "summary": "Desktop sheet music companion for MobileSheets. Instant rendering, stage dark mode, and Bluetooth pedal support.",
+          "tags": [
+            "Rust",
+            "Tauri",
+            "TypeScript",
+            "SQLite",
+            "Wayland"
+          ],
+          "linkText": "Contact voor meer info",
+          "linkHref": "#contact",
+          "external": false
+        },
+        "remplate": {
+          "num": "02",
+          "title": "Remplate",
+          "type": "macOS App · reMarkable Tablets",
+          "summary": "Mac application to install custom page templates on reMarkable tablets over Wi-Fi without touching system files.",
+          "tags": [
+            "macOS",
+            "Tauri",
+            "Rust",
+            "React",
+            "SSH"
+          ],
+          "linkText": "Explore Remplate",
+          "linkHref": "/products/remplate",
+          "external": false
+        },
+        "tourPlanner": {
+          "num": "03",
+          "title": "Tour Planner",
+          "type": "Web App & Geospatial Routing",
+          "summary": "Tour logistics planner that computes driving routes and automatically identifies music venues near the travel corridor.",
+          "tags": [
+            "Python",
+            "Odoo Owl",
+            "Flask",
+            "Shapely"
+          ],
+          "linkText": "Contact voor meer info",
+          "linkHref": "#contact",
+          "external": false
+        },
+        "einkPlanner": {
+          "num": "04",
+          "title": "Aubuscule E-Ink Planner",
+          "type": "Vector Document Generator",
+          "summary": "Interactive vector PDF planner generator with clickable tabs, optimized for high-contrast e-ink screens.",
+          "tags": [
+            "Python",
+            "Typst",
+            "Vector PDF",
+            "E-Ink"
+          ],
+          "linkText": "Contact voor meer info",
+          "linkHref": "#contact",
+          "external": false
+        },
+        "epks": {
+          "num": "05",
+          "title": "Aubuscule EPKs",
+          "type": "Web Platform & Fast Hosting",
+          "summary": "Electronic press kits for artists and performers, engineered to load in under 50ms on mobile and desktop.",
+          "tags": [
+            "Snelle CDN",
+            "Bun",
+            "Static",
+            "Performance"
+          ],
+          "linkText": "Explore platform",
+          "linkHref": "https://epk.aubuscule.com",
+          "external": true
+        },
+        "harmony": {
+          "num": "06",
+          "title": "Harmony Composition Tables",
+          "type": "Algorithmic Tool & Music Rendering",
+          "summary": "Vector engine calculating and visualizing chord progressions and harmonic modulations for composers and educators.",
+          "tags": [
+            "Node.js",
+            "SVG",
+            "Music Theory",
+            "PDF"
+          ],
+          "linkText": "Explore Zones Tonales",
+          "linkHref": "/products/zones-tonales",
+          "external": false
+        }
+      }
+    },
+    "process": {
+      "eyebrow": "Process",
+      "h2": "How we work together",
+      "lead": "A direct, transparent, and bureaucracy-free process.",
+      "steps": {
+        "s1": {
+          "num": "01",
+          "title": "Discussion & scoping",
+          "text": "We identify your friction points and define the minimal useful scope together."
+        },
+        "s2": {
+          "num": "02",
+          "title": "Fast prototype",
+          "text": "A working first version delivered quickly to test with your actual data."
+        },
+        "s3": {
+          "num": "03",
+          "title": "Deployment & handover",
+          "text": "Setup, clear documentation, and full transfer of the source code."
+        }
+      }
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "h2": "Need a custom tool or automation?",
+      "lead": "Tell us what slows you down or what tool you would like to have. We reply within 48h to evaluate if custom software makes sense.",
+      "emailLabel": "Email us directly",
+      "githubLabel": "GitHub-organisatie",
+      "form": {
+        "nameLabel": "Your name or organization",
+        "emailLabel": "Your email address",
+        "typeLabel": "Project type",
+        "typeOptions": {
+          "desktop": "Desktop application (Windows / Mac / Linux)",
+          "web": "Custom web tool or portal",
+          "automation": "Workflow automation & integration",
+          "document": "Document generation or data visualization",
+          "audit": "Codebase audit & tool refactoring"
+        },
+        "messageLabel": "Describe your needs or bottlenecks",
+        "messagePlaceholder": "Tell us about your current workflow and what you want to achieve...",
+        "submit": "Send inquiry",
+        "notice": "Reply within 48h · No commitment",
+        "successTitle": "Your request is ready",
+        "successSub": "Your email client will open with the pre-filled message."
+      }
+    }
   }
 }
