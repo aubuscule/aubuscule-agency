@@ -616,9 +616,9 @@
             "SQLite",
             "Wayland"
           ],
-          "linkText": "Contact for info",
-          "linkHref": "#contact",
-          "external": false
+          "linkText": "Get it on Gumroad",
+          "linkHref": "https://aubuscule.gumroad.com/l/aubuscores",
+          "external": true
         },
         "remplate": {
           "num": "02",
