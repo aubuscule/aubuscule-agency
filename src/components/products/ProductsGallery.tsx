@@ -139,8 +139,8 @@ export function ProductsGallery() {
                   >
                     {t("abCardBuy")}
                     <svg
-                      width="12"
-                      height="12"
+                      width="14"
+                      height="14"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
