@@ -458,7 +458,10 @@
     "cardDesc": "Gérez vos templates reMarkable. Sans ligne de commande, sans risque.",
     "ztCardTitle": "Zones Tonales",
     "ztCardDesc": "Couvrez 99% de l’harmonie musicale occidentale en un seul PDF.",
-    "ztCardTag": "PDF"
+    "ztCardTag": "PDF",
+    "abCardDesc": "Lisez votre bibliothèque MobileSheets sur un bureau Linux. Lecture seule, pages instantanées, pédalier pris en charge.",
+    "abCardTag": "Linux",
+    "abCardBuy": "Obtenir sur Gumroad"
   },
   "zonesTonales": {
     "meta": {

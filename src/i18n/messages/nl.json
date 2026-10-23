@@ -458,7 +458,10 @@
     "cardDesc": "Beheer je reMarkable-sjablonen. Geen commandoregel, geen risico.",
     "ztCardTitle": "Tonale Zones",
     "ztCardDesc": "Behandel 99% van de westerse muzikale harmonie in een enkele PDF.",
-    "ztCardTag": "PDF"
+    "ztCardTag": "PDF",
+    "abCardDesc": "Lees je MobileSheets-bibliotheek op een Linux-desktop. Alleen-lezen, directe paginawissels, pedaalondersteuning.",
+    "abCardTag": "Linux",
+    "abCardBuy": "Koop op Gumroad"
   },
   "zonesTonales": {
     "meta": {
