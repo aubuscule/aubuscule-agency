@@ -458,7 +458,10 @@
     "cardDesc": "Manage your reMarkable templates. No command line, no risk.",
     "ztCardTitle": "Tonal Zones",
     "ztCardDesc": "Cover 99% of Western musical harmony in a single PDF.",
-    "ztCardTag": "PDF"
+    "ztCardTag": "PDF",
+    "abCardDesc": "Read your MobileSheets library on a Linux desktop. Read-only, instant page turns, pedal support.",
+    "abCardTag": "Linux",
+    "abCardBuy": "Get it on Gumroad"
   },
   "zonesTonales": {
     "meta": {
