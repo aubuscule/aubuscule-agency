@@ -748,5 +748,67 @@
         "successSub": "Your email client will open with the pre-filled message."
       }
     }
+  },
+  "epk": {
+    "meta": {
+      "title": "Website van één pagina + EPK voor muzikanten",
+      "description": "Een website van één pagina en een digitale perskit voor muzikanten, opgebouwd rond jouw muziek. Bekijk het live voorbeeld, de prijs en wat erbij zit.",
+      "ogDescription": "Een website van één pagina en een digitale EPK voor muzikanten. Bekijk een live voorbeeld."
+    },
+    "hero": {
+      "eyebrow": "Website van één pagina + EPK voor muzikanten",
+      "h1": "Eén link die je boekingen oplevert.",
+      "sub": "Een website van één pagina en een digitale perskit rond jouw muziek: bio, geluid, foto’s, techrider en contact, op één pagina die een boeker in een minuut leest. Gemaakt door muzikanten die voor het web bouwen.",
+      "ctaPrimary": "Vraag de jouwe aan",
+      "ctaExample": "Bekijk het live voorbeeld"
+    },
+    "proof": {
+      "eyebrow": "Het bewijs",
+      "h2": "Shale, een folkkwartet uit Brussel",
+      "lead": "Dit is de kit die we voor Shale maakten. Hij staat online, open hem en oordeel zelf.",
+      "imageAlt": "Startpagina van de perskit van Shale: Celtic traditional and beyond, met knoppen voor luisteren, mediakit en boekingen.",
+      "link": "Open de EPK van Shale"
+    },
+    "included": {
+      "eyebrow": "Wat erbij zit",
+      "h2": "Alles wat een boeker zoekt",
+      "lead": "Jij stuurt ons je teksten, foto’s en links. Wij doen de rest.",
+      "items": {
+        "site": {
+          "title": "Een website van één pagina op jouw naam",
+          "text": "Een eigen adres, eerst ontworpen voor de telefoon."
+        },
+        "kit": {
+          "title": "Een complete digitale EPK",
+          "text": "Bio, persfoto’s, muziek en video, techrider en boekingscontact, allemaal op één plek."
+        },
+        "fast": {
+          "title": "Snel en licht",
+          "text": "Opent meteen op elke telefoon, ook met een zwakke verbinding."
+        },
+        "link": {
+          "title": "Eén link om te sturen",
+          "text": "Zet hem in elke mail, bio en profiel, en werk hem bij als je nieuws hebt."
+        }
+      }
+    },
+    "offer": {
+      "eyebrow": "Prijs en doorlooptijd",
+      "h2": "Eén aanbod, één prijs",
+      "priceLabel": "Prijs",
+      "price": "[NOG IN TE VULLEN: PRIJS, vóór de merge]",
+      "turnaroundLabel": "Doorlooptijd",
+      "turnaround": "[NOG IN TE VULLEN: DOORLOOPTIJD, vóór de merge]",
+      "guarantee": "Is het niet beter dan wat je nu hebt, dan betaal je niets."
+    },
+    "cta": {
+      "eyebrow": "Volgende stap",
+      "h2": "Stuur ons een bericht",
+      "lead": "Vertel wie je bent en waar je muziek nu te vinden is. We antwoorden binnen 48u.",
+      "button": "Mail ons",
+      "subject": "Website van één pagina + EPK",
+      "body": "Hallo,\n\nIk wil graag een website van één pagina en een EPK.\n\nMijn naam of band:\nMijn huidige links:\n",
+      "notice": "Antwoord binnen 48u · Niets te betalen als je niet overtuigd bent"
+    }
   }
 }

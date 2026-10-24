@@ -748,5 +748,67 @@
         "successSub": "Your email client will open with the pre-filled message."
       }
     }
+  },
+  "epk": {
+    "meta": {
+      "title": "One-page website + EPK for musicians",
+      "description": "A one-page website and digital press kit for musicians, built around your music. See the live example, the price and what is included.",
+      "ogDescription": "A one-page website and digital EPK for musicians. See a live example."
+    },
+    "hero": {
+      "eyebrow": "One-page website + EPK for musicians",
+      "h1": "One link that gets you booked.",
+      "sub": "A one-page website and digital press kit built around your music: bio, sound, photos, tech rider and contact, in a single page a booker can read in a minute. Made by musicians who build for the web.",
+      "ctaPrimary": "Get yours",
+      "ctaExample": "See the live example"
+    },
+    "proof": {
+      "eyebrow": "The proof",
+      "h2": "Shale, a Brussels folk quartet",
+      "lead": "This is the kit we built for Shale. It is live, you can open it and judge for yourself.",
+      "imageAlt": "Home page of the Shale press kit: Celtic traditional and beyond, with listen, media kit and booking buttons.",
+      "link": "Open the Shale EPK"
+    },
+    "included": {
+      "eyebrow": "What is included",
+      "h2": "Everything a booker looks for",
+      "lead": "You send us your texts, photos and links. We do the rest.",
+      "items": {
+        "site": {
+          "title": "A one-page website in your name",
+          "text": "Your own address, readable on a phone first."
+        },
+        "kit": {
+          "title": "A complete digital EPK",
+          "text": "Bio, press photos, music and video, tech rider and booking contact, all in one place."
+        },
+        "fast": {
+          "title": "Fast and light",
+          "text": "It opens at once on any phone, even on a weak connection."
+        },
+        "link": {
+          "title": "One link to send",
+          "text": "Put it in every email, bio and social profile, and update it when you have news."
+        }
+      }
+    },
+    "offer": {
+      "eyebrow": "Price and turnaround",
+      "h2": "One offer, one price",
+      "priceLabel": "Price",
+      "price": "[PLACEHOLDER: PRICE, set before merge]",
+      "turnaroundLabel": "Turnaround",
+      "turnaround": "[PLACEHOLDER: TURNAROUND, set before merge]",
+      "guarantee": "If it is not better than what you have now, you do not pay."
+    },
+    "cta": {
+      "eyebrow": "Next step",
+      "h2": "Send us a message",
+      "lead": "Tell us who you are and where your music lives today. We reply within 48h.",
+      "button": "Email us",
+      "subject": "One-page website + EPK",
+      "body": "Hello,\n\nI would like a one-page website and EPK.\n\nMy name or band:\nMy current links:\n",
+      "notice": "Reply within 48h · Nothing to pay if you are not convinced"
+    }
   }
 }

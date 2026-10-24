@@ -748,5 +748,67 @@
         "successSub": "Votre client email va s’ouvrir avec le message pré-rempli pour envoi immédiat."
       }
     }
+  },
+  "epk": {
+    "meta": {
+      "title": "Site d’une page + EPK pour musiciens",
+      "description": "Un site d’une page et un dossier de presse numérique pour musiciens, construits autour de votre musique. Voyez l’exemple en ligne, le prix et ce qui est inclus.",
+      "ogDescription": "Un site d’une page et un EPK numérique pour musiciens. Voyez un exemple en ligne."
+    },
+    "hero": {
+      "eyebrow": "Site d’une page + EPK pour musiciens",
+      "h1": "Un seul lien pour être programmé.",
+      "sub": "Un site d’une page et un dossier de presse numérique construits autour de votre musique : bio, sons, photos, fiche technique et contact, sur une page qu’un programmateur lit en une minute. Fait par des musiciens qui construisent pour le web.",
+      "ctaPrimary": "Obtenir le mien",
+      "ctaExample": "Voir l’exemple en ligne"
+    },
+    "proof": {
+      "eyebrow": "La preuve",
+      "h2": "Shale, quartet folk bruxellois",
+      "lead": "Voici le dossier que nous avons réalisé pour Shale. Il est en ligne, ouvrez-le et jugez par vous-même.",
+      "imageAlt": "Page d’accueil du dossier de presse de Shale : Celtic traditional and beyond, avec les boutons écouter, dossier média et booking.",
+      "link": "Ouvrir l’EPK de Shale"
+    },
+    "included": {
+      "eyebrow": "Ce qui est inclus",
+      "h2": "Tout ce que cherche un programmateur",
+      "lead": "Vous nous envoyez vos textes, photos et liens. Nous faisons le reste.",
+      "items": {
+        "site": {
+          "title": "Un site d’une page à votre nom",
+          "text": "Votre propre adresse, pensé d’abord pour le téléphone."
+        },
+        "kit": {
+          "title": "Un EPK numérique complet",
+          "text": "Bio, photos de presse, musique et vidéo, fiche technique et contact booking, au même endroit."
+        },
+        "fast": {
+          "title": "Rapide et léger",
+          "text": "Il s’ouvre aussitôt sur n’importe quel téléphone, même avec une connexion faible."
+        },
+        "link": {
+          "title": "Un seul lien à envoyer",
+          "text": "Mettez-le dans chaque email, bio et profil, et mettez-le à jour quand vous avez des nouvelles."
+        }
+      }
+    },
+    "offer": {
+      "eyebrow": "Prix et délai",
+      "h2": "Une offre, un prix",
+      "priceLabel": "Prix",
+      "price": "[À DÉFINIR : PRIX, avant le merge]",
+      "turnaroundLabel": "Délai",
+      "turnaround": "[À DÉFINIR : DÉLAI, avant le merge]",
+      "guarantee": "Si ce n’est pas mieux que ce que vous avez aujourd’hui, vous ne payez rien."
+    },
+    "cta": {
+      "eyebrow": "Prochaine étape",
+      "h2": "Envoyez-nous un message",
+      "lead": "Dites-nous qui vous êtes et où se trouve votre musique aujourd’hui. Nous répondons sous 48h.",
+      "button": "Nous écrire",
+      "subject": "Site d’une page + EPK",
+      "body": "Bonjour,\n\nJe voudrais un site d’une page et un EPK.\n\nMon nom ou mon groupe :\nMes liens actuels :\n",
+      "notice": "Réponse sous 48h · Rien à payer si vous n’êtes pas convaincu"
+    }
   }
 }
