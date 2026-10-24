@@ -26,6 +26,7 @@
     "ariaLabel": "Secondary navigation",
     "colNavigate": "Navigate",
     "colContact": "Contact",
+    "bookCall": "Book a quick call",
     "artists": "Musicians · Visual artists · Performers"
   },
   "home": {
@@ -236,6 +237,8 @@
     "lead": "Tell us where you're at. We respond quickly, no jargon.",
     "emailLabel": "Email",
     "instagramLabel": "Instagram",
+    "callLabel": "Call",
+    "callValue": "Book a quick call",
     "mailtoSubject": "Information request - Aubuscule",
     "mailtoBody": "Hello,\n\nHere's where I'm at:\n\n\nWhat I need:\n\n"
   },
@@ -454,6 +457,7 @@
     "ctaTitle": "An application idea?",
     "ctaText": "If you have a need that a tool could fill, let us know. We study every proposal.",
     "ctaButton": "Write to us",
+    "ctaCall": "Book a quick call",
     "listHeading": "List",
     "cardDesc": "Manage your reMarkable templates. No command line, no risk.",
     "ztCardTitle": "Tonal Zones",
@@ -509,7 +513,7 @@
       "h1": "Useful software, built for your everyday work.",
       "sub": "We build <bold>applications for Windows, macOS, and Linux, web tools, and data bridges</bold> to streamline your operations, without unnecessary complexity.",
       "ctaShowcase": "Explore work",
-      "ctaContact": "Start a project"
+      "ctaCall": "Book a quick call"
     },
     "principles": {
       "eyebrow": "Working principles",
@@ -729,6 +733,8 @@
       "lead": "Tell us what slows you down or what tool you would like to have. We reply within 48h to evaluate if custom software makes sense.",
       "emailLabel": "Email us directly",
       "githubLabel": "GitHub organization",
+      "callLabel": "Call",
+      "callValue": "Book a quick call",
       "form": {
         "nameLabel": "Your name or organization",
         "emailLabel": "Your email address",

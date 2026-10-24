@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import "@/components/products/products.css";
+import { BOOKING_URL } from "@/lib/site";
 
 export function ProductsGallery() {
   const t = useTranslations("products");
@@ -249,12 +250,22 @@ export function ProductsGallery() {
           {t("ctaTitle")}
         </h2>
         <p className="apps-cta-text">{t("ctaText")}</p>
-        <a
-          href="mailto:contact@aubuscule.com?subject=Proposition%20d'application"
-          className="btn-primary apps-cta-btn"
-        >
-          {t("ctaButton")}
-        </a>
+        <div className="apps-cta-actions">
+          <a
+            href="mailto:contact@aubuscule.com?subject=Proposition%20d'application"
+            className="btn-primary"
+          >
+            {t("ctaButton")}
+          </a>
+          <a
+            href={BOOKING_URL}
+            className="btn-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("ctaCall")}
+          </a>
+        </div>
       </section>
     </>
   );

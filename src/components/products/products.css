@@ -173,8 +173,10 @@
   line-height: 1.6;
   color: var(--ink-soft);
 }
-.apps-cta-btn {
-  align-self: flex-start;
+.apps-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3_5);
   margin-top: var(--sp-2);
 }
 

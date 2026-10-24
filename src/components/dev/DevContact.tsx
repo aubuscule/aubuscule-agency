@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import { BOOKING_URL } from '@/lib/site'
 import { DevContactForm } from './DevContactForm'
 
 export function DevContact() {
@@ -24,6 +25,10 @@ export function DevContact() {
             <a href={mailtoUrl} className="dev-contact-item">
               <span className="label-sm dev-contact-item-label">{t('emailLabel')}</span>
               <span className="dev-contact-item-value">contact@aubuscule.com</span>
+            </a>
+            <a href={BOOKING_URL} className="dev-contact-item" target="_blank" rel="noopener noreferrer">
+              <span className="label-sm dev-contact-item-label">{t('callLabel')}</span>
+              <span className="dev-contact-item-value">{t('callValue')}</span>
             </a>
             <a
               href="https://github.com/aubuscule"
