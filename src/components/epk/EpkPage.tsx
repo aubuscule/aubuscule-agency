@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 
 const SHALE_URL = 'https://epk.aubuscule.com/shale/'
 const WHY_KEYS = ['bio', 'photos', 'video', 'screen'] as const
-const ITEM_KEYS = ['bio', 'photos', 'listen', 'video', 'press', 'dates', 'contact', 'pack', 'rider'] as const
+const ITEM_KEYS = ['bio', 'photos', 'listen', 'video', 'press', 'dates', 'calendar', 'contact', 'pack', 'rider'] as const
 
 export function EpkPage() {
   const t = useTranslations('epk')

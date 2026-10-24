@@ -804,6 +804,10 @@
           "title": "Past dates and venues",
           "text": "Made visible, so a promoter can see you can draw a crowd."
         },
+        "calendar": {
+          "title": "Synced calendar",
+          "text": "Site agenda linked to a Google Sheet. Bookers look for upcoming and past dates with venue names, and you update them yourself from the spreadsheet, so the page never shows last year’s dates."
+        },
         "contact": {
           "title": "Contact block",
           "text": "Artist, manager, label."

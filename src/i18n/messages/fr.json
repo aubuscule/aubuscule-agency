@@ -804,6 +804,10 @@
           "title": "Dates et salles passées",
           "text": "Rendues visibles, pour qu’un organisateur voie que vous attirez du public."
         },
+        "calendar": {
+          "title": "Calendrier synchronisé",
+          "text": "Agenda du site relié à un Google Sheet. Les programmateurs cherchent les dates à venir et passées avec le nom des salles, et vous les mettez à jour vous-même depuis le tableur, pour que la page n’affiche jamais les dates de l’an dernier."
+        },
         "contact": {
           "title": "Bloc contact",
           "text": "Artiste, manager, label."

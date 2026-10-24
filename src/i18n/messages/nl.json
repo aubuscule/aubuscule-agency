@@ -804,6 +804,10 @@
           "title": "Eerdere data en zalen",
           "text": "Zichtbaar gemaakt, zodat een promotor ziet dat je publiek trekt."
         },
+        "calendar": {
+          "title": "Gesynchroniseerde agenda",
+          "text": "Siteagenda gekoppeld aan een Google Sheet. Boekers zoeken komende en eerdere data met zaalnamen, en jij werkt ze zelf bij vanuit het spreadsheet, zodat de pagina nooit de data van vorig jaar toont."
+        },
         "contact": {
           "title": "Contactblok",
           "text": "Artiest, manager, label."
