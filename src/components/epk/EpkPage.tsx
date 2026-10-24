@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { BOOKING_URL } from '@/lib/site'
 
 const SHALE_URL = 'https://epk.aubuscule.com/shale/'
 const WHY_KEYS = ['bio', 'photos', 'video', 'screen'] as const
@@ -7,6 +8,8 @@ const ITEM_KEYS = ['bio', 'photos', 'listen', 'video', 'press', 'dates', 'calend
 
 export function EpkPage() {
   const t = useTranslations('epk')
+  // Label shared with the other booking surfaces (added in #14).
+  const tCall = useTranslations('dev.hero')
 
   const mailtoUrl = `mailto:contact@aubuscule.com?subject=${encodeURIComponent(
     t('cta.subject')
@@ -25,10 +28,13 @@ export function EpkPage() {
             <a href="#contact" className="btn-primary">
               {t('hero.ctaPrimary')}
             </a>
-            <a href={SHALE_URL} className="btn-secondary" target="_blank" rel="noopener noreferrer">
-              {t('hero.ctaExample')}
+            <a href={BOOKING_URL} className="btn-secondary" target="_blank" rel="noopener noreferrer">
+              {tCall('ctaCall')}
             </a>
           </div>
+          <a href={SHALE_URL} className="epk-link epk-hero-link" target="_blank" rel="noopener noreferrer">
+            {t('hero.ctaExample')} &rarr;
+          </a>
         </section>
 
         <section className="epk-section" aria-labelledby="epk-why-heading">
@@ -129,6 +135,9 @@ export function EpkPage() {
           <div className="epk-ctas">
             <a href={mailtoUrl} className="btn-primary">
               {t('cta.button')}
+            </a>
+            <a href={BOOKING_URL} className="btn-secondary" target="_blank" rel="noopener noreferrer">
+              {tCall('ctaCall')}
             </a>
             <span className="epk-notice">{t('cta.notice')}</span>
           </div>

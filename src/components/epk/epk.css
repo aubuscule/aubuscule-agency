@@ -40,6 +40,11 @@
   color: var(--ink-faint);
 }
 
+.epk-hero-link {
+  margin-top: 0;
+  align-self: flex-start;
+}
+
 .epk-section {
   border-top: 1px solid var(--hairline);
   padding: var(--sp-18) 0;
