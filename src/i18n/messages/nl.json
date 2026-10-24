@@ -826,9 +826,9 @@
       "eyebrow": "Prijs en doorlooptijd",
       "h2": "Eén aanbod, één prijs",
       "priceLabel": "Prijs",
-      "price": "[NOG IN TE VULLEN: PRIJS, vóór de merge]",
+      "price": "600 €",
       "turnaroundLabel": "Doorlooptijd",
-      "turnaround": "[NOG IN TE VULLEN: DOORLOOPTIJD, vóór de merge]",
+      "turnaround": "Twee weken vanaf de dag dat je materiaal binnenkomt",
       "guarantee": "Is het niet beter dan wat je nu hebt, dan betaal je niets."
     },
     "cta": {

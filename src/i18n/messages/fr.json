@@ -826,9 +826,9 @@
       "eyebrow": "Prix et délai",
       "h2": "Une offre, un prix",
       "priceLabel": "Prix",
-      "price": "[À DÉFINIR : PRIX, avant le merge]",
+      "price": "600 €",
       "turnaroundLabel": "Délai",
-      "turnaround": "[À DÉFINIR : DÉLAI, avant le merge]",
+      "turnaround": "Deux semaines à partir de la réception de vos contenus",
       "guarantee": "Si ce n’est pas mieux que ce que vous avez aujourd’hui, vous ne payez rien."
     },
     "cta": {

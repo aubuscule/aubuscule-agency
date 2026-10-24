@@ -826,9 +826,9 @@
       "eyebrow": "Price and turnaround",
       "h2": "One offer, one price",
       "priceLabel": "Price",
-      "price": "[PLACEHOLDER: PRICE, set before merge]",
+      "price": "600 €",
       "turnaroundLabel": "Turnaround",
-      "turnaround": "[PLACEHOLDER: TURNAROUND, set before merge]",
+      "turnaround": "Two weeks from the day your materials arrive",
       "guarantee": "If it is not better than what you have now, you do not pay."
     },
     "cta": {
