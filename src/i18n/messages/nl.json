@@ -754,5 +754,115 @@
         "successSub": "Uw e-mailprogramma opent met het vooraf ingevulde bericht."
       }
     }
+  },
+  "epk": {
+    "meta": {
+      "title": "Website van één pagina + EPK voor muzikanten",
+      "description": "Een website van één pagina en een digitale perskit voor muzikanten, opgebouwd rond jouw muziek. Bekijk het live voorbeeld, de prijs en wat erbij zit.",
+      "ogDescription": "Een website van één pagina en een digitale EPK voor muzikanten. Bekijk een live voorbeeld."
+    },
+    "hero": {
+      "eyebrow": "Voor muzikanten met een deadline",
+      "h1": "Ze vroegen om je perskit. Wat stuur je?",
+      "sub": "Een programmator, een festival of een zaal heeft net om je materiaal gevraagd, en wat je hebt is niet goed genoeg om te sturen. Wij schrijven en stellen je perskit samen op één pagina met één link, zodat je antwoord iets is waar je trots op bent.",
+      "ctaPrimary": "Vraag de jouwe aan",
+      "ctaExample": "Bekijk het live voorbeeld"
+    },
+    "proof": {
+      "eyebrow": "Het bewijs",
+      "h2": "Shale, een folkkwartet uit Brussel",
+      "lead": "Dit is de kit die we voor Shale maakten. Hij staat online, open hem en oordeel zelf.",
+      "imageAlt": "Startpagina van de perskit van Shale: Celtic traditional and beyond, met knoppen voor luisteren, mediakit en boekingen.",
+      "link": "Open de EPK van Shale"
+    },
+    "included": {
+      "eyebrow": "Wat erbij zit",
+      "h2": "Wat een boeker verwacht te vinden",
+      "lead": "Jij stuurt ons je teksten, foto’s en links. Verschillende hiervan zijn diensten die Aubuscule al los aanbiedt (fotoselectie en retouchering, livefoto’s, techrider en podiumplan). Dit aanbod bundelt ze.",
+      "items": {
+        "bio": {
+          "title": "Bio",
+          "text": "Twee tot drie alinea’s, in de derde persoon."
+        },
+        "photos": {
+          "title": "Persfoto’s",
+          "text": "Drie tot vijf foto’s in hoge resolutie, geselecteerd en geretoucheerd: minstens een portret en een livefoto, in liggend, staand en vierkant formaat."
+        },
+        "listen": {
+          "title": "Muziek die meteen te horen is",
+          "text": "Streaminglinks of spelers: Spotify, Apple Music, Bandcamp."
+        },
+        "video": {
+          "title": "Eén of twee video’s",
+          "text": "Zorgvuldig gekozen, met een liveclip erbij."
+        },
+        "press": {
+          "title": "Pers en bijzondere momenten",
+          "text": "Citaten, radio, artikels, zalen waar je speelde."
+        },
+        "dates": {
+          "title": "Eerdere data en zalen",
+          "text": "Zichtbaar gemaakt, zodat een promotor ziet dat je publiek trekt."
+        },
+        "calendar": {
+          "title": "Gesynchroniseerde agenda",
+          "text": "Siteagenda gekoppeld aan een Google Sheet. Boekers zoeken data en zalen, en jij werkt ze zelf bij, zodat de pagina nooit verouderd raakt."
+        },
+        "contact": {
+          "title": "Contactblok",
+          "text": "Artiest, manager, label."
+        },
+        "pack": {
+          "title": "Downloadbaar pakket",
+          "text": "Foto’s en logo die promotors kunnen gebruiken voor affiches."
+        },
+        "rider": {
+          "title": "Techrider en podiumplan",
+          "text": "Klaar om naar de geluidsman van de zaal te sturen."
+        }
+      }
+    },
+    "offer": {
+      "eyebrow": "Prijs en doorlooptijd",
+      "h2": "Eén aanbod, één prijs",
+      "priceLabel": "Prijs",
+      "price": "600 €",
+      "turnaroundLabel": "Doorlooptijd",
+      "turnaround": "Twee weken vanaf de dag dat je materiaal binnenkomt",
+      "guarantee": "Is het niet beter dan wat je nu hebt, dan betaal je niets."
+    },
+    "cta": {
+      "eyebrow": "Volgende stap",
+      "h2": "Stuur ons een bericht",
+      "lead": "Vertel wie je bent, wat er van je gevraagd is en tegen wanneer.",
+      "button": "Mail ons",
+      "subject": "Website van één pagina + EPK",
+      "body": "Hallo,\n\nIk wil graag een website van één pagina en een EPK.\n\nMijn naam of band:\nMijn huidige links:\n",
+      "notice": "Niets te betalen als je niet overtuigd bent"
+    },
+    "why": {
+      "eyebrow": "Waarom geen sjabloon",
+      "h2": "Het sjabloon is gratis. Het oordeel niet.",
+      "lead": "Wat wij verkopen is het redactionele werk, voor jou gedaan.",
+      "items": {
+        "bio": {
+          "title": "Een bio die goed leest",
+          "text": "Geschreven in de derde persoon, zodat een programmator er een zin uit kan overnemen."
+        },
+        "photos": {
+          "title": "Vier foto’s, geen vierhonderd",
+          "text": "We kiezen de foto’s die laten zien wie je bent en laten de rest weg."
+        },
+        "video": {
+          "title": "De juiste zestig seconden",
+          "text": "We kiezen het live moment dat het waard is om te tonen, want boekers kijken naar het podium."
+        },
+        "screen": {
+          "title": "Gemaakt voor tien seconden",
+          "text": "Promotors bekijken honderden kits per dag. We schrijven die van jou zodat hij een snelle blik overleeft."
+        }
+      },
+      "honest": "Goedkope kitbouwers bestaan, en sommige zijn goed. Als je graag je eigen bio schrijft en je eigen foto’s sorteert, gebruik er dan een. Dit is voor de muzikant die liever speelt en iemand met een redactioneel oog wil laten bepalen wat een boeker eerst ziet."
+    }
   }
 }

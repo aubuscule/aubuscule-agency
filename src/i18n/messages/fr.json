@@ -754,5 +754,115 @@
         "successSub": "Votre client email va s’ouvrir avec le message pré-rempli pour envoi immédiat."
       }
     }
+  },
+  "epk": {
+    "meta": {
+      "title": "Site d’une page + EPK pour musiciens",
+      "description": "Un site d’une page et un dossier de presse numérique pour musiciens, construits autour de votre musique. Voyez l’exemple en ligne, le prix et ce qui est inclus.",
+      "ogDescription": "Un site d’une page et un EPK numérique pour musiciens. Voyez un exemple en ligne."
+    },
+    "hero": {
+      "eyebrow": "Pour les musiciens qui ont une échéance",
+      "h1": "On vous a demandé votre dossier de presse. Qu’envoyez-vous ?",
+      "sub": "Un programmateur, un festival ou une salle vient de vous demander vos documents, et ce que vous avez n’est pas assez bon pour être envoyé. Nous rédigeons et assemblons votre dossier de presse sur une seule page avec un seul lien, pour que votre réponse soit quelque chose dont vous êtes fier.",
+      "ctaPrimary": "Obtenir le mien",
+      "ctaExample": "Voir l’exemple en ligne"
+    },
+    "proof": {
+      "eyebrow": "La preuve",
+      "h2": "Shale, quartet folk bruxellois",
+      "lead": "Voici le dossier que nous avons réalisé pour Shale. Il est en ligne, ouvrez-le et jugez par vous-même.",
+      "imageAlt": "Page d’accueil du dossier de presse de Shale : Celtic traditional and beyond, avec les boutons écouter, dossier média et booking.",
+      "link": "Ouvrir l’EPK de Shale"
+    },
+    "included": {
+      "eyebrow": "Ce qui est inclus",
+      "h2": "Ce qu’un programmateur s’attend à trouver",
+      "lead": "Vous nous envoyez vos textes, photos et liens. Plusieurs de ces éléments sont déjà des services proposés par Aubuscule (sélection et retouche de photos, photos live, fiche technique et plan de scène). Cette offre les réunit.",
+      "items": {
+        "bio": {
+          "title": "Bio",
+          "text": "Deux à trois paragraphes, à la troisième personne."
+        },
+        "photos": {
+          "title": "Photos de presse",
+          "text": "Trois à cinq photos haute résolution, sélectionnées et retouchées : au moins un portrait et une photo live, en paysage, portrait et carré."
+        },
+        "listen": {
+          "title": "De la musique à écouter tout de suite",
+          "text": "Liens ou lecteurs de streaming : Spotify, Apple Music, Bandcamp."
+        },
+        "video": {
+          "title": "Une ou deux vidéos",
+          "text": "Choisies avec soin, dont un extrait live."
+        },
+        "press": {
+          "title": "Presse et moments marquants",
+          "text": "Citations, radio, articles, salles où vous avez joué."
+        },
+        "dates": {
+          "title": "Dates et salles passées",
+          "text": "Rendues visibles, pour qu’un organisateur voie que vous attirez du public."
+        },
+        "calendar": {
+          "title": "Calendrier synchronisé",
+          "text": "Agenda du site relié à un Google Sheet. Les programmateurs cherchent dates et salles, et vous les mettez à jour vous-même, pour que la page ne vieillisse pas."
+        },
+        "contact": {
+          "title": "Bloc contact",
+          "text": "Artiste, manager, label."
+        },
+        "pack": {
+          "title": "Pack à télécharger",
+          "text": "Photos et logo que les organisateurs peuvent récupérer pour leurs affiches."
+        },
+        "rider": {
+          "title": "Fiche technique et plan de scène",
+          "text": "Prêts à envoyer à l’ingénieur son de la salle."
+        }
+      }
+    },
+    "offer": {
+      "eyebrow": "Prix et délai",
+      "h2": "Une offre, un prix",
+      "priceLabel": "Prix",
+      "price": "600 €",
+      "turnaroundLabel": "Délai",
+      "turnaround": "Deux semaines à partir de la réception de vos contenus",
+      "guarantee": "Si ce n’est pas mieux que ce que vous avez aujourd’hui, vous ne payez rien."
+    },
+    "cta": {
+      "eyebrow": "Prochaine étape",
+      "h2": "Envoyez-nous un message",
+      "lead": "Dites-nous qui vous êtes, ce qu’on vous a demandé et pour quand.",
+      "button": "Nous écrire",
+      "subject": "Site d’une page + EPK",
+      "body": "Bonjour,\n\nJe voudrais un site d’une page et un EPK.\n\nMon nom ou mon groupe :\nMes liens actuels :\n",
+      "notice": "Rien à payer si vous n’êtes pas convaincu"
+    },
+    "why": {
+      "eyebrow": "Pourquoi pas un modèle",
+      "h2": "Le modèle est gratuit. Le jugement ne l’est pas.",
+      "lead": "Ce que nous vendons, c’est le travail éditorial, fait pour vous.",
+      "items": {
+        "bio": {
+          "title": "Une bio qui se lit bien",
+          "text": "Écrite à la troisième personne, pour qu’un programmateur puisse en reprendre une phrase."
+        },
+        "photos": {
+          "title": "Quatre photos, pas quatre cents",
+          "text": "Nous choisissons celles qui montrent qui vous êtes, et laissons le reste de côté."
+        },
+        "video": {
+          "title": "Les soixante bonnes secondes",
+          "text": "Nous retenons le moment live qui vaut la peine d’être montré, car les programmateurs regardent la scène."
+        },
+        "screen": {
+          "title": "Pensé pour dix secondes",
+          "text": "Les programmateurs trient des centaines de dossiers par jour. Nous écrivons le vôtre pour qu’il tienne à un coup d’œil."
+        }
+      },
+      "honest": "Il existe des outils de dossier de presse bon marché, et certains sont bons. Si vous aimez écrire votre bio et trier vos photos, utilisez-en un. Ceci s’adresse au musicien qui préfère jouer, et veut que quelqu’un avec un regard d’éditeur décide de ce que le programmateur voit en premier."
+    }
   }
 }
