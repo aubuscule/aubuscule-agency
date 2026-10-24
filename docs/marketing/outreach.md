@@ -30,6 +30,50 @@ Rules: one person at a time, written by hand, sent from my own address or number
 
 Dutch version: translate the English one, same length.
 
+## 1b. Free preview first (use this as the first message when you can)
+
+The best bridge from free to paid is a small thing they have already seen working. Offer it in the first message: free, about two minutes, no strings. Pick one of two forms, whichever fits the person.
+
+**Variant A: their bio, rewritten.** Take the bio paragraph they use now and rewrite it in the third person, short enough to read at a glance.
+
+FR:
+
+> Salut [prénom],
+>
+> J’ai lu ta bio sur [lien]. Je l’ai réécrite en trois phrases, à la troisième personne, comme un programmateur voudrait la lire. Je te l’envoie, gratuitement, sans engagement ?
+> Si ça te plaît, je fais la même chose pour tout ton dossier de presse. Un exemple : https://epk.aubuscule.com/shale/
+>
+> Boris
+
+EN:
+
+> Hi [first name],
+>
+> I read your bio on [link]. I rewrote it in three sentences, in the third person, the way a booker would want to read it. Want me to send it, free, no strings?
+> If you like it, I can do the same for your whole press kit. An example: https://epk.aubuscule.com/shale/
+>
+> Boris
+
+**Variant B: a short screen recording.** Record about two minutes of your screen as a programmer would see their current materials: open the link, show where the eye goes, and say out loud where you would stop reading.
+
+FR:
+
+> Salut [prénom],
+>
+> Je me suis mis à la place d’un programmateur qui ouvre tes liens actuels et j’ai filmé l’écran (2 minutes) : où on s’arrête, ce qu’on ne trouve pas. Je te l’envoie, gratuit, sans engagement ?
+>
+> Boris
+
+EN:
+
+> Hi [first name],
+>
+> I put myself in a booker’s seat opening your current links and recorded my screen (2 minutes): where the eye stops, what is hard to find. Want me to send it, free, no strings?
+>
+> Boris
+
+Rules for both: send what you promised the same day, do not attach a pitch to it, and add one line only: "If you want the full kit done like this, here is how it works: [offer page link]". Count a sent preview as "offer sent" in the tracking table.
+
 ## 2. Follow-up sequence (3 messages)
 
 Send only if there is no reply. Stop after the third. If they say no, thank them and close the thread.

@@ -762,9 +762,9 @@
       "ogDescription": "A one-page website and digital EPK for musicians. See a live example."
     },
     "hero": {
-      "eyebrow": "One-page website + EPK for musicians",
-      "h1": "One link that gets you booked.",
-      "sub": "A one-page website and digital press kit built around your music: bio, sound, photos, tech rider and contact, in a single page a booker can read in a minute.",
+      "eyebrow": "For musicians with a deadline",
+      "h1": "They asked for your press kit. What do you send?",
+      "sub": "A programmer, a festival or a venue has just asked for your materials, and what you have is not good enough to send. We write and assemble your press kit as one page with one link, so the answer to that email is something you are proud of.",
       "ctaPrimary": "Get yours",
       "ctaExample": "See the live example"
     },
@@ -777,24 +777,44 @@
     },
     "included": {
       "eyebrow": "What is included",
-      "h2": "Everything a booker looks for",
-      "lead": "You send us your texts, photos and links. We do the rest.",
+      "h2": "What a booker expects to find",
+      "lead": "You send us your texts, photos and links. Several of these are services Aubuscule already offers on their own (photo selection and retouching, live photos, tech rider and stage plot). This offer bundles them.",
       "items": {
-        "site": {
-          "title": "A one-page website in your name",
-          "text": "Readable on a phone first."
+        "bio": {
+          "title": "Bio",
+          "text": "Two to three paragraphs, in the third person."
         },
-        "kit": {
-          "title": "A complete digital EPK",
-          "text": "Bio, press photos, music and video, tech rider and booking contact, all in one place."
+        "photos": {
+          "title": "Press photos",
+          "text": "Three to five high-resolution photos, selected and retouched, with at least one portrait and one live shot, in landscape, portrait and square."
         },
-        "fast": {
-          "title": "Fast and light",
-          "text": "It opens at once on any phone, even on a weak connection."
+        "listen": {
+          "title": "Music to hear at once",
+          "text": "Streaming links or embeds: Spotify, Apple Music, Bandcamp."
         },
-        "link": {
-          "title": "One link to send",
-          "text": "Put it in every email, bio and social profile, and update it when you have news."
+        "video": {
+          "title": "One or two videos",
+          "text": "Chosen with care, with a live clip among them."
+        },
+        "press": {
+          "title": "Press and notable moments",
+          "text": "Quotes, radio, articles, venues you have played."
+        },
+        "dates": {
+          "title": "Past dates and venues",
+          "text": "Made visible, so a promoter can see you can draw a crowd."
+        },
+        "contact": {
+          "title": "Contact block",
+          "text": "Artist, manager, label."
+        },
+        "pack": {
+          "title": "Asset pack to download",
+          "text": "Photos and logo that promoters can grab for flyers."
+        },
+        "rider": {
+          "title": "Tech rider and stage plot",
+          "text": "Ready to send to the venue’s sound engineer."
         }
       }
     },
@@ -810,11 +830,35 @@
     "cta": {
       "eyebrow": "Next step",
       "h2": "Send us a message",
-      "lead": "Tell us who you are and where your music lives today.",
+      "lead": "Tell us who you are, what you have been asked for and by when.",
       "button": "Email us",
       "subject": "One-page website + EPK",
       "body": "Hello,\n\nI would like a one-page website and EPK.\n\nMy name or band:\nMy current links:\n",
       "notice": "Nothing to pay if you are not convinced"
+    },
+    "why": {
+      "eyebrow": "Why not a template",
+      "h2": "The template is free. The judgement is not.",
+      "lead": "What we sell is the editorial work, done for you.",
+      "items": {
+        "bio": {
+          "title": "A bio that reads well",
+          "text": "Written in the third person, so a programmer can lift a line of it."
+        },
+        "photos": {
+          "title": "Four photos, not four hundred",
+          "text": "We choose the ones that show who you are, and leave out the rest."
+        },
+        "video": {
+          "title": "The right sixty seconds",
+          "text": "We pick the live moment worth showing, because bookers watch the stage."
+        },
+        "screen": {
+          "title": "Built for ten seconds",
+          "text": "Promoters screen hundreds of kits a day. We write yours to survive a quick look."
+        }
+      },
+      "honest": "Cheap kit builders exist, and some are good. If you enjoy writing your own bio and sorting your own photos, use one. This is for the musician who would rather play, and wants someone with an editor’s eye to make the call on what a booker sees first."
     }
   }
 }

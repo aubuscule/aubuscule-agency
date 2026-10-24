@@ -2,7 +2,8 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 const SHALE_URL = 'https://epk.aubuscule.com/shale/'
-const ITEM_KEYS = ['site', 'kit', 'fast', 'link'] as const
+const WHY_KEYS = ['bio', 'photos', 'video', 'screen'] as const
+const ITEM_KEYS = ['bio', 'photos', 'listen', 'video', 'press', 'dates', 'contact', 'pack', 'rider'] as const
 
 export function EpkPage() {
   const t = useTranslations('epk')
@@ -28,6 +29,28 @@ export function EpkPage() {
               {t('hero.ctaExample')}
             </a>
           </div>
+        </section>
+
+        <section className="epk-section" aria-labelledby="epk-why-heading">
+          <div className="epk-header">
+            <p className="eyebrow">{t('why.eyebrow')}</p>
+            <h2 className="epk-h2" id="epk-why-heading">
+              {t('why.h2')}
+            </h2>
+            <p className="epk-lead">{t('why.lead')}</p>
+          </div>
+          <ul className="epk-grid" role="list">
+            {WHY_KEYS.map((key, i) => (
+              <li key={key} className="epk-card card">
+                <span className="label" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="epk-card-title">{t(`why.items.${key}.title`)}</h3>
+                <p className="epk-card-text">{t(`why.items.${key}.text`)}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="epk-honest">{t('why.honest')}</p>
         </section>
 
         <section className="epk-section" id="example" aria-labelledby="epk-proof-heading">
@@ -60,7 +83,7 @@ export function EpkPage() {
             </h2>
             <p className="epk-lead">{t('included.lead')}</p>
           </div>
-          <ul className="epk-grid" role="list">
+          <ul className="epk-grid epk-grid-3" role="list">
             {ITEM_KEYS.map((key, i) => (
               <li key={key} className="epk-card card">
                 <span className="label" aria-hidden="true">
