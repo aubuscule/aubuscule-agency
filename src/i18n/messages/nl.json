@@ -26,6 +26,7 @@
     "ariaLabel": "Secundaire navigatie",
     "colNavigate": "Navigeren",
     "colContact": "Contact",
+    "bookCall": "Plan een gesprek",
     "artists": "Muzikanten · Beeldende kunstenaars · Performers"
   },
   "home": {
@@ -236,6 +237,8 @@
     "lead": "Vertel ons waar u staat. We reageren snel, zonder jargon.",
     "emailLabel": "E-mail",
     "instagramLabel": "Instagram",
+    "callLabel": "Gesprek",
+    "callValue": "Plan een gesprek",
     "mailtoSubject": "Informatieverzoek - Aubuscule",
     "mailtoBody": "Hallo,\n\nHier sta ik:\n\n\nWat ik nodig heb:\n\n"
   },
@@ -454,6 +457,7 @@
     "ctaTitle": "Een app-idee?",
     "ctaText": "Als je een behoefte hebt die een tool kan invullen, laat het ons weten. We bestuderen elk voorstel.",
     "ctaButton": "Schrijf ons",
+    "ctaCall": "Plan een gesprek",
     "listHeading": "Lijst",
     "cardDesc": "Beheer je reMarkable-sjablonen. Geen commandoregel, geen risico.",
     "ztCardTitle": "Tonale Zones",
@@ -509,7 +513,7 @@
       "h1": "Nuttige software, gebouwd voor uw dagelijkse werk.",
       "sub": "Wij bouwen <bold>applicaties voor Windows, macOS en Linux, webtools en gegevenskoppelingen</bold> om uw processen te stroomlijnen, zonder overbodige complexiteit.",
       "ctaShowcase": "Bekijk projecten",
-      "ctaContact": "Start een project"
+      "ctaCall": "Plan een gesprek"
     },
     "principles": {
       "eyebrow": "Werkprincipes",
@@ -729,6 +733,8 @@
       "lead": "Vertel ons wat uw werking vertraagt of welke tool u nodig heeft. We reageren binnen 48 uur om te bekijken of maatwerk zinvol is.",
       "emailLabel": "Stuur ons rechtstreeks een e-mail",
       "githubLabel": "GitHub-organisatie",
+      "callLabel": "Gesprek",
+      "callValue": "Plan een gesprek",
       "form": {
         "nameLabel": "Uw naam of organisatie",
         "emailLabel": "Uw e-mailadres",

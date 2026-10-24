@@ -2,6 +2,7 @@
 
 import { Link, usePathname } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
+import { BOOKING_URL } from '@/lib/site'
 import { Logo } from './Logo'
 
 export function Footer() {
@@ -40,6 +41,9 @@ export function Footer() {
             <span className="label-sm footer-col-label">{t('colContact')}</span>
             <a href="mailto:contact@aubuscule.com" className="footer-link">
               contact@aubuscule.com
+            </a>
+            <a href={BOOKING_URL} className="footer-link" target="_blank" rel="noopener noreferrer">
+              {t('bookCall')}
             </a>
             <a href="https://www.instagram.com/aubuscule_agency/" className="footer-link footer-link-instagram" target="_blank" rel="noopener noreferrer">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>

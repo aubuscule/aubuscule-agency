@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import { BOOKING_URL } from '@/lib/site'
 import { Mark } from '@/components/shared/Mark'
 
 export function DevHero() {
@@ -22,8 +23,8 @@ export function DevHero() {
           <a href="#realisations" className="btn-primary">
             {t('hero.ctaShowcase')}
           </a>
-          <a href="#contact" className="btn-secondary">
-            {t('hero.ctaContact')}
+          <a href={BOOKING_URL} className="btn-secondary" target="_blank" rel="noopener noreferrer">
+            {t('hero.ctaCall')}
           </a>
         </div>
       </div>
