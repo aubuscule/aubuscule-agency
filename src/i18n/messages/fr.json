@@ -26,6 +26,7 @@
     "ariaLabel": "Navigation secondaire",
     "colNavigate": "Naviguer",
     "colContact": "Contact",
+    "bookCall": "Réserver un appel",
     "artists": "Musiciens · Plasticiens · Artistes"
   },
   "home": {
@@ -236,6 +237,8 @@
     "lead": "Dites-nous où vous en êtes. On répond vite, sans jargon.",
     "emailLabel": "Email",
     "instagramLabel": "Instagram",
+    "callLabel": "Appel",
+    "callValue": "Réserver un appel",
     "mailtoSubject": "Demande d'information - Aubuscule",
     "mailtoBody": "Bonjour,\n\nVoici où j'en suis :\n\n\nCe dont j'ai besoin :\n\n"
   },
@@ -454,6 +457,7 @@
     "ctaTitle": "Une idée d’application ?",
     "ctaText": "Si vous avez un besoin qu’un outil pourrait combler, dites-le nous. On étudie chaque proposition.",
     "ctaButton": "Nous écrire",
+    "ctaCall": "Réserver un appel",
     "listHeading": "Liste",
     "cardDesc": "Gérez vos templates reMarkable. Sans ligne de commande, sans risque.",
     "ztCardTitle": "Zones Tonales",
@@ -509,7 +513,7 @@
       "h1": "Des logiciels utiles, construits pour votre quotidien.",
       "sub": "Nous développons des <bold>applications pour Windows, macOS et Linux, des outils web et des passerelles de données</bold> pour fluidifier vos opérations, sans complexité superflue.",
       "ctaShowcase": "Voir les réalisations",
-      "ctaContact": "Discuter d’un projet"
+      "ctaCall": "Réserver un appel"
     },
     "principles": {
       "eyebrow": "Principes de travail",
@@ -729,6 +733,8 @@
       "lead": "Décrivez-nous ce qui vous ralentit ou l’outil que vous aimeriez avoir. Nous vous répondons sous 48h pour voir si un développement sur mesure est pertinent.",
       "emailLabel": "Écrivez-nous directement",
       "githubLabel": "Organisation GitHub",
+      "callLabel": "Appel",
+      "callValue": "Réserver un appel",
       "form": {
         "nameLabel": "Votre nom ou structure",
         "emailLabel": "Votre adresse email",
