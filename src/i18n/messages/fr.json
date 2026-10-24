@@ -786,7 +786,7 @@
         },
         "photos": {
           "title": "Photos de presse",
-          "text": "Trois à cinq photos haute résolution, sélectionnées et retouchées, dont au moins un portrait et une photo live, en paysage, portrait et carré."
+          "text": "Trois à cinq photos haute résolution, sélectionnées et retouchées : au moins un portrait et une photo live, en paysage, portrait et carré."
         },
         "listen": {
           "title": "De la musique à écouter tout de suite",
@@ -806,7 +806,7 @@
         },
         "calendar": {
           "title": "Calendrier synchronisé",
-          "text": "Agenda du site relié à un Google Sheet. Les programmateurs cherchent les dates à venir et passées avec le nom des salles, et vous les mettez à jour vous-même depuis le tableur, pour que la page n’affiche jamais les dates de l’an dernier."
+          "text": "Agenda du site relié à un Google Sheet. Les programmateurs cherchent dates et salles, et vous les mettez à jour vous-même, pour que la page ne vieillisse pas."
         },
         "contact": {
           "title": "Bloc contact",

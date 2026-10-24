@@ -786,7 +786,7 @@
         },
         "photos": {
           "title": "Persfoto’s",
-          "text": "Drie tot vijf foto’s in hoge resolutie, geselecteerd en geretoucheerd, met minstens één portret en één livefoto, in liggend, staand en vierkant formaat."
+          "text": "Drie tot vijf foto’s in hoge resolutie, geselecteerd en geretoucheerd: minstens een portret en een livefoto, in liggend, staand en vierkant formaat."
         },
         "listen": {
           "title": "Muziek die meteen te horen is",
@@ -806,7 +806,7 @@
         },
         "calendar": {
           "title": "Gesynchroniseerde agenda",
-          "text": "Siteagenda gekoppeld aan een Google Sheet. Boekers zoeken komende en eerdere data met zaalnamen, en jij werkt ze zelf bij vanuit het spreadsheet, zodat de pagina nooit de data van vorig jaar toont."
+          "text": "Siteagenda gekoppeld aan een Google Sheet. Boekers zoeken data en zalen, en jij werkt ze zelf bij, zodat de pagina nooit verouderd raakt."
         },
         "contact": {
           "title": "Contactblok",

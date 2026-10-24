@@ -786,7 +786,7 @@
         },
         "photos": {
           "title": "Press photos",
-          "text": "Three to five high-resolution photos, selected and retouched, with at least one portrait and one live shot, in landscape, portrait and square."
+          "text": "Three to five high-resolution photos, selected and retouched: a portrait and a live shot at least, in landscape, portrait and square."
         },
         "listen": {
           "title": "Music to hear at once",
@@ -806,7 +806,7 @@
         },
         "calendar": {
           "title": "Synced calendar",
-          "text": "Site agenda linked to a Google Sheet. Bookers look for upcoming and past dates with venue names, and you update them yourself from the spreadsheet, so the page never shows last year’s dates."
+          "text": "Site agenda linked to a Google Sheet. Bookers look for dates and venues, and you update them yourself, so the page never goes stale."
         },
         "contact": {
           "title": "Contact block",

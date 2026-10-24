@@ -89,14 +89,14 @@ export function EpkPage() {
             </h2>
             <p className="epk-lead">{t('included.lead')}</p>
           </div>
-          <ul className="epk-grid epk-grid-3" role="list">
-            {ITEM_KEYS.map((key, i) => (
-              <li key={key} className="epk-card card">
-                <span className="label" aria-hidden="true">
-                  {String(i + 1).padStart(2, '0')}
+          <ul className="epk-checklist" role="list">
+            {ITEM_KEYS.map((key) => (
+              <li key={key} className="epk-check">
+                <span className="epk-check-label">{t(`included.items.${key}.title`)}</span>
+                <span className="epk-check-sep" aria-hidden="true">
+                  {' · '}
                 </span>
-                <h3 className="epk-card-title">{t(`included.items.${key}.title`)}</h3>
-                <p className="epk-card-text">{t(`included.items.${key}.text`)}</p>
+                <span className="epk-check-text">{t(`included.items.${key}.text`)}</span>
               </li>
             ))}
           </ul>
