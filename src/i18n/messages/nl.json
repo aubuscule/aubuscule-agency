@@ -758,7 +758,7 @@
     "hero": {
       "eyebrow": "Website van één pagina + EPK voor muzikanten",
       "h1": "Eén link die je boekingen oplevert.",
-      "sub": "Een website van één pagina en een digitale perskit rond jouw muziek: bio, geluid, foto’s, techrider en contact, op één pagina die een boeker in een minuut leest. Gemaakt door muzikanten die voor het web bouwen.",
+      "sub": "Een website van één pagina en een digitale perskit rond jouw muziek: bio, geluid, foto’s, techrider en contact, op één pagina die een boeker in een minuut leest.",
       "ctaPrimary": "Vraag de jouwe aan",
       "ctaExample": "Bekijk het live voorbeeld"
     },
@@ -776,7 +776,7 @@
       "items": {
         "site": {
           "title": "Een website van één pagina op jouw naam",
-          "text": "Een eigen adres, eerst ontworpen voor de telefoon."
+          "text": "Eerst ontworpen voor de telefoon."
         },
         "kit": {
           "title": "Een complete digitale EPK",
@@ -804,11 +804,11 @@
     "cta": {
       "eyebrow": "Volgende stap",
       "h2": "Stuur ons een bericht",
-      "lead": "Vertel wie je bent en waar je muziek nu te vinden is. We antwoorden binnen 48u.",
+      "lead": "Vertel wie je bent en waar je muziek nu te vinden is.",
       "button": "Mail ons",
       "subject": "Website van één pagina + EPK",
       "body": "Hallo,\n\nIk wil graag een website van één pagina en een EPK.\n\nMijn naam of band:\nMijn huidige links:\n",
-      "notice": "Antwoord binnen 48u · Niets te betalen als je niet overtuigd bent"
+      "notice": "Niets te betalen als je niet overtuigd bent"
     }
   }
 }

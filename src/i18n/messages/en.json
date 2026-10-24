@@ -758,7 +758,7 @@
     "hero": {
       "eyebrow": "One-page website + EPK for musicians",
       "h1": "One link that gets you booked.",
-      "sub": "A one-page website and digital press kit built around your music: bio, sound, photos, tech rider and contact, in a single page a booker can read in a minute. Made by musicians who build for the web.",
+      "sub": "A one-page website and digital press kit built around your music: bio, sound, photos, tech rider and contact, in a single page a booker can read in a minute.",
       "ctaPrimary": "Get yours",
       "ctaExample": "See the live example"
     },
@@ -776,7 +776,7 @@
       "items": {
         "site": {
           "title": "A one-page website in your name",
-          "text": "Your own address, readable on a phone first."
+          "text": "Readable on a phone first."
         },
         "kit": {
           "title": "A complete digital EPK",
@@ -804,11 +804,11 @@
     "cta": {
       "eyebrow": "Next step",
       "h2": "Send us a message",
-      "lead": "Tell us who you are and where your music lives today. We reply within 48h.",
+      "lead": "Tell us who you are and where your music lives today.",
       "button": "Email us",
       "subject": "One-page website + EPK",
       "body": "Hello,\n\nI would like a one-page website and EPK.\n\nMy name or band:\nMy current links:\n",
-      "notice": "Reply within 48h · Nothing to pay if you are not convinced"
+      "notice": "Nothing to pay if you are not convinced"
     }
   }
 }

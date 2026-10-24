@@ -758,7 +758,7 @@
     "hero": {
       "eyebrow": "Site d’une page + EPK pour musiciens",
       "h1": "Un seul lien pour être programmé.",
-      "sub": "Un site d’une page et un dossier de presse numérique construits autour de votre musique : bio, sons, photos, fiche technique et contact, sur une page qu’un programmateur lit en une minute. Fait par des musiciens qui construisent pour le web.",
+      "sub": "Un site d’une page et un dossier de presse numérique construits autour de votre musique : bio, sons, photos, fiche technique et contact, sur une page qu’un programmateur lit en une minute.",
       "ctaPrimary": "Obtenir le mien",
       "ctaExample": "Voir l’exemple en ligne"
     },
@@ -776,7 +776,7 @@
       "items": {
         "site": {
           "title": "Un site d’une page à votre nom",
-          "text": "Votre propre adresse, pensé d’abord pour le téléphone."
+          "text": "Pensé d’abord pour le téléphone."
         },
         "kit": {
           "title": "Un EPK numérique complet",
@@ -804,11 +804,11 @@
     "cta": {
       "eyebrow": "Prochaine étape",
       "h2": "Envoyez-nous un message",
-      "lead": "Dites-nous qui vous êtes et où se trouve votre musique aujourd’hui. Nous répondons sous 48h.",
+      "lead": "Dites-nous qui vous êtes et où se trouve votre musique aujourd’hui.",
       "button": "Nous écrire",
       "subject": "Site d’une page + EPK",
       "body": "Bonjour,\n\nJe voudrais un site d’une page et un EPK.\n\nMon nom ou mon groupe :\nMes liens actuels :\n",
-      "notice": "Réponse sous 48h · Rien à payer si vous n’êtes pas convaincu"
+      "notice": "Rien à payer si vous n’êtes pas convaincu"
     }
   }
 }
