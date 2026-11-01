@@ -94,7 +94,7 @@ def ill_photos(L):
     for x, w, h, lab, acc in frames:
         y = base - h
         o.append(R(x, y, w, h, ACC if acc else "#d6d3ca", None, 0, 2))
-        o.append(f'<circle cx="{x+w*0.68}" cy="{y+h*0.36}" r="{min(w,h)*0.14}" fill="{PAPER}" opacity="0.9"/>')
+        o.append(f'<circle cx="{x+w*0.68}" cy="{y+h*0.36}" r="{min(w,h)*0.14}" fill="#030303" opacity="0.9"/>')
         o.append(R(x, y, w, h, "none", ACC if acc else INK, 2, 2))
         o.append(T(x, base + 44, lab, 19, ACC if acc else MUTE, weight=500 if acc else 400, ls=1.4))
     o.append(T(24, 56, L["selected"], 22, ACC, weight=500))
@@ -121,9 +121,9 @@ def ill_listen(L):
 def ill_video(L):
     o = []
     fx, fy, fw, fh = 108, 20, 720, 360
-    o.append(R(fx, fy, fw, fh, INK, None, 0, 3))
-    o.append(f'<circle cx="{fx+fw/2}" cy="{fy+fh/2}" r="60" fill="none" stroke="{PAPER}" stroke-width="3"/>')
-    o.append(f'<polygon points="{fx+fw/2-15},{fy+fh/2-27} {fx+fw/2-15},{fy+fh/2+27} {fx+fw/2+32},{fy+fh/2}" fill="{PAPER}"/>')
+    o.append(R(fx, fy, fw, fh, "#010101", "#030303", 2, 3))
+    o.append(f'<circle cx="{fx+fw/2}" cy="{fy+fh/2}" r="60" fill="none" stroke="#030303" stroke-width="3"/>')
+    o.append(f'<polygon points="{fx+fw/2-15},{fy+fh/2-27} {fx+fw/2-15},{fy+fh/2+27} {fx+fw/2+32},{fy+fh/2}" fill="#030303"/>')
     ty = 414
     o.append(R(fx, ty, fw, 9, HAIR2, None, 0, 1))
     o.append(R(fx + 250, ty - 7, 130, 23, ACC, None, 0, 2))
@@ -259,7 +259,7 @@ h1 span{{display:block}}
 h1 .b{{color:{ACC}}}
 .dark h1 .b{{color:{PAPER}}}
 .dark h1 .a{{color:{FBODY}}}
-.card{{background:#fff;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.07);margin-top:40px;flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:18px 18px}}
+.card{{background:#1b1b1a;border-radius:3px;border:1px solid #2a2927;margin-top:40px;flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:18px 18px}}
 .card svg{{width:100%;height:100%}}
 .lead{{font-size:33px;line-height:1.42;color:{SOFT};margin-top:36px;max-width:36em;text-wrap:pretty}}
 .dark .lead{{color:{FBODY}}}
@@ -274,12 +274,23 @@ h1 .b{{color:{ACC}}}
 .spacer{{flex:1}}
 """
 
+def to_dark(svg):
+    """Re-colour a light-ground illustration for the dark theme."""
+    svg = svg.replace(f'stroke="{ACC}"', 'stroke="#030303"')
+    svg = svg.replace(f'fill="{ACC}" text-anchor', 'fill="#030303" text-anchor')
+    svg = svg.replace(f'fill="{MUTE}" text-anchor', f'fill="{FBODY}" text-anchor')
+    svg = svg.replace(INK, "@@P").replace(PAPER, INK).replace("@@P", PAPER)
+    for a, b in (('"#fff"', '"#1b1b1a"'), ("#d6d3ca", "#3a3833"), (HAIR2, "#3a3833"), (HAIR, "#2e2d2a"),
+                 ("#b9b6ad", "#6b6860"), ("#010101", "#262624"), ("#030303", PAPER)):
+        svg = svg.replace(a, b)
+    return svg
+
 def slide_html(lang, i, s, total, fontdir):
     L = COPY[lang]["L"]
-    dark = s["kind"] in ("cover", "cta")
+    dark = True
     num = f"{i+1:02d} / {total:02d}"
     ink = PAPER if dark else ACC
-    foot = f'<div class="foot"><div class="l">{mark("f"+str(i), PAPER if dark else ACC)}<span>Aubuscule</span></div><span>{num}</span></div>'
+    foot = f'<div class="foot"><div class="l">{mark("f"+str(i), PAPER)}<span>Aubuscule</span></div><span>{num}</span></div>'
     h1 = f'<h1><span class="a">{s["a"]}</span><span class="b">{s["b"]}</span></h1>'
     if s["kind"] == "cover":
         w, h, svg = ill_cover()
@@ -293,6 +304,7 @@ def slide_html(lang, i, s, total, fontdir):
                 f'<div class="btn">{s["button"]}</div><div class="ex">{s["example"]}</div><div class="spacer"></div>')
     else:
         w, h, svg = ILL[s["ill"]](L)
+        svg = to_dark(svg)
         body = (h1 + f'<div class="card"><svg viewBox="0 0 {w} {h}" preserveAspectRatio="xMidYMid meet">{svg}</svg></div>'
                 f'<p class="lead">{s["lead"]}</p>')
     if lang == "fr":
