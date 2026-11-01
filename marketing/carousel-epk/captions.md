@@ -16,7 +16,7 @@ Un programmateur survole votre kit. Voici les cinq choses qu’il cherche, et co
 4. de la musique à écouter tout de suite
 5. les dates passées, un contact clair, la fiche technique
 
-Pas le temps de tout assembler ? On écrit et on monte votre kit : une page, un lien, 600 €, en deux semaines. Si ce n’est pas mieux que ce que vous avez, vous ne payez pas.
+Pas le temps de tout assembler ? On écrit et on monte votre kit : une page, un lien, avec un signe de marque et vos photos retouchées. 600 €, en deux semaines. Si ce n’est pas mieux que ce que vous avez, vous ne payez pas.
 
 Écrivez-nous en message privé. Enregistrez ce post pour votre prochain dossier, et envoyez-le à un musicien qui en a besoin.
 
@@ -33,7 +33,7 @@ A booker skims your kit. Here are the five things they look for, and how to show
 4. music to hear right away
 5. past dates, a clear contact, the tech rider
 
-No time to put it together? We write and build your kit: one page, one link, €600, in two weeks. If it is not better than what you have now, you do not pay.
+No time to put it together? We write and build your kit: one page, one link, with a brand mark and retouched photos. €600, in two weeks. If it is not better than what you have now, you do not pay.
 
 Send us a direct message. Save this post for your next press kit, and send it to a musician who needs it.
 
