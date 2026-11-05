@@ -31,10 +31,11 @@ export const routeNamespaces = {
 
 function createRouteEntry(page, specificFiles, namespaces) {
   const allFiles = Array.from(new Set([page, ...specificFiles, ...I18N_MESSAGES]));
-  allFiles.page = page;
-  allFiles.files = allFiles;
-  allFiles.namespaces = namespaces;
-  return allFiles;
+  return {
+    page,
+    files: allFiles,
+    namespaces,
+  };
 }
 
 export const sitemapRoutes = {

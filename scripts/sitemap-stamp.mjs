@@ -5,15 +5,18 @@
  * For JSON translation files (en/fr/nl), hashes only that route's top-level
  * namespace keys so unrelated translation edits don't bump lastmod dates.
  *
+ * Shared chrome (Footer, Nav, Layouts, global CSS) is deliberately excluded.
+ *
  * Usage:
- *   npm run sitemap:stamp   Recomputes hashes and stamps today's date if changed
- *   npm run sitemap:check   Verifies hashes match committed dates; exits non-zero if stale
+ *   npm run sitemap:stamp   Recomputes hashes and stamps today's date if changed (prunes removed routes)
+ *   npm run sitemap:check   Verifies hashes match committed dates; exits non-zero if stale or orphaned
+ *   node scripts/sitemap-stamp.mjs --seed  Initializes dates from git commit history
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { sitemapRoutes } from './sitemap-routes.mjs';
 
@@ -144,20 +147,29 @@ export function computeRouteHash(routePath, inputFiles, namespaces = [], rootDir
 
 /**
  * Gets the latest git commit date touching any of the provided input files.
+ * Uses execFileSync with an argument array and '--' to prevent shell globbing
+ * of Next.js [locale] path segments, and fails loudly on git error.
  */
 export function getLatestCommitDate(inputFiles, rootDir = DEFAULT_ROOT) {
   try {
-    const output = execSync(
-      `git log -1 --format=%cs -- ${inputFiles.join(' ')}`,
-      { cwd: rootDir, stdio: ['ignore', 'pipe', 'ignore'] }
-    ).toString().trim();
+    const args = ['log', '-1', '--format=%cs', '--', ...inputFiles];
+    const output = execFileSync('git', args, {
+      cwd: rootDir,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    }).trim();
+
     if (output && /^\d{4}-\d{2}-\d{2}$/.test(output)) {
       return output;
     }
-  } catch {
-    // Git command failed or not in repo
+  } catch (err) {
+    throw new Error(
+      `Failed to determine latest commit date for input files via git: ${err.message}`
+    );
   }
-  return new Date().toISOString().split('T')[0];
+  throw new Error(
+    `No git commit found touching any of the specified input files: ${inputFiles.join(', ')}`
+  );
 }
 
 /**
@@ -169,6 +181,7 @@ export function runSitemapStamp(options = {}) {
   const checkMode = Boolean(options.checkMode);
   const seedMode = Boolean(options.seedMode);
   const routes = options.routes || sitemapRoutes;
+  // 'today' is formatted in UTC (YYYY-MM-DD) for build reproducibility
   const today = options.customDate || new Date().toISOString().split('T')[0];
 
   let currentDates = {};
@@ -184,10 +197,25 @@ export function runSitemapStamp(options = {}) {
   const stale = [];
   const upToDate = [];
   const changed = [];
-  const newDates = { ...currentDates };
+  const newDates = {};
+
+  const routeKeys = new Set(Object.keys(routes));
+  const orphanKeys = Object.keys(currentDates).filter((k) => !routeKeys.has(k));
+
+  if (checkMode && orphanKeys.length > 0) {
+    for (const orphan of orphanKeys) {
+      stale.push({
+        path: orphan,
+        orphan: true,
+        expectedHash: null,
+        storedHash: currentDates[orphan]?.hash || null,
+        storedDate: currentDates[orphan]?.date || null,
+      });
+    }
+  }
 
   for (const [routePath, routeEntry] of Object.entries(routes)) {
-    const files = routeEntry.files || routeEntry;
+    const files = Array.isArray(routeEntry) ? routeEntry : (routeEntry.files || []);
     const namespaces = routeEntry.namespaces || [];
     const page = routeEntry.page || files[0];
 
@@ -203,6 +231,7 @@ export function runSitemapStamp(options = {}) {
       if (checkMode) {
         stale.push({
           path: routePath,
+          orphan: false,
           expectedHash: computedHash,
           storedHash: existingEntry ? existingEntry.hash : null,
           storedDate: existingEntry ? existingEntry.date : null,
@@ -234,30 +263,38 @@ export function runSitemapStamp(options = {}) {
     if (stale.length > 0) {
       console.error('[sitemap] Stale sitemap paths found:');
       for (const item of stale) {
-        console.error(
-          `  - "${item.path || "''"}": current hash ${item.expectedHash} != stored ${item.storedHash || '(none)'}`
-        );
+        if (item.orphan) {
+          console.error(`  - "${item.path || "''"}": orphaned route present in dates JSON but removed from route map`);
+        } else {
+          console.error(
+            `  - "${item.path || "''"}": current hash ${item.expectedHash} != stored ${item.storedHash || '(none)'}`
+          );
+        }
       }
-      return { success: false, stale, upToDate, warnings: allWarnings };
+      return { success: false, stale, upToDate, warnings: allWarnings, orphanKeys };
     }
     console.log(`[sitemap] All ${upToDate.length} sitemap paths are up to date.`);
-    return { success: true, stale: [], upToDate, warnings: allWarnings };
+    return { success: true, stale: [], upToDate, warnings: allWarnings, orphanKeys: [] };
   }
 
-  // Stamp mode: write back file
+  // Stamp mode: write back file (orphaned routes not in routeKeys are automatically pruned)
   fs.mkdirSync(path.dirname(datesPath), { recursive: true });
   fs.writeFileSync(datesPath, JSON.stringify(newDates, null, 2) + '\n', 'utf8');
+
+  if (orphanKeys.length > 0) {
+    console.log(`[sitemap] Pruned ${orphanKeys.length} removed route(s): ${orphanKeys.join(', ')}`);
+  }
 
   if (changed.length > 0) {
     console.log(`[sitemap] Updated ${changed.length} path(s) in ${path.relative(rootDir, datesPath)}:`);
     for (const item of changed) {
       console.log(`  - "${item.path || "''"}": ${item.oldDate || '(new)'} -> ${item.newDate} (hash: ${item.newHash.slice(0, 10)}...)`);
     }
-  } else {
+  } else if (orphanKeys.length === 0) {
     console.log(`[sitemap] All ${upToDate.length} paths up to date; no changes written.`);
   }
 
-  return { success: true, changed, upToDate, warnings: allWarnings, dates: newDates };
+  return { success: true, changed, upToDate, warnings: allWarnings, dates: newDates, pruned: orphanKeys };
 }
 
 // CLI entry point
