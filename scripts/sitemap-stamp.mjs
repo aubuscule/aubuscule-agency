@@ -1,16 +1,18 @@
 /**
- * Sitemap Hash Stamper and Checker
+ * Sitemap Hash Stamper, Checker, and Rebaseliner
  *
- * Computes deterministic SHA-256 hashes of each sitemap route's input files.
- * For JSON translation files (en/fr/nl), hashes only that route's top-level
- * namespace keys so unrelated translation edits don't bump lastmod dates.
+ * Automatically hashes each route's derived input files and i18n namespaces.
+ * For JSON translation files (en/fr/nl), hashes only that route's derived
+ * top-level namespace keys so unrelated translation edits don't bump lastmod dates.
  *
  * Shared chrome (Footer, Nav, Layouts, global CSS) is deliberately excluded.
  *
  * Usage:
- *   npm run sitemap:stamp   Recomputes hashes and stamps today's date if changed (prunes removed routes)
- *   npm run sitemap:check   Verifies hashes match committed dates; exits non-zero if stale or orphaned
- *   node scripts/sitemap-stamp.mjs --seed  Initializes dates from git commit history
+ *   npm run sitemap:stamp                Recomputes hashes and stamps today's date if changed (prunes removed routes)
+ *   npm run sitemap:check                Verifies hashes match committed dates; exits non-zero if stale, orphaned, or warning
+ *   node scripts/sitemap-stamp.mjs --rebaseline  Migration mode: rewrites hashes WITHOUT changing existing dates
+ *   node scripts/sitemap-stamp.mjs --seed        Initializes dates from git commit history
+ *   node scripts/sitemap-stamp.mjs --explain <path>  Audits derived files and namespaces for a route
  */
 
 import fs from 'node:fs';
@@ -18,95 +20,17 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { sitemapRoutes } from './sitemap-routes.mjs';
+import {
+  deriveSitemapRoutes,
+  deriveRouteInputs,
+  findRouteLayouts,
+  DEFAULT_ROOT,
+  SHARED_CHROME_EXCLUSIONS,
+} from './sitemap-routes.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DEFAULT_ROOT = path.resolve(__dirname, '..');
 const DEFAULT_DATES_FILE = path.join(DEFAULT_ROOT, 'src', 'lib', 'sitemap-dates.json');
-
-/**
- * Resolves a module specifier from an importing file.
- * Handles `@/` (mapped to `src/`) and relative `./` or `../`.
- */
-export function resolveImport(importingFile, specifier, rootDir = DEFAULT_ROOT) {
-  let targetPath;
-  if (specifier.startsWith('@/')) {
-    targetPath = path.join(rootDir, 'src', specifier.slice(2));
-  } else if (specifier.startsWith('.')) {
-    targetPath = path.resolve(path.dirname(path.resolve(rootDir, importingFile)), specifier);
-  } else {
-    return null; // External package (e.g. react, next)
-  }
-
-  const extensions = ['', '.tsx', '.ts', '.jsx', '.js', '.css', '.json', '/index.tsx', '/index.ts'];
-  for (const ext of extensions) {
-    const candidate = targetPath + ext;
-    if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
-      return path.relative(rootDir, candidate);
-    }
-  }
-  return null;
-}
-
-/**
- * Extracts all local imported file paths from a source file.
- */
-export function findLocalImports(filePath, rootDir = DEFAULT_ROOT) {
-  const fullPath = path.resolve(rootDir, filePath);
-  if (!fs.existsSync(fullPath)) return [];
-  const content = fs.readFileSync(fullPath, 'utf8');
-
-  // Match: import ... from '...' or export ... from '...' or import '...'
-  const importRegex = /(?:import|export)\s+(?:(?:(?:\w+|\{[^}]*\}|\*\s+as\s+\w+)\s+from\s+)?['"]([^'"]+)['"]|\s*['"]([^'"]+)['"])/g;
-  const imports = [];
-  let match;
-  while ((match = importRegex.exec(content)) !== null) {
-    const spec = match[1] || match[2];
-    const resolved = resolveImport(filePath, spec, rootDir);
-    if (resolved) {
-      imports.push(resolved);
-    }
-  }
-  return imports;
-}
-
-/**
- * Recursively inspects a route's page and warns if any imported local file
- * is not covered in the route's input list.
- */
-export function checkRouteImports(routePath, pageFile, inputFiles, rootDir = DEFAULT_ROOT) {
-  const warnings = [];
-  const inputSet = new Set(inputFiles);
-  const visited = new Set();
-  const queue = [pageFile];
-
-  while (queue.length > 0) {
-    const current = queue.shift();
-    if (visited.has(current)) continue;
-    visited.add(current);
-
-    const directImports = findLocalImports(current, rootDir);
-    for (const importedFile of directImports) {
-      if (!inputSet.has(importedFile)) {
-        const warning = {
-          route: routePath,
-          importedFile,
-          importedBy: current,
-        };
-        warnings.push(warning);
-        console.warn(
-          `[sitemap:warn] Route "${routePath || "''"}" page imports "${importedFile}" (via "${current}") which is not covered in its input list.`
-        );
-      }
-      if (!visited.has(importedFile)) {
-        queue.push(importedFile);
-      }
-    }
-  }
-
-  return warnings;
-}
 
 /**
  * Computes a deterministic SHA-256 hash for a given route.
@@ -173,27 +97,93 @@ export function getLatestCommitDate(inputFiles, rootDir = DEFAULT_ROOT) {
 }
 
 /**
- * Main execution function for stamping or checking sitemap dates.
+ * Explains and prints a route's derived files and namespaces.
+ */
+export function explainRoute(routePath, options = {}) {
+  const rootDir = options.rootDir || DEFAULT_ROOT;
+  const entry = deriveRouteInputs(routePath, { rootDir });
+  const layouts = findRouteLayouts(routePath, rootDir);
+
+  console.log(`\n======================================================`);
+  console.log(`Sitemap Route Audit: "${routePath || "''"}"`);
+  console.log(`======================================================`);
+  console.log(`Page: ${entry.page}`);
+  if (layouts.length > 0) {
+    console.log(`Route-specific layouts (${layouts.length}):`);
+    for (const l of layouts) {
+      console.log(`  - ${l}`);
+    }
+  } else {
+    console.log(`Route-specific layouts: none (locale/root layouts excluded by policy)`);
+  }
+  console.log(`\nDerived files (${entry.files.length}):`);
+  for (const f of entry.files) {
+    console.log(`  - ${f}`);
+  }
+  console.log(`\nDerived i18n namespaces (${entry.namespaces.length}):`);
+  for (const ns of entry.namespaces) {
+    console.log(`  - ${ns}`);
+  }
+  if (entry.warnings.length > 0) {
+    console.log(`\nWarnings (${entry.warnings.length}):`);
+    for (const w of entry.warnings) {
+      console.log(`  - [WARN] ${w.file}:${w.line} (${w.call})`);
+    }
+  }
+  console.log(`======================================================\n`);
+
+  return entry;
+}
+
+/**
+ * Reads and validates sitemap-dates.json.
+ * Fails loudly on corrupt JSON or invalid structure.
+ */
+export function readDatesFile(datesPath) {
+  if (!fs.existsSync(datesPath)) {
+    return {};
+  }
+
+  const raw = fs.readFileSync(datesPath, 'utf8');
+  try {
+    const parsed = JSON.parse(raw);
+    if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
+      throw new Error('Dates JSON root must be an object');
+    }
+    return parsed;
+  } catch (err) {
+    throw new Error(`Corrupted sitemap dates file at "${datesPath}": ${err.message}`);
+  }
+}
+
+/**
+ * Main execution function for stamping, checking, or rebaselining sitemap dates.
  */
 export function runSitemapStamp(options = {}) {
   const rootDir = options.rootDir || DEFAULT_ROOT;
   const datesPath = options.datesPath || DEFAULT_DATES_FILE;
   const checkMode = Boolean(options.checkMode);
+  const rebaselineMode = Boolean(options.rebaselineMode);
   const seedMode = Boolean(options.seedMode);
-  const routes = options.routes || sitemapRoutes;
-  // 'today' is formatted in UTC (YYYY-MM-DD) for build reproducibility
   const today = options.customDate || new Date().toISOString().split('T')[0];
 
-  let currentDates = {};
-  if (fs.existsSync(datesPath)) {
-    try {
-      currentDates = JSON.parse(fs.readFileSync(datesPath, 'utf8'));
-    } catch (err) {
-      console.warn(`[sitemap:warn] Failed to parse existing ${datesPath}: ${err.message}`);
-    }
+  // 1. Read dates file (throws on corrupt JSON)
+  const currentDates = readDatesFile(datesPath);
+
+  // 2. Derive route definitions from sitemap.ts
+  let routes = options.routes;
+  let allWarnings = options.warnings || [];
+
+  if (!routes) {
+    const derived = deriveSitemapRoutes({
+      rootDir,
+      sitemapFile: options.sitemapFile,
+      paths: options.paths,
+    });
+    routes = derived.routes;
+    allWarnings = derived.warnings;
   }
 
-  const allWarnings = [];
   const stale = [];
   const upToDate = [];
   const changed = [];
@@ -217,17 +207,26 @@ export function runSitemapStamp(options = {}) {
   for (const [routePath, routeEntry] of Object.entries(routes)) {
     const files = Array.isArray(routeEntry) ? routeEntry : (routeEntry.files || []);
     const namespaces = routeEntry.namespaces || [];
-    const page = routeEntry.page || files[0];
-
-    // Check for uncovered imports
-    const warnings = checkRouteImports(routePath, page, files, rootDir);
-    allWarnings.push(...warnings);
 
     // Compute hash
     const computedHash = computeRouteHash(routePath, files, namespaces, rootDir);
     const existingEntry = currentDates[routePath];
 
-    if (!existingEntry || existingEntry.hash !== computedHash) {
+    if (rebaselineMode) {
+      // Rebaseline mode: rewrite hash, keep existing date intact!
+      const existingDate = existingEntry?.date || today;
+      newDates[routePath] = {
+        hash: computedHash,
+        date: existingDate,
+      };
+      changed.push({
+        path: routePath,
+        oldHash: existingEntry ? existingEntry.hash : null,
+        newHash: computedHash,
+        oldDate: existingEntry ? existingEntry.date : null,
+        newDate: existingDate,
+      });
+    } else if (!existingEntry || existingEntry.hash !== computedHash) {
       if (checkMode) {
         stale.push({
           path: routePath,
@@ -259,16 +258,28 @@ export function runSitemapStamp(options = {}) {
     }
   }
 
+  // Check mode validation
   if (checkMode) {
-    if (stale.length > 0) {
-      console.error('[sitemap] Stale sitemap paths found:');
-      for (const item of stale) {
-        if (item.orphan) {
-          console.error(`  - "${item.path || "''"}": orphaned route present in dates JSON but removed from route map`);
-        } else {
-          console.error(
-            `  - "${item.path || "''"}": current hash ${item.expectedHash} != stored ${item.storedHash || '(none)'}`
-          );
+    const hasWarnings = allWarnings.length > 0;
+    if (stale.length > 0 || hasWarnings) {
+      if (stale.length > 0) {
+        console.error('[sitemap] Stale sitemap paths found:');
+        for (const item of stale) {
+          if (item.orphan) {
+            console.error(
+              `  - "${item.path || "''"}": orphaned route present in dates JSON but removed from sitemap`
+            );
+          } else {
+            console.error(
+              `  - "${item.path || "''"}": current hash ${item.expectedHash} != stored ${item.storedHash || '(none)'}`
+            );
+          }
+        }
+      }
+      if (hasWarnings) {
+        console.error(`[sitemap] ${allWarnings.length} unresolvable namespace warning(s) found:`);
+        for (const w of allWarnings) {
+          console.error(`  - ${w.file}:${w.line} (${w.call})`);
         }
       }
       return { success: false, stale, upToDate, warnings: allWarnings, orphanKeys };
@@ -277,7 +288,7 @@ export function runSitemapStamp(options = {}) {
     return { success: true, stale: [], upToDate, warnings: allWarnings, orphanKeys: [] };
   }
 
-  // Stamp mode: write back file (orphaned routes not in routeKeys are automatically pruned)
+  // Stamp or Rebaseline mode: write back to dates JSON file
   fs.mkdirSync(path.dirname(datesPath), { recursive: true });
   fs.writeFileSync(datesPath, JSON.stringify(newDates, null, 2) + '\n', 'utf8');
 
@@ -285,10 +296,20 @@ export function runSitemapStamp(options = {}) {
     console.log(`[sitemap] Pruned ${orphanKeys.length} removed route(s): ${orphanKeys.join(', ')}`);
   }
 
+  if (rebaselineMode) {
+    console.log(`[sitemap:rebaseline] Rebaselined ${changed.length} path(s) preserving existing dates:`);
+    for (const item of changed) {
+      console.log(`  - "${item.path || "''"}": ${item.newDate} (hash: ${item.newHash.slice(0, 10)}...)`);
+    }
+    return { success: true, changed, upToDate: [], warnings: allWarnings, dates: newDates, pruned: orphanKeys };
+  }
+
   if (changed.length > 0) {
     console.log(`[sitemap] Updated ${changed.length} path(s) in ${path.relative(rootDir, datesPath)}:`);
     for (const item of changed) {
-      console.log(`  - "${item.path || "''"}": ${item.oldDate || '(new)'} -> ${item.newDate} (hash: ${item.newHash.slice(0, 10)}...)`);
+      console.log(
+        `  - "${item.path || "''"}": ${item.oldDate || '(new)'} -> ${item.newDate} (hash: ${item.newHash.slice(0, 10)}...)`
+      );
     }
   } else if (orphanKeys.length === 0) {
     console.log(`[sitemap] All ${upToDate.length} paths up to date; no changes written.`);
@@ -302,10 +323,23 @@ const isMainModule = process.argv[1] && fileURLToPath(import.meta.url) === path.
 if (isMainModule) {
   const args = process.argv.slice(2);
   const checkMode = args.includes('--check');
+  const rebaselineMode = args.includes('--rebaseline');
   const seedMode = args.includes('--seed');
+  const explainIdx = args.indexOf('--explain');
 
-  const result = runSitemapStamp({ checkMode, seedMode });
-  if (checkMode && !result.success) {
+  if (explainIdx !== -1) {
+    const routeToExplain = args[explainIdx + 1] !== undefined ? args[explainIdx + 1] : '';
+    explainRoute(routeToExplain);
+    process.exit(0);
+  }
+
+  try {
+    const result = runSitemapStamp({ checkMode, rebaselineMode, seedMode });
+    if (checkMode && !result.success) {
+      process.exit(1);
+    }
+  } catch (err) {
+    console.error(`[sitemap:error] ${err.message}`);
     process.exit(1);
   }
 }

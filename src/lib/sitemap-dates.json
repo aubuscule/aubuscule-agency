@@ -1,26 +1,26 @@
 {
   "": {
-    "hash": "ffe0b74c3cf357f4936cc71177038611369f3519de66be92314565f301179781",
+    "hash": "5a105efc22ca6985b79fef220af72b46b00a161980878bdd74ea7f518538df94",
     "date": "2026-10-22"
   },
   "/agency": {
-    "hash": "dae830a0b0584e2e47e37e7fe614f8cbca7ca3630628365e53116e3044208eee",
+    "hash": "ea24bbfba375e77a53d21a811cbd9890d954b364e37d0d1f60ddceede73d4af0",
     "date": "2026-10-24"
   },
   "/products": {
-    "hash": "d5658649532a80db7f824069f333387579ebb3331da66a8eecf063684a7cc61f",
+    "hash": "47809bdb376f77103174f8b679b49005b7404c4b3e9af9d4b683609acafeff59",
     "date": "2026-10-24"
   },
   "/products/remplate": {
-    "hash": "1e812c13fcfaba0a6a29089e8a4db88baeb78f895b0de469bdf9be8829bed8c0",
+    "hash": "a77f1bbb5f715c606678bb12dfb6266e66e75253c38cffc3a219f80653a35121",
     "date": "2026-10-21"
   },
   "/products/remplate/templates": {
-    "hash": "24c7b36da3acfd71ba55caa7c89bb98919b9d37ee0978f27f4f5714cf15b5813",
+    "hash": "6390b18d4c4d44c77a0a69aebed40117e1a14a7ee07a540bba4599f69f2d15c7",
     "date": "2026-10-21"
   },
   "/products/remplate/faq": {
-    "hash": "975dc22770f7b7a583b2f4ec9056b16b821637fa26a2ecc8781aae005cdda0fa",
+    "hash": "1b32a31a0f1cf5754a5444203aef11da32d118c6b5d274323de72c2b72683568",
     "date": "2026-10-21"
   },
   "/products/zones-tonales": {
@@ -28,11 +28,11 @@
     "date": "2026-10-21"
   },
   "/dev": {
-    "hash": "15d18f757e4260b7c9c4cf436f5aa75afc917e26fc89d7ffd78df7ef460ccb4a",
+    "hash": "926315e5712a6c869b0c490752e6233411345d4282ecfbe6cfad83afcbb88eb8",
     "date": "2026-10-24"
   },
   "/epk": {
-    "hash": "2ee584adbb08c667c7c0db6d4e9d0a31204870566ff87949801b973e8fc2befa",
+    "hash": "8f805d431ebae774dc1ce776421b71b882ed2017c650dee25d98720e53b012f7",
     "date": "2026-10-24"
   }
 }

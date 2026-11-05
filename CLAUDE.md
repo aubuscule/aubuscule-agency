@@ -11,7 +11,7 @@ npm run dev
 
 Build: `npm run build` · Start prod: `npm start`
 
-After changing page content, run `npm run sitemap:stamp` (verify with `npm run sitemap:check`; `node scripts/sitemap-stamp.mjs --seed` initializes dates from git). Shared chrome (`Footer.tsx`, `Nav.tsx`, and layouts) is excluded from sitemap hashing so chrome updates do not bump page dates.
+Route inputs, components, and i18n namespaces are derived automatically from code via the TypeScript compiler API (shared chrome `Footer.tsx`, `Nav.tsx`, root/locale layouts, and `globals.css` are excluded by policy). After editing page content or components, run `npm run sitemap:stamp` to update `src/lib/sitemap-dates.json` (audit with `node scripts/sitemap-stamp.mjs --explain <path>`). CI and pre-commit verify up-to-date hashes with `npm run sitemap:check`.
 
 ## Architecture
 
