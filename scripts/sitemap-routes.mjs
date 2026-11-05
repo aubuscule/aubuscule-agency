@@ -2,8 +2,8 @@
  * Sitemap Routes and Input Graph Derivation
  *
  * Automatically builds each route's input file set and next-intl namespaces
- * by transitively traversing TypeScript and CSS imports starting from each route's
- * page.tsx and route-specific layout.tsx under src/app/[locale]/<route>/.
+ * by transitively scanning imports starting from each route's page.tsx and
+ * route-specific layout.tsx under src/app/[locale]/<route>/.
  *
  * ============================================================================
  * EXCLUSION POLICY
@@ -16,27 +16,18 @@
  *   - src/app/globals.css                (Global CSS tokens and reset)
  *
  * Rationale:
- * Modifying global chrome (e.g. copyright year in footer, sitewide navigation
- * links, or global CSS reset) represents a chrome/theming update rather than a
+ * Modifying global chrome represents a chrome/theming update rather than a
  * content change to specific pages. Including shared chrome would artificially bump
  * lastmod dates across the entire site whenever any global component is touched.
- *
- * Note on src/lib/site.ts:
- * src/lib/site.ts is NOT in this exclusion list; it is included only for routes
- * whose own import graph transitively references it.
  * ============================================================================
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import ts from 'typescript';
 
 export const DEFAULT_ROOT = fileURLToPath(new URL('..', import.meta.url));
 
-/**
- * The single policy exclusion list for shared chrome.
- */
 export const SHARED_CHROME_EXCLUSIONS = [
   'src/components/shared/Footer.tsx',
   'src/components/shared/Nav.tsx',
@@ -52,82 +43,36 @@ export const I18N_MESSAGES = [
 ];
 
 /**
- * Creates or retrieves TypeScript compiler options and host for resolving modules.
- */
-export function createTsResolver(rootDir = DEFAULT_ROOT) {
-  const tsconfigPath = path.join(rootDir, 'tsconfig.json');
-  let compilerOptions = {
-    moduleResolution: ts.ModuleResolutionKind.Bundler,
-    target: ts.ScriptTarget.ES2017,
-    paths: {
-      '@/*': ['./src/*'],
-    },
-  };
-
-  if (fs.existsSync(tsconfigPath)) {
-    try {
-      const configFile = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
-      const parsed = ts.parseJsonConfigFileContent(configFile.config, ts.sys, rootDir);
-      compilerOptions = parsed.options;
-    } catch {
-      // Fallback to defaults if tsconfig cannot be parsed
-    }
-  }
-
-  const host = ts.createCompilerHost(compilerOptions);
-  return { compilerOptions, host };
-}
-
-/**
  * Resolves a module specifier to a relative file path in the workspace.
- * Uses the TypeScript compiler API for TS/JS/paths resolution,
- * and falls back to path candidate lookup for CSS/JSON/asset imports.
  */
-export function resolveModule(specifier, containingFile, rootDir = DEFAULT_ROOT, resolver = null) {
-  const { compilerOptions, host } = resolver || createTsResolver(rootDir);
-  const containingFullPath = path.resolve(rootDir, containingFile);
-
-  // 1. Try TypeScript compiler resolution
-  const tsResolved = ts.resolveModuleName(specifier, containingFullPath, compilerOptions, host);
-  if (tsResolved && tsResolved.resolvedModule) {
-    if (tsResolved.resolvedModule.isExternalLibraryImport) {
-      return null;
-    }
-    const resolvedFullPath = path.resolve(tsResolved.resolvedModule.resolvedFileName);
-    const rel = path.relative(rootDir, resolvedFullPath);
-    if (rel.startsWith('node_modules') || resolvedFullPath.includes(`${path.sep}node_modules${path.sep}`)) {
-      return null;
-    }
-    return rel;
-  }
-
-  // 2. Fallback for CSS, JSON, or non-TS files
+export function resolveModule(specifier, containingFile, rootDir = DEFAULT_ROOT) {
   let targetPath;
   if (specifier.startsWith('@/')) {
     targetPath = path.join(rootDir, 'src', specifier.slice(2));
   } else if (specifier.startsWith('.')) {
-    targetPath = path.resolve(path.dirname(containingFullPath), specifier);
+    const containingFull = path.resolve(rootDir, containingFile);
+    targetPath = path.resolve(path.dirname(containingFull), specifier);
   } else {
-    // External node_modules package
     return null;
   }
 
   const candidates = [
     targetPath,
-    targetPath + '.css',
-    targetPath + '.json',
     targetPath + '.tsx',
     targetPath + '.ts',
     targetPath + '.jsx',
     targetPath + '.js',
+    targetPath + '.css',
+    targetPath + '.json',
     path.join(targetPath, 'index.tsx'),
     path.join(targetPath, 'index.ts'),
+    path.join(targetPath, 'index.js'),
   ];
 
-  for (const candidate of candidates) {
-    if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
-      const rel = path.relative(rootDir, candidate);
-      if (!rel.startsWith('node_modules') && !candidate.includes(`${path.sep}node_modules${path.sep}`)) {
+  for (const cand of candidates) {
+    if (fs.existsSync(cand) && fs.statSync(cand).isFile()) {
+      const rel = path.relative(rootDir, cand).replace(/\\/g, '/');
+      if (!rel.startsWith('node_modules') && !rel.includes('/node_modules/')) {
         return rel;
       }
     }
@@ -137,126 +82,26 @@ export function resolveModule(specifier, containingFile, rootDir = DEFAULT_ROOT,
 }
 
 /**
- * Extracts next-intl namespace(s) from a call expression.
- * Handles string literal argument: useTranslations('x')
- * Handles object argument: getTranslations({ locale, namespace: 'x' })
- * Returns an array of top-level namespace string(s) or null if dynamic / non-literal.
+ * Extracts route paths from src/app/sitemap.ts.
  */
-export function extractNamespaceFromCall(callExpr) {
-  const arg0 = callExpr.arguments[0];
-  if (!arg0) return null;
-
-  // Case 1: useTranslations('namespace') or getTranslations('namespace')
-  if (ts.isStringLiteral(arg0)) {
-    return [arg0.text.split('.')[0]];
-  }
-
-  // Case 2: getTranslations({ locale, namespace: 'namespace' })
-  if (ts.isObjectLiteralExpression(arg0)) {
-    for (const prop of arg0.properties) {
-      if (
-        prop.name &&
-        (ts.isIdentifier(prop.name) || ts.isStringLiteral(prop.name)) &&
-        prop.name.text === 'namespace'
-      ) {
-        if (prop.initializer && ts.isStringLiteral(prop.initializer)) {
-          return [prop.initializer.text.split('.')[0]];
-        }
-      }
-    }
-  }
-
-  return null;
-}
-
-/**
- * Checks for an adjacent comment declaring sitemap namespaces:
- * // sitemap-namespace: a, b
- * or
- * /* sitemap-namespace: a, b * /
- */
-export function findAdjacentNamespaceComment(node, sourceFile) {
-  const text = sourceFile.getFullText();
-  const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart(sourceFile));
-  const lines = text.split('\n');
-
-  // Check previous line
-  if (line > 0) {
-    const prevLine = lines[line - 1];
-    const match = prevLine.match(/(?:\/\/|\/\*)\s*sitemap-namespace:\s*([^\r\n*]+)/);
-    if (match) {
-      return match[1].split(',').map((s) => s.trim().split('.')[0]).filter(Boolean);
-    }
-  }
-
-  // Check current line
-  const curLine = lines[line];
-  const matchCur = curLine.match(/(?:\/\/|\/\*)\s*sitemap-namespace:\s*([^\r\n*]+)/);
-  if (matchCur) {
-    return matchCur[1].split(',').map((s) => s.trim().split('.')[0]).filter(Boolean);
-  }
-
-  // Check leading comment ranges
-  const commentRanges = ts.getLeadingCommentRanges(text, node.getFullStart()) || [];
-  for (const r of commentRanges) {
-    const comment = text.slice(r.pos, r.end);
-    const m = comment.match(/sitemap-namespace:\s*([^\r\n*]+)/);
-    if (m) {
-      return m[1].split(',').map((s) => s.trim().split('.')[0]).filter(Boolean);
-    }
-  }
-
-  return null;
-}
-
-/**
- * Extracts route paths from src/app/sitemap.ts using the TypeScript AST.
- */
-export function extractSitemapPaths(sitemapFile, rootDir = DEFAULT_ROOT) {
+export function extractSitemapPaths(sitemapFile = 'src/app/sitemap.ts', rootDir = DEFAULT_ROOT) {
   const fullPath = path.resolve(rootDir, sitemapFile);
   if (!fs.existsSync(fullPath)) {
     throw new Error(`Sitemap file not found: ${fullPath}`);
   }
 
   const content = fs.readFileSync(fullPath, 'utf8');
-  const sf = ts.createSourceFile(fullPath, content, ts.ScriptTarget.Latest, true);
-
-  let extractedPaths = null;
-
-  function visit(node) {
-    if (
-      ts.isVariableDeclaration(node) &&
-      (node.name.getText(sf) === 'sitemapPaths' || node.name.getText(sf) === 'paths')
-    ) {
-      let init = node.initializer;
-      if (init && ts.isAsExpression(init)) {
-        init = init.expression;
-      }
-      if (init && ts.isArrayLiteralExpression(init)) {
-        extractedPaths = [];
-        for (const el of init.elements) {
-          if (ts.isStringLiteral(el)) {
-            extractedPaths.push(el.text);
-          } else if (
-            ts.isArrayLiteralExpression(el) &&
-            el.elements[0] &&
-            ts.isStringLiteral(el.elements[0])
-          ) {
-            extractedPaths.push(el.elements[0].text);
-          }
-        }
-      }
-    }
-    ts.forEachChild(node, visit);
-  }
-
-  visit(sf);
-
-  if (!extractedPaths) {
+  const match = content.match(/(?:sitemapPaths|paths)\s*=\s*\[([\s\S]*?)\]/);
+  if (!match) {
     throw new Error(`Could not find "sitemapPaths" or "paths" array in ${fullPath}`);
   }
 
-  return extractedPaths;
+  const paths = [];
+  const strMatches = match[1].matchAll(/['"`](.*?)['"`]/g);
+  for (const m of strMatches) {
+    paths.push(m[1]);
+  }
+  return paths;
 }
 
 /**
@@ -282,27 +127,63 @@ export function findRouteLayouts(routePath, rootDir = DEFAULT_ROOT) {
   return layouts;
 }
 
+function handleIntlCall(fn, arg, lineIndex, lineText, lines, file, routePath, namespaces, warnings) {
+  // Case 1: String literal 'namespace'
+  const strMatch = arg.match(/^['"]([^'"]+)['"]/);
+  if (strMatch) {
+    namespaces.add(strMatch[1].split('.')[0]);
+    return;
+  }
+
+  // Case 2: Object { namespace: 'namespace' }
+  const objMatch = arg.match(/namespace\s*:\s*['"]([^'"]+)['"]/);
+  if (objMatch) {
+    namespaces.add(objMatch[1].split('.')[0]);
+    return;
+  }
+
+  // Case 3: Check adjacent comment // sitemap-namespace: customNs
+  const checkLines = [lineText];
+  if (lineIndex > 0) checkLines.unshift(lines[lineIndex - 1]);
+  for (const cl of checkLines) {
+    const commentMatch = cl.match(/(?:\/\/|\/\*)\s*sitemap-namespace:\s*([^\r\n*]+)/);
+    if (commentMatch) {
+      const declared = commentMatch[1].split(',').map((s) => s.trim().split('.')[0]).filter(Boolean);
+      for (const ns of declared) namespaces.add(ns);
+      return;
+    }
+  }
+
+  // Unresolvable: record warning
+  const warning = {
+    file,
+    line: lineIndex + 1,
+    call: fn,
+    route: routePath,
+    message: `Non-literal or unresolvable namespace in ${fn}() at ${file}:${lineIndex + 1}`,
+  };
+  warnings.push(warning);
+  console.warn(
+    `[sitemap:warn] ${file}:${lineIndex + 1} - Dynamic/non-literal namespace in ${fn}() call for route "${routePath}". Declare with comment: // sitemap-namespace: <namespaces>`
+  );
+}
+
 /**
  * Derives the complete input file set and i18n namespaces for a single route.
  */
 export function deriveRouteInputs(routePath, options = {}) {
   const rootDir = options.rootDir || DEFAULT_ROOT;
-  const resolver = options.resolver || createTsResolver(rootDir);
   const exclusions = new Set((options.exclusions || SHARED_CHROME_EXCLUSIONS).map((f) => path.normalize(f)));
 
-  // 1. Determine page file
   const pageRel = routePath === ''
     ? 'src/app/[locale]/page.tsx'
     : path.posix.join('src/app/[locale]', routePath.slice(1), 'page.tsx');
   const pageFull = path.resolve(rootDir, pageRel);
 
   if (!fs.existsSync(pageFull)) {
-    throw new Error(
-      `Route "${routePath}" in sitemap.ts has no matching page.tsx at ${pageRel}`
-    );
+    throw new Error(`Route "${routePath}" in sitemap.ts has no matching page.tsx at ${pageRel}`);
   }
 
-  // 2. Identify start files (page.tsx + route-specific layout.tsx)
   const startFiles = [pageRel];
   const routeLayouts = findRouteLayouts(routePath, rootDir);
   for (const layout of routeLayouts) {
@@ -311,7 +192,6 @@ export function deriveRouteInputs(routePath, options = {}) {
     }
   }
 
-  // 3. Transitive graph traversal
   const visited = new Set();
   const queue = [...startFiles];
   const graphFiles = [];
@@ -324,13 +204,10 @@ export function deriveRouteInputs(routePath, options = {}) {
     if (visited.has(curNorm)) continue;
     visited.add(curNorm);
 
-    if (exclusions.has(curNorm)) {
-      continue;
-    }
+    if (exclusions.has(curNorm)) continue;
 
     graphFiles.push(cur);
 
-    // CSS and JSON files don't export/import further local TS files
     if (cur.endsWith('.css') || cur.endsWith('.json')) {
       continue;
     }
@@ -339,122 +216,75 @@ export function deriveRouteInputs(routePath, options = {}) {
     if (!fs.existsSync(fullPath)) continue;
 
     const content = fs.readFileSync(fullPath, 'utf8');
-    const sf = ts.createSourceFile(cur, content, ts.ScriptTarget.Latest, true);
 
-    // Track next-intl imports and aliases in this source file
-    const translationFunctions = new Set(['useTranslations', 'getTranslations']);
-    const namespaceAliases = new Set();
+    // 1. Scan for next-intl translation function names and aliases
+    const intlFns = new Set(['useTranslations', 'getTranslations']);
+    const intlNamespaces = new Set();
 
-    for (const statement of sf.statements) {
-      if (
-        ts.isImportDeclaration(statement) &&
-        statement.moduleSpecifier &&
-        ts.isStringLiteral(statement.moduleSpecifier)
-      ) {
-        const mod = statement.moduleSpecifier.text;
-        if (mod === 'next-intl' || mod === 'next-intl/server' || mod.startsWith('next-intl/')) {
-          const clause = statement.importClause;
-          if (clause && clause.namedBindings) {
-            if (ts.isNamedImports(clause.namedBindings)) {
-              for (const el of clause.namedBindings.elements) {
-                const orig = el.propertyName ? el.propertyName.text : el.name.text;
-                if (orig === 'useTranslations' || orig === 'getTranslations') {
-                  translationFunctions.add(el.name.text);
-                }
-              }
-            } else if (ts.isNamespaceImport(clause.namedBindings)) {
-              namespaceAliases.add(clause.namedBindings.name.text);
+    const namedIntlRegex = /import\s*\{([^}]+)\}\s*from\s*['"]next-intl(?:\/[^'"]+)?['"]/g;
+    for (const match of content.matchAll(namedIntlRegex)) {
+      for (const part of match[1].split(',')) {
+        const trimmed = part.trim();
+        const aliasMatch = trimmed.match(/^(\w+)\s+as\s+(\w+)$/);
+        if (aliasMatch) {
+          if (aliasMatch[1] === 'useTranslations' || aliasMatch[1] === 'getTranslations') {
+            intlFns.add(aliasMatch[2]);
+          }
+        } else if (trimmed === 'useTranslations' || trimmed === 'getTranslations') {
+          intlFns.add(trimmed);
+        }
+      }
+    }
+
+    const nsIntlRegex = /import\s*\*\s*as\s+(\w+)\s+from\s*['"]next-intl(?:\/[^'"]+)?['"]/g;
+    for (const match of content.matchAll(nsIntlRegex)) {
+      intlNamespaces.add(match[1]);
+    }
+
+    // 2. Scan lines for next-intl calls & namespaces
+    const lines = content.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      for (const fn of intlFns) {
+        const callRegex = new RegExp(`\\b${fn}\\s*\\(([^)]*)\\)`, 'g');
+        for (const callMatch of line.matchAll(callRegex)) {
+          const arg = callMatch[1].trim();
+          handleIntlCall(fn, arg, i, line, lines, cur, routePath, namespaces, warnings);
+        }
+      }
+      for (const ns of intlNamespaces) {
+        const callRegex = new RegExp(`\\b${ns}\\.(useTranslations|getTranslations)\\s*\\(([^)]*)\\)`, 'g');
+        for (const callMatch of line.matchAll(callRegex)) {
+          const fn = `${ns}.${callMatch[1]}`;
+          const arg = callMatch[2].trim();
+          handleIntlCall(fn, arg, i, line, lines, cur, routePath, namespaces, warnings);
+        }
+      }
+    }
+
+    // 3. Scan for imported and exported module paths
+    const importRegexes = [
+      /import\s+['"]([^'"]+)['"]/g,
+      /import\s+(?:type\s+)?[\w*\s{},]+\s+from\s+['"]([^'"]+)['"]/g,
+      /export\s+(?:type\s+)?[\w*\s{},]+\s+from\s+['"]([^'"]+)['"]/g,
+      /import\s*\(\s*['"]([^'"]+)['"]\s*\)/g,
+    ];
+    for (const re of importRegexes) {
+      for (const match of content.matchAll(re)) {
+        const spec = match[1];
+        if (spec) {
+          const resolved = resolveModule(spec, cur, rootDir);
+          if (resolved) {
+            const resolvedNorm = path.normalize(resolved);
+            if (!exclusions.has(resolvedNorm) && !visited.has(resolvedNorm)) {
+              queue.push(resolved);
             }
           }
         }
       }
     }
-
-    function isNextIntlCall(node) {
-      if (!ts.isCallExpression(node)) return null;
-      if (ts.isIdentifier(node.expression)) {
-        if (translationFunctions.has(node.expression.text)) {
-          return node.expression.text;
-        }
-      } else if (ts.isPropertyAccessExpression(node.expression)) {
-        const prop = node.expression.name.text;
-        if (ts.isIdentifier(node.expression.expression)) {
-          const obj = node.expression.expression.text;
-          if (
-            (namespaceAliases.has(obj) || obj.toLowerCase().includes('intl')) &&
-            (prop === 'useTranslations' || prop === 'getTranslations')
-          ) {
-            return `${obj}.${prop}`;
-          }
-        }
-      }
-      return null;
-    }
-
-    function visit(node) {
-      // Detect next-intl calls
-      const callName = isNextIntlCall(node);
-      if (callName) {
-        const extracted = extractNamespaceFromCall(node);
-        if (extracted) {
-          for (const ns of extracted) namespaces.add(ns);
-        } else {
-          const override = findAdjacentNamespaceComment(node, sf);
-          if (override) {
-            for (const ns of override) namespaces.add(ns);
-          } else {
-            const { line } = sf.getLineAndCharacterOfPosition(node.getStart(sf));
-            const warning = {
-              file: cur,
-              line: line + 1,
-              call: callName,
-              route: routePath,
-              message: `Non-literal or unresolvable namespace in ${callName}() at ${cur}:${line + 1}`,
-            };
-            warnings.push(warning);
-            console.warn(
-              `[sitemap:warn] ${cur}:${line + 1} - Dynamic/non-literal namespace in ${callName}() call for route "${routePath}". Declare with comment: // sitemap-namespace: <namespaces>`
-            );
-          }
-        }
-      }
-
-      // Collect imports & dynamic imports
-      let spec = null;
-      if (ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier)) {
-        spec = node.moduleSpecifier.text;
-      } else if (
-        ts.isExportDeclaration(node) &&
-        node.moduleSpecifier &&
-        ts.isStringLiteral(node.moduleSpecifier)
-      ) {
-        spec = node.moduleSpecifier.text;
-      } else if (
-        ts.isCallExpression(node) &&
-        node.expression.kind === ts.SyntaxKind.ImportKeyword &&
-        node.arguments[0] &&
-        ts.isStringLiteral(node.arguments[0])
-      ) {
-        spec = node.arguments[0].text;
-      }
-
-      if (spec) {
-        const resolved = resolveModule(spec, cur, rootDir, resolver);
-        if (resolved) {
-          const resolvedNorm = path.normalize(resolved);
-          if (!exclusions.has(resolvedNorm) && !visited.has(resolvedNorm)) {
-            queue.push(resolved);
-          }
-        }
-      }
-
-      ts.forEachChild(node, visit);
-    }
-
-    visit(sf);
   }
 
-  // Add i18n message files to input files
   const existingI18n = I18N_MESSAGES.filter((f) => fs.existsSync(path.resolve(rootDir, f)));
   const allFiles = Array.from(new Set([...graphFiles, ...existingI18n])).sort();
   const sortedNamespaces = Array.from(namespaces).sort();
@@ -475,7 +305,6 @@ export function deriveSitemapRoutes(options = {}) {
   const rootDir = options.rootDir || DEFAULT_ROOT;
   const sitemapFile = options.sitemapFile || 'src/app/sitemap.ts';
   const paths = options.paths || extractSitemapPaths(sitemapFile, rootDir);
-  const resolver = createTsResolver(rootDir);
 
   const routes = {};
   const allWarnings = [];
@@ -484,7 +313,6 @@ export function deriveSitemapRoutes(options = {}) {
     const entry = deriveRouteInputs(routePath, {
       ...options,
       rootDir,
-      resolver,
     });
     routes[routePath] = {
       page: entry.page,
@@ -497,7 +325,6 @@ export function deriveSitemapRoutes(options = {}) {
   return { routes, warnings: allWarnings };
 }
 
-// Compute once for default export
 let _defaultRoutes = null;
 export function getSitemapRoutes() {
   if (!_defaultRoutes) {

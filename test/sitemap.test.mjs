@@ -751,3 +751,10 @@ test('CLI: node scripts/sitemap-stamp.mjs --check exits with code 0 when clean',
   );
   assert.match(stdout, /All 9 sitemap paths are up to date/);
 });
+
+test('simplicity: sitemap-routes.mjs does not import typescript compiler API', () => {
+  const code = fs.readFileSync(path.join(REPO_ROOT, 'scripts', 'sitemap-routes.mjs'), 'utf8');
+  assert.ok(!code.includes("from 'typescript'"), 'sitemap-routes.mjs must not import typescript');
+  assert.ok(!code.includes('require("typescript")') && !code.includes("require('typescript')"), 'sitemap-routes.mjs must not require typescript');
+});
+
