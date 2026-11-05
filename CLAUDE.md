@@ -11,6 +11,8 @@ npm run dev
 
 Build: `npm run build` · Start prod: `npm start`
 
+After changing page content, run `npm run sitemap:stamp`.
+
 ## Architecture
 
 Next.js 16 app (App Router, TypeScript). Source in `src/`.
