@@ -11,6 +11,8 @@ npm run dev
 
 Build: `npm run build` · Start prod: `npm start`
 
+Route inputs, components, and i18n namespaces are derived automatically from code via the TypeScript compiler API (shared chrome `Footer.tsx`, `Nav.tsx`, root/locale layouts, and `globals.css` are excluded by policy). After editing page content or components, run `npm run sitemap:stamp` to update `src/lib/sitemap-dates.json` (audit with `node scripts/sitemap-stamp.mjs --explain <path>`). Run `npm run sitemap:check` manually to verify up-to-date hashes (it is not yet wired into CI; a follow-up PR with workflow scope can add it).
+
 ## Architecture
 
 Next.js 16 app (App Router, TypeScript). Source in `src/`.

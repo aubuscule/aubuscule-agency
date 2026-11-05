@@ -1,0 +1,38 @@
+{
+  "": {
+    "hash": "5a105efc22ca6985b79fef220af72b46b00a161980878bdd74ea7f518538df94",
+    "date": "2026-10-22"
+  },
+  "/agency": {
+    "hash": "ea24bbfba375e77a53d21a811cbd9890d954b364e37d0d1f60ddceede73d4af0",
+    "date": "2026-10-24"
+  },
+  "/products": {
+    "hash": "47809bdb376f77103174f8b679b49005b7404c4b3e9af9d4b683609acafeff59",
+    "date": "2026-10-24"
+  },
+  "/products/remplate": {
+    "hash": "a77f1bbb5f715c606678bb12dfb6266e66e75253c38cffc3a219f80653a35121",
+    "date": "2026-10-21"
+  },
+  "/products/remplate/templates": {
+    "hash": "6390b18d4c4d44c77a0a69aebed40117e1a14a7ee07a540bba4599f69f2d15c7",
+    "date": "2026-10-21"
+  },
+  "/products/remplate/faq": {
+    "hash": "1b32a31a0f1cf5754a5444203aef11da32d118c6b5d274323de72c2b72683568",
+    "date": "2026-10-21"
+  },
+  "/products/zones-tonales": {
+    "hash": "1ebad524dbe56c04992f5eee460dad886d78d0f99a487c04964bede8a765251b",
+    "date": "2026-10-21"
+  },
+  "/dev": {
+    "hash": "926315e5712a6c869b0c490752e6233411345d4282ecfbe6cfad83afcbb88eb8",
+    "date": "2026-10-24"
+  },
+  "/epk": {
+    "hash": "8f805d431ebae774dc1ce776421b71b882ed2017c650dee25d98720e53b012f7",
+    "date": "2026-10-24"
+  }
+}
