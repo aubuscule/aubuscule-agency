@@ -98,6 +98,35 @@ test('unchanged: hashing is deterministic and check mode passes when up to date'
   assert.equal(stampResult.changed.length, 0, 'No paths should be changed');
 });
 
+test('shared chrome exclusion: editing Footer.tsx alone does not change any route hash', () => {
+  const footerPath = 'src/components/shared/Footer.tsx';
+  const originalFooter = fs.readFileSync(footerPath, 'utf8');
+
+  // Capture baseline hashes for all 9 routes
+  const baselineHashes = {};
+  for (const [routePath, route] of Object.entries(sitemapRoutes)) {
+    baselineHashes[routePath] = computeRouteHash(routePath, route.files, route.namespaces);
+  }
+
+  try {
+    // Mutate Footer.tsx
+    fs.writeFileSync(footerPath, originalFooter + '\n// temporary test edit to footer\n', 'utf8');
+
+    // Recompute hashes for all 9 routes
+    for (const [routePath, route] of Object.entries(sitemapRoutes)) {
+      const newHash = computeRouteHash(routePath, route.files, route.namespaces);
+      assert.equal(
+        newHash,
+        baselineHashes[routePath],
+        `Route ${routePath || "''"} hash must not change when Footer.tsx is edited`
+      );
+    }
+  } finally {
+    // Restore Footer.tsx
+    fs.writeFileSync(footerPath, originalFooter, 'utf8');
+  }
+});
+
 test('changed: component modification changes route hash and updates date on stamp', () => {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sitemap-change-test-'));
   try {

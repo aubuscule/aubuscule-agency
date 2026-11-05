@@ -11,7 +11,7 @@ npm run dev
 
 Build: `npm run build` · Start prod: `npm start`
 
-After changing page content, run `npm run sitemap:stamp`.
+After changing page content, run `npm run sitemap:stamp`. Shared chrome (`Footer.tsx`, `Nav.tsx`, and layouts) is excluded from sitemap hashing so chrome updates do not bump page dates.
 
 ## Architecture
 

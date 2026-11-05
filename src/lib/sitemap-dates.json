@@ -1,38 +1,38 @@
 {
   "": {
-    "hash": "2abaebc6189853742a436016d5b192aafd6f73413a934e7e847f8586b36fcae2",
-    "date": "2026-10-24"
+    "hash": "ffe0b74c3cf357f4936cc71177038611369f3519de66be92314565f301179781",
+    "date": "2026-10-22"
   },
   "/agency": {
-    "hash": "dfa391cabb8dc2042ecdc4d416c8cf427051e1f5e7941b198596c3e6fd9782fd",
+    "hash": "dae830a0b0584e2e47e37e7fe614f8cbca7ca3630628365e53116e3044208eee",
     "date": "2026-10-24"
   },
   "/products": {
-    "hash": "61538348e4f1921316de0b94200d9dede2a6ef2311f47bd676d1739ee1c76d40",
+    "hash": "d5658649532a80db7f824069f333387579ebb3331da66a8eecf063684a7cc61f",
     "date": "2026-10-24"
   },
   "/products/remplate": {
-    "hash": "35a6dcf007ee1921f19c1eeab2e5c0d727a5a071ccac7ab73e0c55859907a147",
-    "date": "2026-10-24"
+    "hash": "1e812c13fcfaba0a6a29089e8a4db88baeb78f895b0de469bdf9be8829bed8c0",
+    "date": "2026-10-21"
   },
   "/products/remplate/templates": {
-    "hash": "aad429777424e82c83f2c91239233311725bab352a53ba7eb5a5bc3682e0d082",
-    "date": "2026-10-24"
+    "hash": "24c7b36da3acfd71ba55caa7c89bb98919b9d37ee0978f27f4f5714cf15b5813",
+    "date": "2026-10-21"
   },
   "/products/remplate/faq": {
-    "hash": "9d277a91c5f7261b7fd7eb7819b8b0f6cceff1aea7254ca442bb34afedfa6333",
-    "date": "2026-10-24"
+    "hash": "975dc22770f7b7a583b2f4ec9056b16b821637fa26a2ecc8781aae005cdda0fa",
+    "date": "2026-10-21"
   },
   "/products/zones-tonales": {
-    "hash": "61efe10bf3d47fd2618f1ecde1d37173d1aa9e4866fd29deb7cb1eed176699b4",
-    "date": "2026-10-24"
+    "hash": "1ebad524dbe56c04992f5eee460dad886d78d0f99a487c04964bede8a765251b",
+    "date": "2026-10-21"
   },
   "/dev": {
-    "hash": "00e47b7d63cd7e6de7b454e9f5b58c5a6a6befc20d8428610d6af10b2a92ebc6",
+    "hash": "15d18f757e4260b7c9c4cf436f5aa75afc917e26fc89d7ffd78df7ef460ccb4a",
     "date": "2026-10-24"
   },
   "/epk": {
-    "hash": "a02ba46e0e9cdd1f2c4e82bf61a2ab85fdab82fdfd4ad7a21a14dfafe69612b9",
+    "hash": "2ee584adbb08c667c7c0db6d4e9d0a31204870566ff87949801b973e8fc2befa",
     "date": "2026-10-24"
   }
 }
