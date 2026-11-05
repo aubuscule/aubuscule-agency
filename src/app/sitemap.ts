@@ -23,10 +23,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return sitemapPaths.flatMap((path) => {
     const entry = dates[path]
-    const lastModified = entry ? new Date(entry.date) : new Date()
+    const lastModified = entry?.date ? new Date(entry.date) : undefined
     return locales.map((locale) => ({
       url: `${SITE_URL}/${locale}${path}`,
-      lastModified,
+      ...(lastModified ? { lastModified } : {}),
       changeFrequency: 'monthly' as const,
       priority: path === '' ? 1.0 : 0.9,
       alternates: {

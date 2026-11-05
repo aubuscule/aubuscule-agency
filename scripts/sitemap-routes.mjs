@@ -32,9 +32,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-export const DEFAULT_ROOT = path.resolve(__dirname, '..');
+export const DEFAULT_ROOT = fileURLToPath(new URL('..', import.meta.url));
 
 /**
  * The single policy exclusion list for shared chrome.
@@ -139,7 +137,7 @@ export function resolveModule(specifier, containingFile, rootDir = DEFAULT_ROOT,
 }
 
 /**
- * Extracts next-intl namespace(s) from a call expression (useTranslations / getTranslations).
+ * Extracts next-intl namespace(s) from a call expression.
  * Handles string literal argument: useTranslations('x')
  * Handles object argument: getTranslations({ locale, namespace: 'x' })
  * Returns an array of top-level namespace string(s) or null if dynamic / non-literal.
@@ -343,32 +341,80 @@ export function deriveRouteInputs(routePath, options = {}) {
     const content = fs.readFileSync(fullPath, 'utf8');
     const sf = ts.createSourceFile(cur, content, ts.ScriptTarget.Latest, true);
 
+    // Track next-intl imports and aliases in this source file
+    const translationFunctions = new Set(['useTranslations', 'getTranslations']);
+    const namespaceAliases = new Set();
+
+    for (const statement of sf.statements) {
+      if (
+        ts.isImportDeclaration(statement) &&
+        statement.moduleSpecifier &&
+        ts.isStringLiteral(statement.moduleSpecifier)
+      ) {
+        const mod = statement.moduleSpecifier.text;
+        if (mod === 'next-intl' || mod === 'next-intl/server' || mod.startsWith('next-intl/')) {
+          const clause = statement.importClause;
+          if (clause && clause.namedBindings) {
+            if (ts.isNamedImports(clause.namedBindings)) {
+              for (const el of clause.namedBindings.elements) {
+                const orig = el.propertyName ? el.propertyName.text : el.name.text;
+                if (orig === 'useTranslations' || orig === 'getTranslations') {
+                  translationFunctions.add(el.name.text);
+                }
+              }
+            } else if (ts.isNamespaceImport(clause.namedBindings)) {
+              namespaceAliases.add(clause.namedBindings.name.text);
+            }
+          }
+        }
+      }
+    }
+
+    function isNextIntlCall(node) {
+      if (!ts.isCallExpression(node)) return null;
+      if (ts.isIdentifier(node.expression)) {
+        if (translationFunctions.has(node.expression.text)) {
+          return node.expression.text;
+        }
+      } else if (ts.isPropertyAccessExpression(node.expression)) {
+        const prop = node.expression.name.text;
+        if (ts.isIdentifier(node.expression.expression)) {
+          const obj = node.expression.expression.text;
+          if (
+            (namespaceAliases.has(obj) || obj.toLowerCase().includes('intl')) &&
+            (prop === 'useTranslations' || prop === 'getTranslations')
+          ) {
+            return `${obj}.${prop}`;
+          }
+        }
+      }
+      return null;
+    }
+
     function visit(node) {
       // Detect next-intl calls
-      if (ts.isCallExpression(node)) {
-        const fnText = node.expression.getText(sf);
-        if (fnText === 'useTranslations' || fnText === 'getTranslations') {
-          const extracted = extractNamespaceFromCall(node);
-          if (extracted) {
-            for (const ns of extracted) namespaces.add(ns);
+      const callName = isNextIntlCall(node);
+      if (callName) {
+        const extracted = extractNamespaceFromCall(node);
+        if (extracted) {
+          for (const ns of extracted) namespaces.add(ns);
+        } else {
+          const override = findAdjacentNamespaceComment(node, sf);
+          if (override) {
+            for (const ns of override) namespaces.add(ns);
           } else {
-            const override = findAdjacentNamespaceComment(node, sf);
-            if (override) {
-              for (const ns of override) namespaces.add(ns);
-            } else {
-              const { line } = sf.getLineAndCharacterOfPosition(node.getStart(sf));
-              const warning = {
-                file: cur,
-                line: line + 1,
-                call: fnText,
-                route: routePath,
-                message: `Non-literal or unresolvable namespace in ${fnText}() at ${cur}:${line + 1}`,
-              };
-              warnings.push(warning);
-              console.warn(
-                `[sitemap:warn] ${cur}:${line + 1} - Dynamic/non-literal namespace in ${fnText}() call for route "${routePath}". Declare with comment: // sitemap-namespace: <namespaces>`
-              );
-            }
+            const { line } = sf.getLineAndCharacterOfPosition(node.getStart(sf));
+            const warning = {
+              file: cur,
+              line: line + 1,
+              call: callName,
+              route: routePath,
+              message: `Non-literal or unresolvable namespace in ${callName}() at ${cur}:${line + 1}`,
+            };
+            warnings.push(warning);
+            console.warn(
+              `[sitemap:warn] ${cur}:${line + 1} - Dynamic/non-literal namespace in ${callName}() call for route "${routePath}". Declare with comment: // sitemap-namespace: <namespaces>`
+            );
           }
         }
       }
@@ -451,32 +497,15 @@ export function deriveSitemapRoutes(options = {}) {
   return { routes, warnings: allWarnings };
 }
 
-// Default export / cached instance
-export const sitemapRoutes = new Proxy({}, {
-  get(target, prop) {
-    if (typeof prop === 'string') {
-      const { routes } = deriveSitemapRoutes();
-      return routes[prop];
-    }
-    return Reflect.get(target, prop);
-  },
-  ownKeys() {
-    const { routes } = deriveSitemapRoutes();
-    return Reflect.ownKeys(routes);
-  },
-  getOwnPropertyDescriptor(target, prop) {
-    const { routes } = deriveSitemapRoutes();
-    if (prop in routes) {
-      return {
-        value: routes[prop],
-        writable: true,
-        enumerable: true,
-        configurable: true,
-      };
-    }
-    return undefined;
-  },
-});
+// Compute once for default export
+let _defaultRoutes = null;
+export function getSitemapRoutes() {
+  if (!_defaultRoutes) {
+    _defaultRoutes = deriveSitemapRoutes().routes;
+  }
+  return _defaultRoutes;
+}
 
+export const sitemapRoutes = getSitemapRoutes();
 export const routes = sitemapRoutes;
 export default sitemapRoutes;

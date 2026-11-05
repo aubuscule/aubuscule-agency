@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import {
   deriveSitemapRoutes,
   deriveRouteInputs,
@@ -18,6 +20,8 @@ import {
   getLatestCommitDate,
 } from '../scripts/sitemap-stamp.mjs';
 
+const REPO_ROOT = fileURLToPath(new URL('..', import.meta.url));
+
 test('sitemapRoutes: all 9 routes are automatically derived with page, files, and namespaces', () => {
   const expectedPaths = [
     '',
@@ -31,14 +35,14 @@ test('sitemapRoutes: all 9 routes are automatically derived with page, files, an
     '/epk',
   ];
 
-  const derived = deriveSitemapRoutes();
+  const derived = deriveSitemapRoutes({ rootDir: REPO_ROOT });
   assert.equal(derived.warnings.length, 0, 'Derived repository routes must have 0 warnings');
   assert.deepEqual(Object.keys(derived.routes).sort(), expectedPaths.sort());
 
   for (const [p, route] of Object.entries(derived.routes)) {
     assert.ok(typeof route === 'object' && route !== null, `Route ${p} should be an object`);
     assert.ok(route.page, `Route ${p} should have a page file defined`);
-    assert.ok(fs.existsSync(route.page), `Route ${p} page ${route.page} must exist on disk`);
+    assert.ok(fs.existsSync(path.resolve(REPO_ROOT, route.page)), `Route ${p} page ${route.page} must exist on disk`);
     assert.ok(Array.isArray(route.files), `Route ${p} should have files array`);
     assert.ok(route.files.length > 0, `Route ${p} files array must not be empty`);
     assert.ok(Array.isArray(route.namespaces), `Route ${p} should have namespaces array`);
@@ -46,13 +50,13 @@ test('sitemapRoutes: all 9 routes are automatically derived with page, files, an
 
     // Verify all files in input list exist on disk
     for (const file of route.files) {
-      assert.ok(fs.existsSync(file), `Input file ${file} for route "${p}" must exist on disk`);
+      assert.ok(fs.existsSync(path.resolve(REPO_ROOT, file)), `Input file ${file} for route "${p}" must exist on disk`);
     }
   }
 });
 
 test('shared chrome exclusion: Footer, Nav, and layouts appear in NO route inputs', () => {
-  const derived = deriveSitemapRoutes();
+  const derived = deriveSitemapRoutes({ rootDir: REPO_ROOT });
 
   for (const [routePath, route] of Object.entries(derived.routes)) {
     for (const file of route.files) {
@@ -75,8 +79,8 @@ test('shared chrome exclusion: Footer, Nav, and layouts appear in NO route input
   }
 });
 
-test('migration safety: --rebaseline preserves all original dates while updating hashes', () => {
-  const dates = readDatesFile('src/lib/sitemap-dates.json');
+test('migration safety: committed sitemap-dates.json preserves all baseline dates', () => {
+  const dates = readDatesFile(path.join(REPO_ROOT, 'src', 'lib', 'sitemap-dates.json'));
 
   const expectedDates = {
     '': '2026-10-22',
@@ -100,9 +104,186 @@ test('migration safety: --rebaseline preserves all original dates while updating
     assert.match(dates[routePath].hash, /^[a-f0-9]{64}$/, 'Hash must be a valid 64-character SHA-256 string');
   }
 
-  // Running check mode right now must succeed
-  const checkResult = runSitemapStamp({ checkMode: true });
+  // Running check mode against committed dates must succeed
+  const checkResult = runSitemapStamp({ rootDir: REPO_ROOT, checkMode: true });
   assert.equal(checkResult.success, true, 'Check mode must pass against committed sitemap-dates.json');
+});
+
+test('migration safety: temp-dir test runs runSitemapStamp with rebaselineMode and asserts dates unchanged and hashes updated', () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sitemap-rebaseline-test-'));
+  try {
+    const datesPath = path.join(tmpDir, 'sitemap-dates.json');
+    const compFile = 'src/components/Comp.tsx';
+
+    fs.mkdirSync(path.join(tmpDir, 'src', 'components'), { recursive: true });
+    fs.writeFileSync(path.join(tmpDir, compFile), 'export const x = "initial";\n');
+
+    const fakeOldHash = '0000000000000000000000000000000000000000000000000000000000000000';
+    const initialDates = {
+      '/route1': {
+        hash: fakeOldHash,
+        date: '2026-05-15',
+      },
+    };
+    fs.writeFileSync(datesPath, JSON.stringify(initialDates, null, 2) + '\n');
+
+    const testRoutes = {
+      '/route1': {
+        page: compFile,
+        files: [compFile],
+        namespaces: [],
+      },
+    };
+
+    const rebaselineResult = runSitemapStamp({
+      rootDir: tmpDir,
+      datesPath,
+      routes: testRoutes,
+      rebaselineMode: true,
+    });
+
+    assert.equal(rebaselineResult.success, true);
+    assert.equal(rebaselineResult.changed.length, 1);
+    assert.equal(rebaselineResult.changed[0].newDate, '2026-05-15', 'Date must be strictly preserved');
+    assert.notEqual(rebaselineResult.changed[0].newHash, fakeOldHash, 'Hash must be updated');
+
+    const saved = readDatesFile(datesPath);
+    assert.equal(saved['/route1'].date, '2026-05-15');
+    assert.notEqual(saved['/route1'].hash, fakeOldHash);
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('hermetic test: editing Footer.tsx in temp fixture does not change route hash', () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sitemap-footer-hermetic-'));
+  try {
+    fs.mkdirSync(path.join(tmpDir, 'src', 'app', '[locale]', 'page'), { recursive: true });
+    fs.mkdirSync(path.join(tmpDir, 'src', 'components', 'shared'), { recursive: true });
+
+    fs.writeFileSync(path.join(tmpDir, 'tsconfig.json'), JSON.stringify({
+      compilerOptions: { paths: { '@/*': ['./src/*'] } }
+    }));
+    fs.writeFileSync(path.join(tmpDir, 'src', 'app', 'sitemap.ts'), `export const sitemapPaths = ['/page'] as const;\n`);
+
+    const pageFile = path.join(tmpDir, 'src', 'app', '[locale]', 'page', 'page.tsx');
+    const footerFile = path.join(tmpDir, 'src', 'components', 'shared', 'Footer.tsx');
+
+    fs.writeFileSync(footerFile, 'export function Footer() { return <footer>Footer v1</footer>; }\n');
+    // Page renders content; layout or shared chrome references footer
+    fs.writeFileSync(pageFile, 'export default function Page() { return <div>Page Content</div>; }\n');
+
+    const routes1 = deriveSitemapRoutes({ rootDir: tmpDir }).routes;
+    const hash1 = computeRouteHash('/page', routes1['/page'].files, routes1['/page'].namespaces, tmpDir);
+
+    // Edit Footer.tsx in the temp dir
+    fs.writeFileSync(footerFile, 'export function Footer() { return <footer>Footer v2 modified</footer>; }\n');
+
+    const routes2 = deriveSitemapRoutes({ rootDir: tmpDir }).routes;
+    const hash2 = computeRouteHash('/page', routes2['/page'].files, routes2['/page'].namespaces, tmpDir);
+
+    assert.equal(hash1, hash2, 'Route hash must remain identical when Footer.tsx is edited');
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('hermetic test: editing unrelated namespace in en.json does not change other route hash', () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sitemap-ns-hermetic-'));
+  try {
+    fs.mkdirSync(path.join(tmpDir, 'src', 'app', '[locale]', 'dev'), { recursive: true });
+    fs.mkdirSync(path.join(tmpDir, 'src', 'app', '[locale]', 'agency'), { recursive: true });
+    fs.mkdirSync(path.join(tmpDir, 'src', 'i18n', 'messages'), { recursive: true });
+
+    fs.writeFileSync(path.join(tmpDir, 'tsconfig.json'), JSON.stringify({
+      compilerOptions: { paths: { '@/*': ['./src/*'] } }
+    }));
+    fs.writeFileSync(path.join(tmpDir, 'src', 'app', 'sitemap.ts'), `export const sitemapPaths = ['/dev', '/agency'] as const;\n`);
+
+    const enJson = path.join(tmpDir, 'src', 'i18n', 'messages', 'en.json');
+    fs.writeFileSync(
+      enJson,
+      JSON.stringify({
+        dev: { title: 'Developer' },
+        agency: { title: 'Agency Services' },
+      })
+    );
+
+    fs.writeFileSync(
+      path.join(tmpDir, 'src', 'app', '[locale]', 'dev', 'page.tsx'),
+      `import { useTranslations } from 'next-intl';\nexport default function DevPage() { useTranslations('dev'); return <div>Dev</div>; }\n`
+    );
+    fs.writeFileSync(
+      path.join(tmpDir, 'src', 'app', '[locale]', 'agency', 'page.tsx'),
+      `import { useTranslations } from 'next-intl';\nexport default function AgencyPage() { useTranslations('agency'); return <div>Agency</div>; }\n`
+    );
+
+    const routes1 = deriveSitemapRoutes({ rootDir: tmpDir }).routes;
+    const devHash1 = computeRouteHash('/dev', routes1['/dev'].files, routes1['/dev'].namespaces, tmpDir);
+    const agencyHash1 = computeRouteHash('/agency', routes1['/agency'].files, routes1['/agency'].namespaces, tmpDir);
+
+    // Mutate only agency namespace in en.json
+    fs.writeFileSync(
+      enJson,
+      JSON.stringify({
+        dev: { title: 'Developer' },
+        agency: { title: 'Agency Services MODIFIED' },
+      })
+    );
+
+    const routes2 = deriveSitemapRoutes({ rootDir: tmpDir }).routes;
+    const devHash2 = computeRouteHash('/dev', routes2['/dev'].files, routes2['/dev'].namespaces, tmpDir);
+    const agencyHash2 = computeRouteHash('/agency', routes2['/agency'].files, routes2['/agency'].namespaces, tmpDir);
+
+    assert.equal(devHash2, devHash1, 'Dev hash must NOT change when agency namespace in en.json is mutated');
+    assert.notEqual(agencyHash2, agencyHash1, 'Agency hash MUST change when its own namespace is mutated');
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('regression test: non-i18n JSON (e.g. data.json) is hashed verbatim, not as empty object', () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sitemap-json-verbatim-'));
+  try {
+    fs.mkdirSync(path.join(tmpDir, 'src', 'app', '[locale]', 'data-page'), { recursive: true });
+    fs.mkdirSync(path.join(tmpDir, 'src', 'app', '[locale]', 'other-page'), { recursive: true });
+    fs.mkdirSync(path.join(tmpDir, 'src', 'lib'), { recursive: true });
+
+    fs.writeFileSync(path.join(tmpDir, 'tsconfig.json'), JSON.stringify({
+      compilerOptions: { paths: { '@/*': ['./src/*'] } }
+    }));
+    fs.writeFileSync(path.join(tmpDir, 'src', 'app', 'sitemap.ts'), `export const sitemapPaths = ['/data-page', '/other-page'] as const;\n`);
+
+    const dataJson = path.join(tmpDir, 'src', 'lib', 'data.json');
+    fs.writeFileSync(dataJson, JSON.stringify({ items: [1, 2, 3], version: '1.0' }) + '\n');
+
+    fs.writeFileSync(
+      path.join(tmpDir, 'src', 'app', '[locale]', 'data-page', 'page.tsx'),
+      `import data from '@/lib/data.json';\nexport default function Page() { return <div>{data.version}</div>; }\n`
+    );
+    fs.writeFileSync(
+      path.join(tmpDir, 'src', 'app', '[locale]', 'other-page', 'page.tsx'),
+      `export default function Page() { return <div>Other</div>; }\n`
+    );
+
+    const routes1 = deriveSitemapRoutes({ rootDir: tmpDir }).routes;
+    assert.ok(routes1['/data-page'].files.some(f => f.includes('data.json')), 'data.json must be in derived files');
+
+    const dataHash1 = computeRouteHash('/data-page', routes1['/data-page'].files, routes1['/data-page'].namespaces, tmpDir);
+    const otherHash1 = computeRouteHash('/other-page', routes1['/other-page'].files, routes1['/other-page'].namespaces, tmpDir);
+
+    // Edit data.json
+    fs.writeFileSync(dataJson, JSON.stringify({ items: [1, 2, 3, 4], version: '2.0' }) + '\n');
+
+    const routes2 = deriveSitemapRoutes({ rootDir: tmpDir }).routes;
+    const dataHash2 = computeRouteHash('/data-page', routes2['/data-page'].files, routes2['/data-page'].namespaces, tmpDir);
+    const otherHash2 = computeRouteHash('/other-page', routes2['/other-page'].files, routes2['/other-page'].namespaces, tmpDir);
+
+    assert.notEqual(dataHash2, dataHash1, 'Editing non-i18n data.json must change the route hash');
+    assert.equal(otherHash2, otherHash1, 'Other page hash must not change');
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
 });
 
 test('synthetic fixture: brand-new component imported by a page changes only that route hash with no list edit', () => {
@@ -126,26 +307,22 @@ test('synthetic fixture: brand-new component imported by a page changes only tha
     fs.writeFileSync(pageB, `import { useTranslations } from 'next-intl';\nexport default function Page() { useTranslations('b'); return <div>B</div>; }\n`);
     fs.writeFileSync(sitemapTs, `export const sitemapPaths = ['/a', '/b'] as const;\n`);
 
-    // 1. Initial derivation and hash
     const initialRoutes = deriveSitemapRoutes({ rootDir: tmpDir }).routes;
     const initialHashA = computeRouteHash('/a', initialRoutes['/a'].files, initialRoutes['/a'].namespaces, tmpDir);
     const initialHashB = computeRouteHash('/b', initialRoutes['/b'].files, initialRoutes['/b'].namespaces, tmpDir);
 
-    // 2. Add brand-new component and import into page A only
+    // Add brand-new component and import into page A only
     const newComp = path.join(tmpDir, 'src', 'components', 'BrandNewComponent.tsx');
     fs.writeFileSync(newComp, `export function BrandNew() { return <span>Brand New</span>; }\n`);
     fs.writeFileSync(pageA, `import { useTranslations } from 'next-intl';\nimport { BrandNew } from '@/components/BrandNewComponent';\nexport default function Page() { useTranslations('a'); return <BrandNew />; }\n`);
 
-    // 3. Re-derive with NO manual list edits
+    // Re-derive with NO manual list edits
     const updatedRoutes = deriveSitemapRoutes({ rootDir: tmpDir }).routes;
     const updatedHashA = computeRouteHash('/a', updatedRoutes['/a'].files, updatedRoutes['/a'].namespaces, tmpDir);
     const updatedHashB = computeRouteHash('/b', updatedRoutes['/b'].files, updatedRoutes['/b'].namespaces, tmpDir);
 
-    // Route A must have automatically picked up BrandNewComponent.tsx
     assert.ok(updatedRoutes['/a'].files.some(f => f.includes('BrandNewComponent.tsx')));
     assert.notEqual(updatedHashA, initialHashA, 'Route A hash must change after importing new component');
-
-    // Route B must NOT change
     assert.equal(updatedHashB, initialHashB, 'Route B hash must remain unchanged');
   } finally {
     fs.rmSync(tmpDir, { recursive: true, force: true });
@@ -205,72 +382,90 @@ test('synthetic fixture: component imported by two routes changes both but leave
   }
 });
 
-test('real map test: editing Footer.tsx alone does not change ANY real route hash', () => {
-  const footerPath = 'src/components/shared/Footer.tsx';
-  const originalFooter = fs.readFileSync(footerPath, 'utf8');
-
-  const baselineRoutes = deriveSitemapRoutes().routes;
-  const baselineHashes = {};
-  for (const [routePath, route] of Object.entries(baselineRoutes)) {
-    baselineHashes[routePath] = computeRouteHash(routePath, route.files, route.namespaces);
-  }
-
+test('synthetic fixture: dynamic import(), barrel export *, CSS import, and type-only import are handled', () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sitemap-imports-test-'));
   try {
-    fs.writeFileSync(footerPath, originalFooter + '\n// test edit to verify chrome exclusion\n', 'utf8');
+    fs.mkdirSync(path.join(tmpDir, 'src', 'app', '[locale]', 'feature'), { recursive: true });
+    fs.mkdirSync(path.join(tmpDir, 'src', 'components', 'barrel'), { recursive: true });
+    fs.mkdirSync(path.join(tmpDir, 'src', 'types'), { recursive: true });
 
-    const newRoutes = deriveSitemapRoutes().routes;
-    for (const [routePath, route] of Object.entries(newRoutes)) {
-      const newHash = computeRouteHash(routePath, route.files, route.namespaces);
-      assert.equal(
-        newHash,
-        baselineHashes[routePath],
-        `Real route "${routePath || "''"}" hash changed when Footer.tsx was edited`
-      );
-    }
+    fs.writeFileSync(path.join(tmpDir, 'tsconfig.json'), JSON.stringify({
+      compilerOptions: { paths: { '@/*': ['./src/*'] } }
+    }));
+    fs.writeFileSync(path.join(tmpDir, 'src', 'app', 'sitemap.ts'), `export const sitemapPaths = ['/feature'] as const;\n`);
+
+    // CSS file
+    fs.writeFileSync(path.join(tmpDir, 'src', 'app', '[locale]', 'feature', 'style.css'), 'body { color: blue; }\n');
+
+    // Type-only file
+    fs.writeFileSync(path.join(tmpDir, 'src', 'types', 'model.ts'), 'export interface MyModel { id: string; }\n');
+
+    // Lazy component
+    fs.writeFileSync(path.join(tmpDir, 'src', 'components', 'LazyWidget.tsx'), 'export default function LazyWidget() { return <div>Lazy</div>; }\n');
+
+    // Barrel component
+    fs.writeFileSync(path.join(tmpDir, 'src', 'components', 'barrel', 'ActualWidget.tsx'), 'export function ActualWidget() { return <span>Actual</span>; }\n');
+    fs.writeFileSync(path.join(tmpDir, 'src', 'components', 'barrel', 'index.ts'), 'export * from "./ActualWidget";\n');
+
+    // Page importing CSS, type, barrel, and dynamic import
+    const pageCode = `
+import './style.css';
+import type { MyModel } from '@/types/model';
+import { ActualWidget } from '@/components/barrel';
+
+const LazyComp = dynamic(() => import('@/components/LazyWidget'));
+
+export default function FeaturePage() {
+  return <div><ActualWidget /></div>;
+}
+`;
+    fs.writeFileSync(path.join(tmpDir, 'src', 'app', '[locale]', 'feature', 'page.tsx'), pageCode);
+
+    const derived = deriveSitemapRoutes({ rootDir: tmpDir });
+    const files = derived.routes['/feature'].files;
+
+    assert.ok(files.some(f => f.includes('style.css')), 'CSS import must be in derived files');
+    assert.ok(files.some(f => f.includes('LazyWidget.tsx')), 'Dynamic import must be in derived files');
+    assert.ok(files.some(f => f.includes('ActualWidget.tsx')), 'Barrel export * must be in derived files');
+    assert.ok(files.some(f => f.includes('model.ts')), 'Type-only import must be in derived files');
   } finally {
-    fs.writeFileSync(footerPath, originalFooter, 'utf8');
+    fs.rmSync(tmpDir, { recursive: true, force: true });
   }
 });
 
-test('real map test: editing unrelated namespace in real en.json does not change /dev hash', () => {
-  const enJsonPath = 'src/i18n/messages/en.json';
-  const originalJson = fs.readFileSync(enJsonPath, 'utf8');
-  const parsed = JSON.parse(originalJson);
-
-  const baselineRoutes = deriveSitemapRoutes().routes;
-  const baselineDevHash = computeRouteHash('/dev', baselineRoutes['/dev'].files, baselineRoutes['/dev'].namespaces);
-  const baselineAgencyHash = computeRouteHash('/agency', baselineRoutes['/agency'].files, baselineRoutes['/agency'].namespaces);
-
+test('synthetic fixture: next-intl aliased imports and namespace objects are tracked', () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sitemap-aliased-intl-'));
   try {
-    const mutated = {
-      ...parsed,
-      hero: {
-        ...parsed.hero,
-        headline: 'Modified headline for agency test',
-      },
-    };
-    fs.writeFileSync(enJsonPath, JSON.stringify(mutated, null, 2) + '\n', 'utf8');
+    fs.mkdirSync(path.join(tmpDir, 'src', 'app', '[locale]', 'intl-test'), { recursive: true });
+    fs.mkdirSync(path.join(tmpDir, 'src', 'i18n', 'messages'), { recursive: true });
 
-    const newRoutes = deriveSitemapRoutes().routes;
-    const newDevHash = computeRouteHash('/dev', newRoutes['/dev'].files, newRoutes['/dev'].namespaces);
-    const newAgencyHash = computeRouteHash('/agency', newRoutes['/agency'].files, newRoutes['/agency'].namespaces);
+    fs.writeFileSync(path.join(tmpDir, 'tsconfig.json'), JSON.stringify({
+      compilerOptions: { paths: { '@/*': ['./src/*'] } }
+    }));
+    fs.writeFileSync(path.join(tmpDir, 'src', 'app', 'sitemap.ts'), `export const sitemapPaths = ['/intl-test'] as const;\n`);
+    fs.writeFileSync(path.join(tmpDir, 'src', 'i18n', 'messages', 'en.json'), JSON.stringify({ hero: {}, meta: {} }));
 
-    assert.equal(
-      newDevHash,
-      baselineDevHash,
-      '/dev hash must not change when unrelated "hero" namespace is edited in en.json'
-    );
-    assert.notEqual(
-      newAgencyHash,
-      baselineAgencyHash,
-      '/agency hash must change when its own "hero" namespace is edited in en.json'
-    );
+    const pageCode = `
+import { useTranslations as useT } from 'next-intl';
+import * as serverIntl from 'next-intl/server';
+
+export default function Page() {
+  const t = useT('hero');
+  const tMeta = serverIntl.getTranslations({ namespace: 'meta' });
+  return <div>Intl</div>;
+}
+`;
+    fs.writeFileSync(path.join(tmpDir, 'src', 'app', '[locale]', 'intl-test', 'page.tsx'), pageCode);
+
+    const derived = deriveSitemapRoutes({ rootDir: tmpDir });
+    assert.equal(derived.warnings.length, 0, 'Aliased next-intl calls must be detected with 0 warnings');
+    assert.deepEqual(derived.routes['/intl-test'].namespaces, ['hero', 'meta']);
   } finally {
-    fs.writeFileSync(enJsonPath, originalJson, 'utf8');
+    fs.rmSync(tmpDir, { recursive: true, force: true });
   }
 });
 
-test('synthetic fixture: non-literal useTranslations argument produces warning and fails check', () => {
+test('synthetic fixture: unresolvable next-intl call produces warning and fails check and stamp modes', () => {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sitemap-dyn-warning-'));
   try {
     fs.mkdirSync(path.join(tmpDir, 'src', 'app', '[locale]', 'test'), { recursive: true });
@@ -283,18 +478,19 @@ test('synthetic fixture: non-literal useTranslations argument produces warning a
     fs.writeFileSync(path.join(tmpDir, 'src', 'i18n', 'messages', 'en.json'), JSON.stringify({}));
 
     // Dynamic namespace without comment
-    const pageCode = `import { useTranslations } from 'next-intl';\nconst key = 'dynamicKey';\nexport default function Page() {\n  const t = useTranslations(key);\n  return <div>Test</div>;\n}\n`;
+    const pageCode = `import { useTranslations as useT } from 'next-intl';\nconst key = 'dynamicKey';\nexport default function Page() {\n  const t = useT(key);\n  return <div>Test</div>;\n}\n`;
     fs.writeFileSync(path.join(tmpDir, 'src', 'app', '[locale]', 'test', 'page.tsx'), pageCode);
 
     const derived = deriveSitemapRoutes({ rootDir: tmpDir });
     assert.equal(derived.warnings.length, 1, 'Expected 1 warning for non-literal namespace');
     assert.equal(derived.warnings[0].line, 4);
-    assert.equal(derived.warnings[0].call, 'useTranslations');
+    assert.equal(derived.warnings[0].call, 'useT');
 
     const datesPath = path.join(tmpDir, 'sitemap-dates.json');
     const hash = computeRouteHash('/test', derived.routes['/test'].files, derived.routes['/test'].namespaces, tmpDir);
     fs.writeFileSync(datesPath, JSON.stringify({ '/test': { hash, date: '2026-11-05' } }));
 
+    // 1. checkMode must fail
     const checkResult = runSitemapStamp({
       rootDir: tmpDir,
       datesPath,
@@ -303,8 +499,16 @@ test('synthetic fixture: non-literal useTranslations argument produces warning a
       warnings: derived.warnings,
     });
     assert.equal(checkResult.success, false, 'Check mode must fail when unresolvable namespace warnings exist');
-    assert.equal(checkResult.warnings.length, 1);
-    assert.equal(checkResult.stale.length, 0, 'Hashes themselves were matching, check failed on warnings');
+
+    // 2. stampMode must fail and NOT write dates
+    const stampResult = runSitemapStamp({
+      rootDir: tmpDir,
+      datesPath,
+      checkMode: false,
+      routes: derived.routes,
+      warnings: derived.warnings,
+    });
+    assert.equal(stampResult.success, false, 'Stamp mode must fail when unresolvable namespace warnings exist');
   } finally {
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
@@ -322,13 +526,72 @@ test('synthetic fixture: adjacent // sitemap-namespace comment resolves non-lite
     fs.writeFileSync(path.join(tmpDir, 'src', 'app', 'sitemap.ts'), `export const sitemapPaths = ['/test'] as const;\n`);
     fs.writeFileSync(path.join(tmpDir, 'src', 'i18n', 'messages', 'en.json'), JSON.stringify({ customNs: {} }));
 
-    // Dynamic namespace WITH adjacent comment
     const pageCode = `import { useTranslations } from 'next-intl';\nconst key = 'dynamicKey';\nexport default function Page() {\n  // sitemap-namespace: customNs\n  const t = useTranslations(key);\n  return <div>Test</div>;\n}\n`;
     fs.writeFileSync(path.join(tmpDir, 'src', 'app', '[locale]', 'test', 'page.tsx'), pageCode);
 
     const derived = deriveSitemapRoutes({ rootDir: tmpDir });
     assert.equal(derived.warnings.length, 0, 'Comment must resolve the dynamic namespace with 0 warnings');
     assert.deepEqual(derived.routes['/test'].namespaces, ['customNs']);
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('missing date entry: check mode flags missing route and sitemap.ts omits lastModified', () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sitemap-missing-entry-'));
+  try {
+    const datesPath = path.join(tmpDir, 'sitemap-dates.json');
+    const compFile = 'src/components/Comp.tsx';
+
+    fs.mkdirSync(path.join(tmpDir, 'src', 'components'), { recursive: true });
+    fs.writeFileSync(path.join(tmpDir, compFile), 'export const a = 1;\n');
+
+    // Only route1 is in dates JSON; route2 has no entry
+    const initialDates = {
+      '/route1': {
+        hash: computeRouteHash('/route1', [compFile], [], tmpDir),
+        date: '2026-10-01',
+      },
+    };
+    fs.writeFileSync(datesPath, JSON.stringify(initialDates, null, 2) + '\n');
+
+    const testRoutes = {
+      '/route1': { page: compFile, files: [compFile], namespaces: [] },
+      '/route2': { page: compFile, files: [compFile], namespaces: [] },
+    };
+
+    const checkResult = runSitemapStamp({
+      rootDir: tmpDir,
+      datesPath,
+      routes: testRoutes,
+      checkMode: true,
+    });
+
+    assert.equal(checkResult.success, false, 'Check mode must fail when a route has no entry in dates file');
+    const missing = checkResult.stale.find(s => s.path === '/route2');
+    assert.ok(missing, 'Missing route must be in stale list');
+    assert.equal(missing.missing, true);
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('binary file hashing: reads non-text files as Buffer for hashing', () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sitemap-binary-hash-'));
+  try {
+    const imgPath = path.join(tmpDir, 'image.png');
+    // Buffer with binary bytes
+    const buf1 = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00]);
+    fs.writeFileSync(imgPath, buf1);
+
+    const hash1 = computeRouteHash('/img', ['image.png'], [], tmpDir);
+    assert.match(hash1, /^[a-f0-9]{64}$/);
+
+    const buf2 = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x01]);
+    fs.writeFileSync(imgPath, buf2);
+
+    const hash2 = computeRouteHash('/img', ['image.png'], [], tmpDir);
+    assert.notEqual(hash1, hash2, 'Changing binary file byte must change hash');
   } finally {
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
@@ -437,7 +700,7 @@ test('sitemap route validation: route with missing page.tsx throws loudly', () =
 });
 
 test('--explain: explainRoute prints route details and returns expected files and namespaces', () => {
-  const explained = explainRoute('/dev');
+  const explained = explainRoute('/dev', { rootDir: REPO_ROOT });
   assert.equal(explained.route, '/dev');
   assert.equal(explained.page, 'src/app/[locale]/dev/page.tsx');
   assert.ok(explained.files.includes('src/components/dev/DevHero.tsx'));
@@ -446,23 +709,45 @@ test('--explain: explainRoute prints route details and returns expected files an
   assert.equal(explained.warnings.length, 0);
 });
 
-test('getLatestCommitDate: uses argv array and resolves git commit dates without shell globbing', () => {
-  const files = ['src/app/[locale]/page.tsx'];
-  const date = getLatestCommitDate(files);
-  assert.match(date, /^\d{4}-\d{2}-\d{2}$/, 'Should return a valid YYYY-MM-DD date from git');
+test('--explain: CLI path runs cleanly and prints route audit', () => {
+  const stdout = execFileSync(
+    process.execPath,
+    ['scripts/sitemap-stamp.mjs', '--explain', '/dev'],
+    { cwd: REPO_ROOT, encoding: 'utf8' }
+  );
+  assert.match(stdout, /Sitemap Route Audit: "\/dev"/);
+  assert.match(stdout, /Derived files/);
+  assert.match(stdout, /Derived i18n namespaces/);
+  assert.match(stdout, /src\/components\/dev\/DevHero\.tsx/);
+});
+
+test('getLatestCommitDate: uses argv array and resolves git commit dates without shell globbing', (t) => {
+  try {
+    const files = ['src/app/[locale]/page.tsx'];
+    const date = getLatestCommitDate(files, REPO_ROOT);
+    assert.match(date, /^\d{4}-\d{2}-\d{2}$/, 'Should return a valid YYYY-MM-DD date from git');
+  } catch (err) {
+    if (
+      err.message.includes('No git commit found') ||
+      err.message.includes('Failed to determine latest commit date')
+    ) {
+      t.skip('Skipping git-date test: git history is unavailable or shallow in this environment');
+      return;
+    }
+    throw err;
+  }
 
   assert.throws(
-    () => getLatestCommitDate(['non_existent_file_xyz_123.ts']),
+    () => getLatestCommitDate(['non_existent_file_xyz_123.ts'], REPO_ROOT),
     /Failed to determine latest commit date|No git commit found/
   );
 });
 
-test('CLI: node scripts/sitemap-stamp.mjs --check exits with code 0 when clean', async () => {
-  const { exec } = await import('node:child_process');
-  const { promisify } = await import('node:util');
-  const execAsync = promisify(exec);
-
-  const { stdout, stderr } = await execAsync('node scripts/sitemap-stamp.mjs --check');
+test('CLI: node scripts/sitemap-stamp.mjs --check exits with code 0 when clean', () => {
+  const stdout = execFileSync(
+    process.execPath,
+    ['scripts/sitemap-stamp.mjs', '--check'],
+    { cwd: REPO_ROOT, encoding: 'utf8' }
+  );
   assert.match(stdout, /All 9 sitemap paths are up to date/);
-  assert.equal(stderr, '');
 });

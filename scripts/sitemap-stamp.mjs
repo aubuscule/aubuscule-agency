@@ -11,7 +11,6 @@
  *   npm run sitemap:stamp                Recomputes hashes and stamps today's date if changed (prunes removed routes)
  *   npm run sitemap:check                Verifies hashes match committed dates; exits non-zero if stale, orphaned, or warning
  *   node scripts/sitemap-stamp.mjs --rebaseline  Migration mode: rewrites hashes WITHOUT changing existing dates
- *   node scripts/sitemap-stamp.mjs --seed        Initializes dates from git commit history
  *   node scripts/sitemap-stamp.mjs --explain <path>  Audits derived files and namespaces for a route
  */
 
@@ -25,16 +24,31 @@ import {
   deriveRouteInputs,
   findRouteLayouts,
   DEFAULT_ROOT,
-  SHARED_CHROME_EXCLUSIONS,
+  I18N_MESSAGES,
 } from './sitemap-routes.mjs';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const DEFAULT_DATES_FILE = path.join(DEFAULT_ROOT, 'src', 'lib', 'sitemap-dates.json');
+
+const TEXT_EXTENSIONS = new Set([
+  '.ts', '.tsx', '.js', '.jsx', '.mjs', '.cjs',
+  '.css', '.json', '.svg', '.html', '.md', '.txt'
+]);
+
+function isTextFile(filePath) {
+  const ext = path.extname(filePath).toLowerCase();
+  return TEXT_EXTENSIONS.has(ext);
+}
+
+function isI18nMessageFile(relFile) {
+  const norm = relFile.replace(/\\/g, '/');
+  return norm.startsWith('src/i18n/messages/') && norm.endsWith('.json');
+}
 
 /**
  * Computes a deterministic SHA-256 hash for a given route.
- * For JSON files, only hashes the specified top-level namespaces.
+ * For i18n JSON files, only hashes the specified top-level namespaces.
+ * Other JSON and text files are hashed verbatim.
+ * Non-text / binary files are hashed as Buffer.
  */
 export function computeRouteHash(routePath, inputFiles, namespaces = [], rootDir = DEFAULT_ROOT) {
   const hash = crypto.createHash('sha256');
@@ -46,7 +60,7 @@ export function computeRouteHash(routePath, inputFiles, namespaces = [], rootDir
       throw new Error(`Input file not found for route "${routePath}": ${relFile}`);
     }
 
-    if (relFile.endsWith('.json')) {
+    if (isI18nMessageFile(relFile)) {
       const raw = fs.readFileSync(fullPath, 'utf8');
       const data = JSON.parse(raw);
       // Extract only the namespaces relevant to this route
@@ -58,11 +72,17 @@ export function computeRouteHash(routePath, inputFiles, namespaces = [], rootDir
         }
       }
       hash.update(`${relFile}:${JSON.stringify(filtered)}\n`);
-    } else {
+    } else if (isTextFile(fullPath)) {
       const raw = fs.readFileSync(fullPath, 'utf8');
       // Normalize line endings for cross-platform stability
       const normalized = raw.replace(/\r\n/g, '\n');
       hash.update(`${relFile}:${normalized}\n`);
+    } else {
+      // Non-text / binary files (images etc.) read as Buffer
+      const buf = fs.readFileSync(fullPath);
+      hash.update(`${relFile}:`);
+      hash.update(buf);
+      hash.update('\n');
     }
   }
 
@@ -164,7 +184,6 @@ export function runSitemapStamp(options = {}) {
   const datesPath = options.datesPath || DEFAULT_DATES_FILE;
   const checkMode = Boolean(options.checkMode);
   const rebaselineMode = Boolean(options.rebaselineMode);
-  const seedMode = Boolean(options.seedMode);
   const today = options.customDate || new Date().toISOString().split('T')[0];
 
   // 1. Read dates file (throws on corrupt JSON)
@@ -184,6 +203,15 @@ export function runSitemapStamp(options = {}) {
     allWarnings = derived.warnings;
   }
 
+  // If stamping (not rebaselining) and there are unresolved namespace warnings: fail loudly
+  if (!checkMode && !rebaselineMode && allWarnings.length > 0) {
+    console.error(`[sitemap:error] Cannot stamp dates: ${allWarnings.length} unresolved namespace warning(s) found:`);
+    for (const w of allWarnings) {
+      console.error(`  - ${w.file}:${w.line} (${w.call})`);
+    }
+    return { success: false, stale: [], upToDate: [], warnings: allWarnings, changed: [], pruned: [] };
+  }
+
   const stale = [];
   const upToDate = [];
   const changed = [];
@@ -197,6 +225,7 @@ export function runSitemapStamp(options = {}) {
       stale.push({
         path: orphan,
         orphan: true,
+        missing: false,
         expectedHash: null,
         storedHash: currentDates[orphan]?.hash || null,
         storedDate: currentDates[orphan]?.date || null,
@@ -231,15 +260,13 @@ export function runSitemapStamp(options = {}) {
         stale.push({
           path: routePath,
           orphan: false,
+          missing: !existingEntry,
           expectedHash: computedHash,
           storedHash: existingEntry ? existingEntry.hash : null,
           storedDate: existingEntry ? existingEntry.date : null,
         });
       } else {
-        let dateToSet = today;
-        if (seedMode) {
-          dateToSet = options.customDate || getLatestCommitDate(files, rootDir);
-        }
+        const dateToSet = today;
         newDates[routePath] = {
           hash: computedHash,
           date: dateToSet,
@@ -268,6 +295,10 @@ export function runSitemapStamp(options = {}) {
           if (item.orphan) {
             console.error(
               `  - "${item.path || "''"}": orphaned route present in dates JSON but removed from sitemap`
+            );
+          } else if (item.missing) {
+            console.error(
+              `  - "${item.path || "''"}": missing entry in sitemap-dates.json (expected hash ${item.expectedHash})`
             );
           } else {
             console.error(
@@ -324,7 +355,6 @@ if (isMainModule) {
   const args = process.argv.slice(2);
   const checkMode = args.includes('--check');
   const rebaselineMode = args.includes('--rebaseline');
-  const seedMode = args.includes('--seed');
   const explainIdx = args.indexOf('--explain');
 
   if (explainIdx !== -1) {
@@ -334,8 +364,8 @@ if (isMainModule) {
   }
 
   try {
-    const result = runSitemapStamp({ checkMode, rebaselineMode, seedMode });
-    if (checkMode && !result.success) {
+    const result = runSitemapStamp({ checkMode, rebaselineMode });
+    if (!result.success) {
       process.exit(1);
     }
   } catch (err) {
