@@ -8,13 +8,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // the Workers build has no git checkout. Bump a path's date when its content changes.
   const paths: [string, string][] = [
     ['', '2026-09-08'],
-    ['/agency', '2026-06-30'],
-    ['/products', '2026-10-21'],
+    ['/agency', '2026-10-24'],
+    ['/products', '2026-10-24'],
     ['/products/remplate', '2026-10-21'],
     ['/products/remplate/templates', '2026-10-21'],
     ['/products/remplate/faq', '2026-10-21'],
     ['/products/zones-tonales', '2026-10-21'],
-    ['/dev', '2026-10-22'],
+    ['/dev', '2026-10-24'],
     ['/epk', '2026-10-24'],
   ]
 
