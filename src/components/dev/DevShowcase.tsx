@@ -80,32 +80,30 @@ function RemplateVisual() {
   )
 }
 
-function TourPlannerVisual() {
+function DetourVisual() {
   return (
     <svg width="240" height="130" viewBox="0 0 240 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      {/* Background Geo Grid */}
-      <line x1="20" y1="35" x2="220" y2="35" stroke="var(--hairline)" strokeWidth="0.6" strokeDasharray="4 4" />
-      <line x1="20" y1="65" x2="220" y2="65" stroke="var(--hairline)" strokeWidth="0.6" strokeDasharray="4 4" />
-      <line x1="20" y1="95" x2="220" y2="95" stroke="var(--hairline)" strokeWidth="0.6" strokeDasharray="4 4" />
-      {/* 50km Radius Buffer Zone */}
-      <path d="M45,75 Q90,30 145,55 T205,80" stroke="var(--accent)" strokeWidth="24" strokeOpacity="0.12" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      {/* Outer Exclusion Zone Ring */}
-      <circle cx="145" cy="55" r="32" stroke="var(--accent)" strokeWidth="1" strokeDasharray="3 3" strokeOpacity="0.4" />
-      <circle cx="145" cy="55" r="16" stroke="var(--ink-mute)" strokeWidth="1" strokeDasharray="2 2" strokeOpacity="0.4" fill="color-mix(in srgb, var(--surface) 40%, transparent)" />
-      {/* Polyline Route */}
-      <path d="M45,75 Q90,30 145,55 T205,80" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      {/* Waypoint 1 (Brussels) */}
-      <circle cx="45" cy="75" r="5" fill="var(--surface)" stroke="var(--accent)" strokeWidth="2" />
-      <text x="45" y="93" fill="var(--ink-soft)" fontSize="7" fontFamily="var(--font-jetbrains-mono)" textAnchor="middle">Départ</text>
-      {/* Waypoint 2 (Stage) */}
-      <circle cx="145" cy="55" r="5" fill="var(--accent)" stroke="var(--surface)" strokeWidth="1.5" />
-      <text x="145" y="38" fill="var(--accent)" fontSize="8" fontFamily="var(--font-jetbrains-mono)" textAnchor="middle">50km Buffer</text>
-      {/* Waypoint 3 (Arrival) */}
-      <circle cx="205" cy="80" r="5" fill="var(--surface)" stroke="var(--accent)" strokeWidth="2" />
-      <text x="205" y="98" fill="var(--ink-soft)" fontSize="7" fontFamily="var(--font-jetbrains-mono)" textAnchor="middle">Étape</text>
-      {/* Matched Venue Pins */}
-      <circle cx="120" cy="46" r="2.5" fill="var(--ink)" />
-      <circle cx="160" cy="68" r="2.5" fill="var(--ink)" />
+      {/* The Detour mark: a map marker whose shadow is the Aubuscule crescent, drawn in halftone dots */}
+      <svg x="38" y="25" width="80" height="80" viewBox="-4 0 100 100" fill="var(--accent)">
+        <defs>
+          <mask id="dev-detour-hole">
+            <rect x="-4" width="100" height="100" fill="#fff" />
+            <circle cx="58" cy="36" r="7" fill="#000" />
+          </mask>
+          <mask id="dev-detour-shadow">
+            <rect x="-4" width="100" height="100" fill="#000" />
+            <circle cx="46" cy="52" r="34" fill="#fff" />
+            <circle cx="58" cy="42" r="30" fill="#000" />
+          </mask>
+          <pattern id="dev-detour-dots" width="4.4" height="4.4" patternUnits="userSpaceOnUse" patternTransform="rotate(8)">
+            <circle cx="2.2" cy="2.2" r="1.45" fill="var(--accent)" />
+          </pattern>
+        </defs>
+        <rect x="-4" width="100" height="100" fill="url(#dev-detour-dots)" mask="url(#dev-detour-shadow)" />
+        <path d="M58 84L76.88 45.19A21 21 0 1 0 39.12 45.19Z" mask="url(#dev-detour-hole)" />
+      </svg>
+      {/* Wordmark */}
+      <text x="116" y="76" fill="var(--ink)" fontSize="30" fontWeight="700" fontFamily="var(--font-space-grotesk)" letterSpacing="-0.5">Detour</text>
     </svg>
   )
 }
@@ -202,7 +200,7 @@ function HarmonyVisual() {
 const VISUAL_COMPONENTS = {
   aubuscores: AubuscoresVisual,
   remplate: RemplateVisual,
-  tourPlanner: TourPlannerVisual,
+  tourPlanner: DetourVisual,
   einkPlanner: EinkPlannerVisual,
   epks: EpksVisual,
   harmony: HarmonyVisual,
