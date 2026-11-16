@@ -647,7 +647,7 @@
           "num": "03",
           "title": "Detour",
           "type": "Web App & Geospatial Routing",
-          "summary": "Tour logistics planner that computes driving routes and automatically identifies music venues near the travel corridor.",
+          "summary": "Tour planner for the venues you already know: plan the route and see which ones are on the way, and which sit just off it.",
           "tags": [
             "Ruby on Rails",
             "Hotwire",

@@ -647,7 +647,7 @@
           "num": "03",
           "title": "Detour",
           "type": "Web App & Calcul Géospatial",
-          "summary": "Planificateur de tournées qui calcule les trajets routiers et repère automatiquement les salles de concert situées à proximité du trajet.",
+          "summary": "Planificateur de tournée pour les salles que vous connaissez déjà : tracez l'itinéraire et voyez celles qui sont sur la route, et celles qui sont juste à côté.",
           "tags": [
             "Ruby on Rails",
             "Hotwire",

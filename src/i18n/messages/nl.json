@@ -647,7 +647,7 @@
           "num": "03",
           "title": "Detour",
           "type": "Web App & Geospatiale Routing",
-          "summary": "Logistieke tourplanner die rijroutes berekent en automatisch concertzalen in de buurt van het traject identificeert.",
+          "summary": "Tourplanner voor de zalen die je al kent: plan de route en zie welke op de weg liggen, en welke er net naast.",
           "tags": [
             "Ruby on Rails",
             "Hotwire",
