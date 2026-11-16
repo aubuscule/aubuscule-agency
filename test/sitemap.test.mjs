@@ -79,7 +79,7 @@ test('shared chrome exclusion: Footer, Nav, and layouts appear in NO route input
   }
 });
 
-test('migration safety: committed sitemap-dates.json preserves all baseline dates', () => {
+test('migration safety: committed sitemap-dates.json keeps every route, never earlier than its baseline date', () => {
   const dates = readDatesFile(path.join(REPO_ROOT, 'src', 'lib', 'sitemap-dates.json'));
 
   const expectedDates = {
@@ -96,10 +96,10 @@ test('migration safety: committed sitemap-dates.json preserves all baseline date
 
   for (const [routePath, expectedDate] of Object.entries(expectedDates)) {
     assert.ok(dates[routePath], `Route "${routePath}" must be present in sitemap-dates.json`);
-    assert.equal(
-      dates[routePath].date,
-      expectedDate,
-      `Route "${routePath}" date must match expected migration date ${expectedDate}`
+    // A later content change restamps the route (npm run sitemap:stamp), so the date may move forward, never back.
+    assert.ok(
+      dates[routePath].date >= expectedDate,
+      `Route "${routePath}" date ${dates[routePath].date} must not be earlier than its migration date ${expectedDate}`
     );
     assert.match(dates[routePath].hash, /^[a-f0-9]{64}$/, 'Hash must be a valid 64-character SHA-256 string');
   }

@@ -645,18 +645,18 @@
         },
         "tourPlanner": {
           "num": "03",
-          "title": "Tour Planner",
+          "title": "Detour",
           "type": "Web App & Geospatiale Routing",
-          "summary": "Logistieke tourplanner die rijroutes berekent en automatisch concertzalen in de buurt van het traject identificeert.",
+          "summary": "Tourplanner voor de zalen die je al kent: plan de route en zie welke op de weg liggen, en welke er net naast.",
           "tags": [
-            "Python",
-            "Odoo Owl",
-            "Flask",
-            "Shapely"
+            "Ruby on Rails",
+            "Hotwire",
+            "PostgreSQL",
+            "Leaflet"
           ],
-          "linkText": "Contact voor meer info",
-          "linkHref": "#contact",
-          "external": false
+          "linkText": "Open Detour",
+          "linkHref": "https://detour.aubuscule.com",
+          "external": true
         },
         "einkPlanner": {
           "num": "04",
