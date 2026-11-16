@@ -645,18 +645,18 @@
         },
         "tourPlanner": {
           "num": "03",
-          "title": "Tour Planner",
+          "title": "Detour",
           "type": "Web App & Geospatial Routing",
           "summary": "Tour logistics planner that computes driving routes and automatically identifies music venues near the travel corridor.",
           "tags": [
-            "Python",
-            "Odoo Owl",
-            "Flask",
-            "Shapely"
+            "Ruby on Rails",
+            "Hotwire",
+            "PostgreSQL",
+            "Leaflet"
           ],
-          "linkText": "Contact for info",
-          "linkHref": "#contact",
-          "external": false
+          "linkText": "Open Detour",
+          "linkHref": "https://detour.aubuscule.com",
+          "external": true
         },
         "einkPlanner": {
           "num": "04",
