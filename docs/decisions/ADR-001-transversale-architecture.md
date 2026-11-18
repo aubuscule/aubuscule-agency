@@ -85,7 +85,7 @@ flowchart TD
 
     subgraph Visiteurs["Interface Utilisateur (Tous écrans)"]
         Home["Accueil & Hero Banner"]
-        Projets["Fiches Projets (Accordéon Accessible)"]
+        Projets["10 Fiches Projets (Cartes à Déploiement Progressif)"]
         AgendaUI["Agenda Automatique (Sans dates passées)"]
         NewsUI["News (4 Gabarits Visuels Maîtrisés)"]
     end
