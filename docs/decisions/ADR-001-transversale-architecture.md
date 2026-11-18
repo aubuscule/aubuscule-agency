@@ -43,7 +43,7 @@ L'objectif architectural est de fournir une solution **la plus économique possi
 * **Inconvénients / Risques :** 
   - Dépendance envers les quotas et politiques tarifaires de tiers (risques de passage payant).
   - Décision disproportionnée pour un rythme de mise à jour mensuel.
-  - Complexité de configuration et de formation client hors budget (600 € – 1 000 €).
+  - Complexité de configuration et de formation client hors budget (590 € – 990 €).
 
 ### Option B : WordPress Nettoyé (Sans Elementor, Blocs Gutenberg purs sur OVH)
 * **Description :** Conservation de WordPress sur l'hébergement mutualisé OVH existant, avec thème sur mesure basé sur Gutenberg.
@@ -80,19 +80,20 @@ flowchart TD
         CF["Cloudflare Pages / Edge Network<br/>(Distribution CDN Mondiale + SSL Gratuit)"]
         StaticEngine["Moteur Statique (Astro / Next.js Export)<br/>Design System Ocre & Organique"]
         Filter["Filtre Dynamique<br/>(date >= today)"]
+        ImgOpt["Pipeline Optimisation WebP<br/>(Redimensionnement auto des photos)"]
     end
 
     subgraph Visiteurs["Interface Utilisateur (Tous écrans)"]
         Home["Accueil & Hero Banner"]
         Projets["Fiches Projets (Accordéon Accessible)"]
         AgendaUI["Agenda Automatique (Sans dates passées)"]
-        NewsUI["News & Pages Libres (Blocs Stylisés)"]
+        NewsUI["News (4 Gabarits Visuels Maîtrisés)"]
     end
 
     GS -->|API Fetch / CSV Publié| Filter
     Filter -->|Données à jour| AgendaUI
-    GD -->|Contenu & Photos| StaticEngine
-    StaticEngine -->|Build Statique Automatique| CF
+    GD --> StaticEngine
+    StaticEngine --> ImgOpt --> CF
     CF --> Home
     CF --> Projets
     CF --> NewsUI
@@ -100,25 +101,24 @@ flowchart TD
 
 ---
 
-## 5. Stratégie de Mise en Page pour les Contenus Éditables (The Layout Block Palette)
+## 5. Stratégie de Mise en Page pour les Contenus Éditables (The 4-Layout Template System)
 
-Pour répondre au besoin d'avoir des options de mise en page agréables et variées pour les textes et photos sans la lourdeur d'un page builder, nous mettons en place un système de **5 Blocs Éditoriaux Harmonisés** :
+Pour répondre au besoin d'avoir des options de mise en page agréables et variées pour les textes et photos sans la lourdeur d'un page builder, nous mettons en place un système de **4 Gabarits Éditoriaux Maîtrisés** :
 
-1. **Bloc 01 — *Le Récit Standard* :**
+1. **Gabarit A — *Le Grand Récit* :**
    - Chapeau de texte en grand corps pour l'accroche.
-   - Corps d'article fluide et typographié avec élégance.
-   - Grande image centrale immersive avec légende discrète.
-2. **Bloc 02 — *Le Duo Asymétrique (Magazine)* :**
-   - Colonne texte à gauche / visuel à droite (ou inversement), avec fond sable/matière texturé. Idéal pour présenter un nouvel artiste ou une résidence de création.
-3. **Bloc 03 — *Le Manifeste / Citation Artiste* :**
-   - Citation en typographie de caractère mise en valeur sur fond ocre chaud, avec signature de l'auteur. Parfait pour véhiculer la voix et l'engagement du collectif.
-4. **Bloc 04 — *La Grille Visuelle (Triptyque d'ambiance)* :**
-   - Présentation de 2 ou 3 clichés de festival/scène côte à côte, avec agrandissement plein écran (lightbox ultra-légère).
-5. **Bloc 05 — *L'Encart d'Action (Call-to-Action)* :**
-   - Bloc délimité en terre cuite avec bouton interactif (lien vers billetterie, formulaire d'adhésion, ou contact mail direct).
+   - Grande image panoramique avec légende soignée.
+   - Corps d'article fluide, typographié avec élégance et centré.
+2. **Gabarit B — *L'Édito / Focus Artiste (Duo Asymétrique Magazine)* :**
+   - Grille CSS 2 colonnes (texte à gauche, photo portrait à droite avec fond sable texturé).
+   - Encadré citation "Parole d'artiste" en typographie de caractère.
+3. **Gabarit C — *Le Triptyque Concert (Galerie Photo)* :**
+   - Texte introductif court suivi d'une mosaïque de 2 à 4 clichés de concert avec visionneuse plein écran (lightbox légère).
+4. **Gabarit D — *L'Encart d'Action (Call-to-Action)* :**
+   - Bloc délimité en terre cuite avec liste d'infos pratiques et bouton interactif (billetterie, formulaire d'adhésion, ou contact mail direct).
 
-### Mécanisme de publication au quotidien :
-Le client prépare ses textes et photos dans un **Google Doc ou une fiche Notion partagée**. Chaque publication est formatée en appliquant directement les styles pré-définis, garantissant qu'aucune fausse manipulation ne puisse casser la grille ou l'identité visuelle du site.
+### Pipeline de Publication :
+L'équipe rédige ses textes et colle ses photos brutes dans un Google Doc ou Notion partagé. Le pipeline de compilation se charge de compresser et convertir automatiquement les photos en WebP haute performance, tout en appliquant les styles verrouillés de la charte.
 
 ---
 
